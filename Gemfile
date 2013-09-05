@@ -12,7 +12,7 @@ group :development do
   gem 'guard-rails'
 end
 
-group [:test, :development] do
+group :test, :development do
   gem 'faker'
   gem 'rspec-rails'
   gem 'jasmine-rails'
