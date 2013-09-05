@@ -1,28 +1,45 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+StoryWard is a Rails 4.0 application to create literature, together.  
 
-Things you may want to cover:
+Important notes: 
 
-* Ruby version
+* Testing Stack:
 
-* System dependencies
+  - RSpec
+
+  - Factory Girl
+
+  - Capybara
+
+  - Guard (continuous testing... run '$ guard' to launch a Pry terminal that will relaunch the RSpec suite related to any given file that changes in an editor)
 
 * Configuration
 
-* Database creation
+  - No special configuration is required. 
+
+* Database
+
+  - PostgreSQL
 
 * Database initialization
 
+  - '$ rake db:create'
+
+...followed by
+
+  - '$ rake db:migrate' for development
+  - '$ rake db:migrate RAILS_ENV=test' for test
+
 * How to run the test suite
+
+  - '$ rspec' for standalone complete test suite
+  - '$ guard' for continuous small-set testing based on file changes
 
 * Services (job queues, cache servers, search engines, etc.)
 
+  - No external service dependencies
+
 * Deployment instructions
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+  - No production environment configured for production
