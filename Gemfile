@@ -17,6 +17,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'jasmine-rails'
   gem 'selenium-webdriver'
+  gem 'dotenv-rails'
 end
 
 group :test do
@@ -38,6 +39,7 @@ group :doc do
 end
 
 #Feature
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
