@@ -11,4 +11,11 @@ describe Node do
     it { should belong_to(:user) }
     it { should have_and_belong_to_many(:stories) }
   end
+
+  describe "on create" do
+    it "should set default children nodes to an empty array" do
+      node = Node.new
+      expect(node.children_nodes).to eq []
+    end
+  end
 end
