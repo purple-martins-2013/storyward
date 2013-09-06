@@ -8,7 +8,7 @@ class NodesController
   end
 
   def create
-    @node = Node.new(nodes_params)
+    @node = Node.new(params)
     if @node.save
       redirect_to @node
     else
@@ -17,11 +17,25 @@ class NodesController
   end
 
   def show
-    @node = Node.find(nodes_params[:node])
+    @node = Node.find(params[:id])
+  end
+
+  def edit
+    @node = Node.find(params[:id])
+  end
+
+  def update
+    node = Node.find(params[:id])
+    unless node.children_nodes.any?
+      node.update(nodes_params)
+      node.save
+    else
+      redirect_to :back, notice: "Node cannot be edited because it has children."
+    end
   end
 
   def destroy
-    node = Node.find(nodes_params[:node])
+    node = Node.find(params[:id])
 
     unless node.children_nodes.any? 
       node.destroy
