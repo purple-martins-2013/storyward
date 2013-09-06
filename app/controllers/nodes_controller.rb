@@ -8,18 +8,23 @@ class NodesController
   end
 
   def create
-    nodes = Node.create(nodes_params)
+    @node = Node.new(nodes_params)
+    if @node.save
+      redirect_to @node
+    else
+      render :new
+    end
   end
 
-  def delete
+
+  def destroy
     node = Node.find(params[:node])
-    
+
     if node.terminal? 
       node.destroy
     else
       redirect_to :back, notice: "Node cannot be deleted because it has children."
     end
-
   end
 
   private
