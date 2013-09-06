@@ -5,9 +5,11 @@ Storyward::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resources :users do 
-    resources :nodes
+  resources :stories do 
+    resources :nodes, except: :index
   end
+
+  get 'nodes' => 'nodes#index'
 
   root 'welcome#index'
   # Example of regular route:

@@ -9,9 +9,9 @@ class NodesController < ApplicationController
   end
 
   def create
-    @node = Node.new(params)
+    @node = Node.new(nodes_params)
     if @node.save
-      redirect_to @node
+      redirect_to story_node_path(params[:story_id], @node.id)
     else
       render :new
     end
@@ -26,20 +26,24 @@ class NodesController < ApplicationController
   end
 
   def update
-    node = Node.find(params[:id])
-    unless node.children_nodes.any?
-      node.update(nodes_params)
-      node.save
+    Node.find(params[:id])
+    @node = Node.find(params[:id])
+    unless @node.children_nodes.any?
+      @node.update(nodes_params)
+      @node.save
+      redirect_to story_node_path(params[:story_id], @node.id)
     else
       redirect_to :back, notice: "Node cannot be edited because it has children."
     end
   end
 
   def destroy
-    node = Node.find(params[:id])
-
-    unless node.children_nodes.any? 
-      node.destroy
+    puts '*' * 80
+    p params
+    @node = Node.find(params[:id])
+    p @node
+    unless @node.children_nodes.any? 
+      @node.destroy
       redirect_to root_url
     else
       redirect_to :back, notice: "Node cannot be deleted because it has children."
@@ -49,6 +53,8 @@ class NodesController < ApplicationController
   private
 
   def nodes_params
-    params.require(:nodes).permit(:title, :content)
+    return_params = params.require(:node).permit(:title, :content) 
+    return_params[:parent_node] = params[:story_id]
+    return_params 
   end
 end
