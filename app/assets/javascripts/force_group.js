@@ -1,4 +1,4 @@
-$(document).ready(function() {
+  $(document).ready(function() {
 
   var width = 960,
       height = 500;
@@ -41,7 +41,11 @@ $(document).ready(function() {
 
   var svg = d3.select("#group-chart").append("svg")
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", height)
+      .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", redraw))
+      .attr("pointer-events", "all")
+      .attr("viewBox", "0 0 "+width+" "+height)
+      .attr("preserveAspectRatio","xMinYMid");
 
   var node = svg.selectAll(".node")
       .data(nodes)
@@ -66,6 +70,14 @@ $(document).ready(function() {
 
   d3.select("#group-chart")
       .on("mousedown", mousedown);
+
+  function redraw() {
+    trans=d3.event.translate;
+    scale=d3.event.scale;
+    $("#group-chart .node").attr("transform",
+        "translate(" + trans + ")"
+            + " scale(" + scale + ")");
+  }
 
   function tick(e) {
 
