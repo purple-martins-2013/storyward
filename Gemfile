@@ -21,7 +21,7 @@ group :test, :development do
 end
 
 group :test do
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'shoulda'
 end
