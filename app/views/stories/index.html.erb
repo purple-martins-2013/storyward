@@ -1,0 +1,11 @@
+<div class="story-list">
+  <% if @stories.any? %>
+    <% @stories.each do |story| %>
+      <div class="story">
+        <h4><%= @story.title %></h4>
+      </div>
+    <% end %>
+  <% else %>
+    <h4>There are no stories to show.</h4>
+  <% end %>
+</div>
