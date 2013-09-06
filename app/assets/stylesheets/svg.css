@@ -19,12 +19,27 @@ circle {
   stroke: steelblue;
 }
 
-text {
-  font-size:10px;
+text, .node {
+  font: 10px sans-serif;
 }
 
 path.link {
   fill: none;
   stroke: #ccc;
   stroke-width: 1.5px;
+}
+
+.node circle {
+  stroke-width: 1.5px;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+path {
+  stroke: #fff;
+  fill-rule: evenodd;
 }
