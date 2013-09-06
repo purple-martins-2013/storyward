@@ -1,6 +1,6 @@
 class NodesController
   def index
-    @all_nodes = Node.all 
+    @nodes = Node.all 
   end
 
   def new
@@ -16,12 +16,16 @@ class NodesController
     end
   end
 
+  def show
+    @node = Node.find(nodes_params[:node])
+  end
 
   def destroy
-    node = Node.find(params[:node])
+    node = Node.find(nodes_params[:node])
 
-    if node.terminal? 
+    unless node.children_nodes.any? 
       node.destroy
+      redirect_to root_url
     else
       redirect_to :back, notice: "Node cannot be deleted because it has children."
     end
