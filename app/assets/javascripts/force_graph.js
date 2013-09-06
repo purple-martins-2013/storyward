@@ -10,7 +10,7 @@ function forceGraph() {
     }
   }
 
-  var curElement, lastElement, timeoutId, lastColor, lastWidth, lastStroke, clickedOnNode = false;
+  var curElement, lastElement, timeoutId, lastColor, lastWidth, lastStroke, clickedOnNode = false, zoomFactor = 4;
 
   $("#chart").on("mousedown", function() {
     clickedOnNode = true;
@@ -55,12 +55,27 @@ function forceGraph() {
 
   var vis = d3.select("#chart").append("svg:svg")
       .attr("width", w)
-      .attr("height", h);
+      .attr("height", h)
+      .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", redraw))
+      .attr("pointer-events", "all")
+      .attr("viewBox", "0 0 "+w+" "+h)
+      .attr("preserveAspectRatio","xMinYMid");
 
   d3.json("readme.json", function(json) {
     root = json;
     update();
   });
+
+  function redraw() {
+    trans=d3.event.translate;
+    scale=d3.event.scale;
+    $("#chart .node").attr("transform",
+        "translate(" + trans + ")"
+            + " scale(" + scale + ")");
+    $("#chart .link").attr("transform",
+        "translate(" + trans + ")"
+            + " scale(" + scale + ")");
+  }
 
   function update() {
     var nodes = flatten(root),
@@ -175,6 +190,12 @@ function forceGraph() {
         clearTimeout(timeoutId);
       }
       update();
+    }
+    if (d3.event.shiftKey) {
+      vis.transition().attr("transform", "translate(" + 
+        (-parseInt(vis.select(".node").attr("cx"))*zoomFactor + w/2) + "," +
+        (-parseInt(vis.select(".node").attr("cy"))*zoomFactor + h/2) +
+        ")scale(" + zoomFactor + ")");
     }
   }
 
