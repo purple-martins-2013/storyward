@@ -15,8 +15,6 @@ Storyward::Application.routes.draw do
   end
 
   get 'nodes' => 'nodes#index'
-
-  root 'welcome#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

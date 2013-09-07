@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130906071826) do
+ActiveRecord::Schema.define(version: 20130907021608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "nodes", force: true do |t|
     t.integer  "user_id"
-    t.integer  "story_id"
     t.string   "title"
     t.text     "content"
     t.integer  "parent_node"
@@ -35,9 +34,7 @@ ActiveRecord::Schema.define(version: 20130906071826) do
 
   create_table "stories", force: true do |t|
     t.string  "title"
-    t.integer "tail_node"
     t.integer "user_id"
-    t.integer "nodes_id"
   end
 
   create_table "users", force: true do |t|

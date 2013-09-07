@@ -1,6 +1,6 @@
 class Story < ActiveRecord::Base
   belongs_to :user
-  has_and_belongs_to_many :nodes
+  belongs_to :node
 
   validates :title, :user, presence: true
 
