@@ -1,8 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville|Montserrat:400,700);
-
 body {
   background-image: url(image_path('ricepaper2.png'));
-  //background-size: 100% auto;
 }
 
 .container {
@@ -13,7 +10,6 @@ h1.inset {
   text-shadow: 0px 2px 3px #FFFFFF;
 }
 
-//------------- DISUSED ----------------
 .light-box {
   background-color:rgba(255,255,255,0.25);
   border-radius: 15px;
