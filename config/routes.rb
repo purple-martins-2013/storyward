@@ -15,6 +15,9 @@ Storyward::Application.routes.draw do
     resources :nodes, except: :index
   end
 
+  get "nodes/details" => "nodes#details"
+  get "nodes/query" => "nodes#query"
+
   get 'nodes' => 'nodes#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
