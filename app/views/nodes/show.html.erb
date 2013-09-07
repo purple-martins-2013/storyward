@@ -1,0 +1,6 @@
+<div class="show-story">
+  <h2><%= @node.title %></h2>
+  <p><%= @node.content %></p>
+</div>
+
+<%= link_to "Delete", story_node_path(1, @node), :method => :delete %>
