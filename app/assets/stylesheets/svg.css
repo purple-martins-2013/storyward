@@ -43,3 +43,7 @@ path {
   stroke: #fff;
   fill-rule: evenodd;
 }
+
+#chart {
+  width: auto;
+}
