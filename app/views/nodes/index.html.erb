@@ -1,0 +1,13 @@
+<div class="node-list">
+  <% if @nodes.any? %>
+    <% @nodes.each do |node| %>
+      <div class="node">
+        <h4><%= node.title %></h4>
+        <%= node.content %>
+        <%= node.id %>
+      </div>
+    <% end %>
+  <% else %>
+    <h4>There are no nodes to show.</h4>
+  <% end %>
+</div>
