@@ -5,8 +5,13 @@ describe NodesController do
   let(:story_id) { 1 }
   let(:node_id) { 1 }
   let(:node) { FactoryGirl.create(:node) }
+  let(:user) { FactoryGirl.create(:user) }
   let(:valid_params) { FactoryGirl.attributes_for(:node) }
 
+  before(:each) do
+    sign_in(user)
+  end
+  
   describe 'GET#index' do
 
     it 'returns an array of all nodes' do 
