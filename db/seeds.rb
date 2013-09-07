@@ -8,26 +8,28 @@
 
 User.create(name: "First Guy", email: "test@test.com", password: "password", password_confirmation: "password")
 
-@node = Node.create(title: "First Title", content: "First Content")
+@node = Node.create(title: "First Title", content: "First Content", parent_node: 0)
 
-@node.story = Story.create(title: @node.title, tail_node: @node.id)
+@node.stories << Story.create(title: @node.title, user: User.first)
 @node.save
 
-10.times do |n|
-  new_node = Node.create(title: "Second Title #{n}", content: "Second Content #{n}")
-  new_node.stories = Story.create(title: new_node.title, tail_node: new_node.id)
+5.times do |n|
+  new_node = Node.create(title: "Second Title #{n}", content: "Second Content #{n}", parent_node: @node.id)
+  new_node.stories << Story.create(title: new_node.title, user: User.first)
   new_node.save
   @node.children_nodes << new_node.id
+  @node.children_nodes_will_change!
   @node.save
 end
 
 @node.children_nodes.each do |child|
-  10.times do |n|
-    new_node = Node.create(title: "Third Title #{n}", content: "Third Content #{n}")
-    new_node.story = Story.create(title: new_node.title, tail_node: new_node.id)
+  5.times do |n|
+    new_node = Node.create(title: "Third Title #{n} #{child}", content: "Third Content #{n} #{child}", parent_node: child)
+    new_node.stories << Story.create(title: new_node.title, user: User.first)
     new_node.save
     child_node = Node.find(child)
     child_node.children_nodes << new_node.id
+    child_node.children_nodes_will_change!
     child_node.save
   end
 end
@@ -35,12 +37,13 @@ end
 @node.children_nodes.each do |child|
   child_node = Node.find(child)
   child_node.children_nodes.each do |mini_child|
-    10.times do |n|
-      new_node = Node.create(title: "Fourth Title #{n}", content: "Fourth Content #{n}")
-      new_node.story = Story.create(title: new_node.title, tail_node: new_node.id)
+    5.times do |n|
+      new_node = Node.create(title: "Fourth Title #{n} #{child} #{mini_child}", content: "Fourth Content #{n} #{child} #{mini_child}", parent_node: mini_child)
+      new_node.stories << Story.create(title: new_node.title, user: User.first)
       new_node.save
       mini_node = Node.find(mini_child)
       mini_node.children_nodes << new_node.id
+      mini_node.children_nodes_will_change!
       mini_node.save
     end
   end
@@ -51,12 +54,13 @@ end
   child_node.children_nodes.each do |mini_child|
     mini_child_node = Node.find(mini_child)
     mini_child_node.children_nodes.each do |tiny_child|
-      10.times do |n|
-        new_node = Node.create(title: "Fifth Title #{n}", content: "Fifth Content #{n}")
-        new_node.story = Story.create(title: new_node.title, tail_node: new_node.id)
+      5.times do |n|
+        new_node = Node.create(title: "Fifth Title #{n} #{child} #{mini_child} #{tiny_child}", content: "Fifth Content #{n} #{child} #{mini_child} #{tiny_child}", parent_node: tiny_child)
+        new_node.stories << Story.create(title: new_node.title, user: User.first)
         new_node.save
         tiny_node = Node.find(tiny_child)
         tiny_node.children_nodes << new_node.id
+        tiny_node.children_nodes_will_change!
         tiny_node.save
       end
     end
