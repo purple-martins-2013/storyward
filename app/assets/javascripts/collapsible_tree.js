@@ -16,6 +16,8 @@ $(document).ready(function() {
       .attr("width", w)
       .attr("height", h)
     .append("svg:g")
+      .attr("class", "drawarea")
+    .append("svg:g")
       .attr("transform", "translate(40,0)");
 
   d3.json("math_map_compact.json", function(json) {
@@ -136,6 +138,9 @@ $(document).ready(function() {
       d.x0 = d.x;
       d.y0 = d.y;
     });
+
+    d3.select("#tree svg")
+        .call(d3.behavior.zoom().scaleExtent([1, 5]).on("zoom", zoom));
   }
 
   // Toggle children on click.
@@ -148,6 +153,24 @@ $(document).ready(function() {
       d._children = null;
     }
     update(d);
+  }
+
+
+  function zoom() {
+    var scale = d3.event.scale,
+        translation = d3.event.translate,
+        tbound = -h * scale,
+        bbound = h * scale,
+        lbound = (-w) * scale,
+        rbound = (w) * scale;
+    // limit translation to thresholds
+    translation = [
+        Math.max(Math.min(translation[0], rbound), lbound),
+        Math.max(Math.min(translation[1], bbound), tbound)
+    ];
+    d3.select(".drawarea")
+        .attr("transform", "translate(" + translation + ")" +
+              " scale(" + scale + ")");
   }
 
   d3.select(self.frameElement).style("height", "2000px");
