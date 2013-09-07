@@ -15,7 +15,7 @@ User.create(name: "First Guy", email: "test@test.com", password: "password", pas
 
 10.times do |n|
   new_node = Node.create(title: "Second Title #{n}", content: "Second Content #{n}")
-  new_node.story = Story.create(title: new_node.title, tail_node: new_node.id)
+  new_node.stories = Story.create(title: new_node.title, tail_node: new_node.id)
   new_node.save
   @node.children_nodes << new_node.id
   @node.save
