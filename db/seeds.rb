@@ -15,7 +15,7 @@
   @node.stories << Story.create(title: @node.title, user: @user)
   @node.save
 
-  5.times do |n|
+  (rand(9) + 1).times do |n|
     new_node = Node.create(title: "Second #{index} Title #{n}", content: "Second #{index} Content #{n}", parent_node: @node.id)
     new_node.stories << Story.create(title: new_node.title, user: @user)
     new_node.save
@@ -25,7 +25,7 @@
   end
 
   @node.children_nodes.each do |child|
-    5.times do |n|
+    (rand(9) + 1).times do |n|
       new_node = Node.create(title: "Third #{index} Title #{n} #{child}", content: "Third #{index} Content #{n} #{child}", parent_node: child)
       new_node.stories << Story.create(title: new_node.title, user: @user)
       new_node.save
@@ -39,7 +39,7 @@
   @node.children_nodes.each do |child|
     child_node = Node.find(child)
     child_node.children_nodes.each do |mini_child|
-      5.times do |n|
+      (rand(9) + 1).times do |n|
         new_node = Node.create(title: "Fourth #{index} Title #{n} #{child} #{mini_child}", content: "Fourth #{index} Content #{n} #{child} #{mini_child}", parent_node: mini_child)
         new_node.stories << Story.create(title: new_node.title, user: @user)
         new_node.save
@@ -56,7 +56,7 @@
     child_node.children_nodes.each do |mini_child|
       mini_child_node = Node.find(mini_child)
       mini_child_node.children_nodes.each do |tiny_child|
-        5.times do |n|
+        (rand(9) + 1).times do |n|
           new_node = Node.create(title: "Fifth #{index} Title #{n} #{child} #{mini_child} #{tiny_child}", content: "Fifth #{index} Content #{n} #{child} #{mini_child} #{tiny_child}", parent_node: tiny_child)
           new_node.stories << Story.create(title: new_node.title, user: @user)
           new_node.save
