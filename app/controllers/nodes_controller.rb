@@ -38,10 +38,7 @@ class NodesController < ApplicationController
   end
 
   def destroy
-    puts '*' * 80
-    p params
     @node = Node.find(params[:id])
-    p @node
     unless @node.children_nodes.any? 
       @node.destroy
       redirect_to root_url

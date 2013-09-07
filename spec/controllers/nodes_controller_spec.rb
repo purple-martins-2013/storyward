@@ -25,7 +25,7 @@ describe NodesController do
       assigns(:node).should be_new_record
     end
   end
-  #/users/:user_id/nodes
+  
   describe 'POST#create' do
 
     context 'with correct params' do     
@@ -113,7 +113,7 @@ describe NodesController do
 
   describe 'DELETE#destroy' do
     it 'finds correct node' do
-      delete :destroy, :story_id => story_id, :id => node.id #, node: (valid_params)
+      delete :destroy, :story_id => story_id, :id => node.id
       assigns(:node).should eq(node)
     end
 
@@ -126,9 +126,9 @@ describe NodesController do
         Node.stub(:find).and_return(node)
         node.stub(:children_nodes).and_return([1, 3, 4])
 
-        delete :destroy, :story_id => story_id, :id => node.id, node: (valid_params)
+        delete :destroy, :story_id => story_id, :id => node.id
         expect(response).to redirect_to("where_i_came_from")
-        flash[:notice].should eq("Node cannot be edited because it has children.") 
+        flash[:notice].should eq("Node cannot be deleted because it has children.") 
       end
     end
 
@@ -139,14 +139,16 @@ describe NodesController do
       end
 
       it 'deletes node' do 
-        delete :destroy, :story_id => story_id, :id => node.id, node: (valid_params)
-        expect(Node.find(node.id)).to be_nil
+        id = node.id
+        delete :destroy, :story_id => story_id, :id => id
+        Node.all.count.should eq(0)
       end
 
-      it 'redirects to show path' do
-        delete :destroy, :story_id => story_id, :id => node.id, node: (valid_params)
-        expect(response).to redirect_to story_node_path(story_id, node.id)
+      it 'redirects to root' do
+        delete :destroy, :story_id => story_id, :id => node.id
+        expect(response).to redirect_to root_url
       end
     end
+
   end
 end
