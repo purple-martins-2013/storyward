@@ -47,6 +47,32 @@ class NodesController < ApplicationController
     end
   end
 
+  def query
+    render json: Node.find(params[:id]).to_json
+  end
+
+  def details
+    @node = Node.find(params[:id])
+    render json: create_json(@node).to_json
+  end
+
+  def create_json(node)
+    return { id: node.id } if node.children_nodes.length == 0
+    child_nodes = []
+    node.children_nodes.each do |child|
+      child_nodes << Node.find(child)
+    end
+    return {id: node.id, size: node_size(node), children: child_nodes.map { |child_node| create_json(child_node) } }
+  end
+
+  def node_size(node)
+    child_nodes_length = 0
+    node.children_nodes.each do |child|
+      child_nodes_length +=  Node.find(child).children_nodes.length
+    end
+    return node.children_nodes.length + child_nodes_length / 4
+  end
+
   private
 
   def nodes_params
