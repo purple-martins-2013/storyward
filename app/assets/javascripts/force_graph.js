@@ -70,13 +70,11 @@ function forceGraph() {
       data,
       function(response) {
         json = response;
-        console.log(json);
         takeJson();
       });
   }
 
   function takeJson() {
-    console.log(json);
     root = json;
     update();
   }
@@ -86,8 +84,12 @@ function forceGraph() {
     $.get("nodes/query",
       data,
       function(response) {
-        $("#superNav").replaceWith("<div id='superNav' class='small-3-columns' style='display: none; float: right; margin-top: -250px'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
-        $('#superNav').slideDown();
+        if ($("#superNav").html() == "") {
+          $("#superNav").replaceWith("<div id='superNav' class='small-3-columns' style='display: none'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
+          $('#superNav').show("slow");
+        } else {
+          $("#superNav").replaceWith("<div id='superNav' class='small-3-columns'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
+        }
       });
   }
 
@@ -133,10 +135,12 @@ function forceGraph() {
         .on("dragend", dragend);
 
     function dragstart(d, i) {
+        d3.event.sourceEvent.stopPropagation();
         force.stop() // stops the force auto positioning before you start dragging
     }
 
     function dragmove(d, i) {
+        d3.event.sourceEvent.stopPropagation();
         d.px += d3.event.dx;
         d.py += d3.event.dy;
         d.x += d3.event.dx;
@@ -145,6 +149,7 @@ function forceGraph() {
     }
 
     function dragend(d, i) {
+        d3.event.sourceEvent.stopPropagation();
         d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
         tick();
         force.resume();
