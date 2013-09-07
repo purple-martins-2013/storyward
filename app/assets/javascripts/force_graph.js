@@ -26,7 +26,7 @@ function forceGraph() {
       if (lastElement) {
         $(lastElement).css("fill", lastColor).css("stroke-width", lastWidth).css("stroke", lastStroke);
       }
-      $('#superNav').slideDown();
+      populateNode(curElement);
       lastElement = curElement;
       lastColor = curElement.style.fill;
       lastWidth = curElement.style.strokeWidth;
@@ -42,12 +42,13 @@ function forceGraph() {
     }
   });
 
-  var w = 960,
-      h = 500,
+  var w = 900,
+      h = 900,
       r = 15,
       node,
       link,
-      root;
+      root,
+      json;
 
   var force = d3.layout.force()
       .on("tick", tick)
@@ -56,15 +57,39 @@ function forceGraph() {
   var vis = d3.select("#chart").append("svg:svg")
       .attr("width", w)
       .attr("height", h)
-      .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", redraw))
+      .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", redraw)).on("dblclick.zoom", null)
       .attr("pointer-events", "all")
       .attr("viewBox", "0 0 "+w+" "+h)
       .attr("preserveAspectRatio","xMinYMid");
 
-  d3.json("readme.json", function(json) {
+  createJson();
+
+  function createJson() {
+    var data = "id="+$("#chart").data("node");
+    $.get("nodes/details",
+      data,
+      function(response) {
+        json = response;
+        console.log(json);
+        takeJson();
+      });
+  }
+
+  function takeJson() {
+    console.log(json);
     root = json;
     update();
-  });
+  }
+
+  function populateNode(curElement) {
+    var data = "id="+curElement.__data__["id"];
+    $.get("nodes/query",
+      data,
+      function(response) {
+        $("#superNav").replaceWith("<div id='superNav' class='small-3-columns' style='display: none; float: right; margin-top: -250px'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
+        $('#superNav').slideDown();
+      });
+  }
 
   function redraw() {
     trans=d3.event.translate;
@@ -144,7 +169,7 @@ function forceGraph() {
         .attr("class", "node")
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; })
-        .attr("r", function(d) { return d.size * 0 + 5 || Math.random() * 16; })
+        .attr("r", function(d) { return d.size * 1.5 || 6; })
          // || Math.sqrt(d.children.length) * 4 -- at some point; children does become null though, when expanding closed children
         .style("fill", color)
         .on("mouseup", click)
