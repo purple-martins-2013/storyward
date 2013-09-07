@@ -53,8 +53,8 @@ $default-float: left;
 
 // $body-bg: #fff;
 // $body-font-color: #222;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-// $body-font-weight: normal;
+// $body-font-family: "Montserrat", Times, serif;
+// $body-font-weight: bold;
 // $body-font-style: normal;
 
 // Font-smoothing
@@ -160,7 +160,7 @@ $default-float: left;
 
 // Control header font styles
 
-// $header-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+   $header-font-family: "Montserrat", "Helvetica", Helvetica, Arial, sans-serif;
 // $header-font-weight: bold;
 // $header-font-style: normal;
 // $header-font-color: #222;
@@ -193,15 +193,15 @@ $default-float: left;
 
 // Style paragraphs
 
-// $paragraph-font-family: inherit;
+   $paragraph-font-family: "Libre Baskerville", serif;
 // $paragraph-font-weight: normal;
-// $paragraph-font-size: 1em;
-// $paragraph-line-height: 1.6;
+   $paragraph-font-size: 1.1em;
+   $paragraph-line-height: 1.8;
 // $paragraph-margin-bottom: emCalc(20);
 // $paragraph-aside-font-size: emCalc(14);
 // $paragraph-aside-line-height: 1.35;
 // $paragraph-aside-font-style: italic;
-// $paragraph-text-rendering: optimizeLegibility;
+   $paragraph-text-rendering: optimizeLegibility;
 
 // Style <code> tags
 

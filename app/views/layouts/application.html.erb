@@ -8,15 +8,15 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
   	<title><%= content_for?(:title) ? yield(:title) : "StoryWard" %></title>
 
-  	<%= stylesheet_link_tag    "application" %>
+    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville|Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <div class="container">
-      <%# render partial: 'layouts/messages' %>
+    <div>
       <%= display_flash_messages %>
       <%= yield %>
     </div>
