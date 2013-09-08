@@ -8,9 +8,9 @@ Storyward::Application.routes.draw do
   resources :stories
   resources :nodes, :except => [:new, :create, :index]
 
-  get "nodes/details" => "nodes#details"
-  get "nodes/query" => "nodes#query"
-  get "nodes/chain" => "nodes#chain"
+  get "nodes/details/:id" => "nodes#details"
+  get "nodes/query/:id" => "nodes#query"
+  get "nodes/chain/:id" => "nodes#chain"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

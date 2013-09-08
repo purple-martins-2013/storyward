@@ -90,9 +90,7 @@ function forceGraph() {
   createJson();
 
   function createJson() {
-    var data = "id="+$("#chart").data("node");
-    $.get("nodes/details",
-      data,
+    $.get("nodes/details/"+$("#chart").data("node"),
       function(response) {
         json = response;
         takeJson();
@@ -105,12 +103,10 @@ function forceGraph() {
   }
 
   function populateNode(curElement) {
-    var data = "id="+curElement.__data__["id"];
-    $.get("nodes/query",
-      data,
+    var data = curElement.__data__["id"];
+    $.get("nodes/query"+data,
       function(response) {
-        $.get("nodes/chain",
-          data,
+        $.get("nodes/chain"+data,
           function(chain) {
             var story_preview = "<div id='story-preview'>";
             

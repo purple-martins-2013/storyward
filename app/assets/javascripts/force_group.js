@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-  var width = 300,
-      height = 300,
+  var width = 600,
+      height = 600,
       root;
 
   var curElement, lastElement, timeoutId, lastColor, lastWidth, lastStroke;
@@ -40,9 +40,7 @@ $(document).ready(function() {
   }
 
   function populateTitle(curElement) {
-    var data = "id="+curElement.__data__["book_id"];
-    $.get("nodes/query",
-      data,
+    $.get("nodes/query/"+curElement.__data__["book_id"],
       function(response) {
         $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns' style='display: none; float: right; margin-top: -250px'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
         $('#superNavTwo').slideDown();
