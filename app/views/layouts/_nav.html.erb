@@ -16,8 +16,8 @@
       </ul>
 
       <ul class="right">
-        <li><%= link_to "My Profile", profiles_path(current_user.id) %></li>
-        <li><%= link_to "Logout", destroy_user_session_path %></li>
+        <li><%= link_to "My Profile", profile_path(current_user) %></li>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
       </ul>
     </section>
   </nav>
