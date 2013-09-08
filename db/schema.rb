@@ -44,6 +44,17 @@ ActiveRecord::Schema.define(version: 20130908030635) do
     t.integer "user_id"
   end
 
+  create_table "stories_tags", force: true do |t|
+    t.integer "story_id"
+    t.integer "tag_id"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "word"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
