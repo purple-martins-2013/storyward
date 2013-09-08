@@ -1,5 +1,4 @@
 class StoriesController < ApplicationController
-  
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
@@ -8,11 +7,18 @@ class StoriesController < ApplicationController
 
   def new
     @story = Story.new
+    @story.build_node
+  end
+
+  def show
+    @story = Story.find(params[:id])
   end
 
   def create
     @story = Story.new(story_params)
     @story.user = current_user
+    @story.node = Node.new(node_params)
+    @story.node.user = current_user
     if @story.save
       redirect_to @story, :notice => "#{@story.title} was created successfully."
     else
@@ -37,6 +43,10 @@ class StoriesController < ApplicationController
 
   private
   def story_params
-    params.require(:story).permit(:title, :tail_node)
+    params.require(:story).permit(:title, node_attributes: [:id, :title, :content])
+  end
+
+  def node_params
+    params.require(:node).permit(:title, :content)
   end
 end

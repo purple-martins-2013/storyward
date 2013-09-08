@@ -5,21 +5,19 @@ Storyward::Application.routes.draw do
   get 'visualizations' => 'users#index'
 
   resources :profiles, :only => [:index, :show]
+  resources :stories
+  resources :nodes, :except => [:new, :create, :index]
+
+  get "nodes/details" => "nodes#details"
+  get "nodes/query" => "nodes#query"
+  get "nodes/chain" => "nodes#chain"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resources :stories do 
-    resources :nodes, except: :index
-  end
 
-  get "nodes/details" => "nodes#details"
-  get "nodes/query" => "nodes#query"
-  get "nodes/chain" => "nodes#chain"
-
-  get 'nodes' => 'nodes#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
