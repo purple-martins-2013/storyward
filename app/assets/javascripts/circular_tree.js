@@ -1,4 +1,10 @@
 $(document).ready(function() {
+  if (document.getElementById("other-page")) {
+    new circularTree("#other-page")
+  }
+});
+
+function circularTree(container) {
 
   var diameter = 960;
 
@@ -43,4 +49,4 @@ $(document).ready(function() {
 
   d3.select(self.frameElement).style("height", diameter - 150 + "px");
 
-});
+}

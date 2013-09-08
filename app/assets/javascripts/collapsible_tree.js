@@ -1,4 +1,10 @@
 $(document).ready(function() {
+  if (document.getElementById("other-page")) {
+    new collapsibleTree("#other-page")
+  }
+});
+
+function collapsibleTree(container) {
 
   var w = 960,
       h = 2000,
@@ -20,7 +26,7 @@ $(document).ready(function() {
     .append("svg:g")
       .attr("transform", "translate(40,0)");
 
-  d3.json("math_map_compact.json", function(json) {
+  d3.json("/math_map_compact.json", function(json) {
     json.x0 = 800;
     json.y0 = 0;
     update(root = json);
@@ -174,4 +180,5 @@ $(document).ready(function() {
   }
 
   d3.select(self.frameElement).style("height", "2000px");
-});
+
+}

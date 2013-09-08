@@ -1,4 +1,10 @@
 $(document).ready(function() {
+  if (document.getElementById("index-page")) {
+    new forceGroup("#index-page");
+  }
+});
+
+function forceGroup(container) {
 
   var width = 600,
       height = 600,
@@ -80,7 +86,7 @@ $(document).ready(function() {
           d3.event.stopPropagation();
           $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9-columns reveal-modal' ><div id='chart' class='small-6-columns' data-node='"+d["book_id"]+"'></div><div><a id='node-link' style='display: none'></a></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
           $("#chart-holder").foundation('reveal', 'open');
-          forceGraph();
+          new forceGraph(container);
         });
 
     svg.style("opacity", 1e-6)
@@ -129,4 +135,4 @@ $(document).ready(function() {
       return nodes;
     }
   }
-});
+}

@@ -80,5 +80,6 @@ path {
 
 #node-page .full-width {
   width: 80% !important;
+  clear: right;
   float: right;
 }

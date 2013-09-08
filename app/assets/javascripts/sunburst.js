@@ -1,4 +1,10 @@
 $(document).ready(function() {
+  if (document.getElementById("other-page")) {
+    new sunBurst("#other-page")
+  }
+});
+
+function sunBurst(container) {
   var width = 960,
       height = 700,
       radius = Math.min(width, height) / 2;
@@ -73,4 +79,4 @@ $(document).ready(function() {
     };
   }
 
-});
+}

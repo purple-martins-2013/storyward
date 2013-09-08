@@ -1,19 +1,30 @@
 $(document).ready(function() {
-  forceGraph();
+  if (document.getElementById("node-page")) {
+    new forceGraph("#node-page")
+  }
+});
 
-  $(document).on("mouseenter", "#superNav", function(e) {
+
+function forceGraph(container) {
+  window.oncontextmenu = function () {
+    if (clickedOnNode) {
+      return false;
+    }
+  }
+
+  $(container).on("mouseenter", "#superNav", function(e) {
     e.preventDefault();
-    $("#chart").hide(400);
+    $("#chart").hide(600);
     $("#superNav").addClass("full-width", 400);
   });
 
-  $(document).on("mouseleave", "#superNav", function(e) {
+  $(container).on("mouseleave", "#superNav", function(e) {
     e.preventDefault();
     $("#chart").show();
     $("#superNav").removeClass("full-width");
   });
 
-  $(document).on("mouseenter", ".node-preview", function(e) {
+  $(container).on("mouseenter", ".node-preview", function(e) {
     e.preventDefault();
     $(this).find(".preview").hide();
     $(this).find(".full").show();
@@ -22,7 +33,7 @@ $(document).ready(function() {
 
   var previewEle;
 
-  $(document).on("mouseleave", ".node-preview", function(e) {
+  $(container).on("mouseleave", ".node-preview", function(e) {
     e.preventDefault();
     $(this).find(".preview").show();
     $(this).find(".full").hide();
@@ -31,15 +42,7 @@ $(document).ready(function() {
       $(previewEle).removeClass("full-color", 400);
     }, 400);
   });  
-});
 
-
-function forceGraph() {
-  window.oncontextmenu = function () {
-    if (clickedOnNode) {
-      return false;
-    }
-  }
 
   var curElement, lastElement, timeoutId, lastColor, lastWidth, lastStroke, clickedOnNode = false, zoomFactor = 4;
 
@@ -122,12 +125,12 @@ function forceGraph() {
             
             if ($("#superNav").html() == "") {
               $("#superNav").replaceWith("<div id='superNav' style='display: none'>"+ story_preview + "</div>");
-              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right; display: inline' href='/stories/"+data+"'>Check out this story!</a>");
+              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right' href='/stories/"+data+"'>Check out this story!</a>");
               $("#chart-holder").css("width", "900px");
               $('#superNav').show("slow");
             } else {
               $("#superNav").replaceWith("<div id='superNav'>"+ story_preview + "</div>");
-              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right; display: inline' href='/stories/show/"+data+"'>Check out this story!</a>");
+              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right' href='/stories/show/"+data+"'>Check out this story!</a>");
             }
 
           });
