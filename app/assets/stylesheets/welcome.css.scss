@@ -1,0 +1,35 @@
+body {
+  background-image: url(typographic_tree.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.welcome_box {
+	height: 20em;
+	width: 30em;
+	margin: 0 auto;
+	border: 1px solid #363434;
+	border-radius: 2em;
+	background-color: rgba(56,54,55,0.875);
+	position: relative;
+	top: 22em;
+}
+
+#welcome_message {
+	text-align: center;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+.welcome_options {
+	text-align: center;
+	button {
+		color: black;
+	}
+}
+
+.sign_in_links {
+	text-align: center;
+	a {
+		color: red;
+	}
+}
