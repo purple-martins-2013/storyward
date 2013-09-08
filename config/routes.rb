@@ -4,7 +4,7 @@ Storyward::Application.routes.draw do
 
   resources :profiles, :only => [:index, :show]
   resources :stories
-  resources :nodes
+  resources :nodes, :except => [:new, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
