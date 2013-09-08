@@ -17,6 +17,7 @@ Storyward::Application.routes.draw do
 
   get "nodes/details" => "nodes#details"
   get "nodes/query" => "nodes#query"
+  get "nodes/chain" => "nodes#chain"
 
   get 'nodes' => 'nodes#index'
   # Example of regular route:
