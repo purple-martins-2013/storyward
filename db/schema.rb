@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130907021608) do
+ActiveRecord::Schema.define(version: 20130908021149) do
 
   create_table "nodes", force: true do |t|
     t.integer  "user_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20130907021608) do
   create_table "stories", force: true do |t|
     t.string  "title"
     t.integer "user_id"
+    t.integer "node_id"
   end
 
   create_table "users", force: true do |t|
