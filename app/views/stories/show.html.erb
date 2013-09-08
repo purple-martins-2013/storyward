@@ -10,13 +10,19 @@
         <a href="#" data-dropdown="drop<%= node[:id] %>" class="button success round" style="opacity: 0.5">Check Out Another Branch</a>
         <ul id="drop<%= node[:id] %>" class="f-dropdown" data-dropdown-content>
           <% children_nodes.each do |child_id| %>
-            <% if child_id != @story[index + 2][:id] %>
+            <% if @story[index + 2] %>
+              <% if child_id != @story[index + 2][:id] %>
+                <% child_node = Node.find(child_id) %>
+                <li><%= link_to child_node.title, story_path(child_node) %></li>
+              <% end %>
+            <% else %>
               <% child_node = Node.find(child_id) %>
               <li><%= link_to child_node.title, story_path(child_node) %></li>
             <% end %>
           <% end %>
         </ul>
       <% end %>
+      <%= link_to "Create a New Branch!", "/stories/new/#{node[:id]}", class:"button success round", style:"opacity: 0.5; float: right" %>
     <% end %>
   </div>
 </div>
