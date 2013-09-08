@@ -1,5 +1,30 @@
 $(document).ready(function() {
   forceGraph();
+
+  $(document).on("mouseenter mouseleave", "#superNav", function(e) {
+    e.preventDefault();
+    $("#chart").toggle();
+    $("#superNav").toggleClass("full-width");
+  });
+
+  $(document).on("mouseenter", ".node-preview", function(e) {
+    e.preventDefault();
+    $(this).find(".preview").hide();
+    $(this).find(".full").show();
+    $(this).addClass("full-color", 400);
+  });
+
+  var previewEle;
+
+  $(document).on("mouseleave", ".node-preview", function(e) {
+    e.preventDefault();
+    $(this).find(".preview").show();
+    $(this).find(".full").hide();
+    previewEle = this;
+    setTimeout(function() {
+      $(previewEle).removeClass("full-color", 400);
+    }, 400);
+  });  
 });
 
 
@@ -42,8 +67,8 @@ function forceGraph() {
     }
   });
 
-  var w = 900,
-      h = 900,
+  var w = 600,
+      h = 600,
       r = 15,
       node,
       link,
@@ -84,12 +109,26 @@ function forceGraph() {
     $.get("nodes/query",
       data,
       function(response) {
-        if ($("#superNav").html() == "") {
-          $("#superNav").replaceWith("<div id='superNav' class='small-3-columns' style='display: none'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
-          $('#superNav').show("slow");
-        } else {
-          $("#superNav").replaceWith("<div id='superNav' class='small-3-columns'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
-        }
+        $.get("nodes/chain",
+          data,
+          function(chain) {
+            var story_preview = "<div id='story-preview'>";
+            
+            console.log(chain);
+            chain.forEach(function(element, index, array) {
+              story_preview += ("<div class='node-preview'><h4>" + array[index].title + "</h4><p class='preview'>" + array[index].content.slice(0, 15) + "...</p><p class='full' style='display: none'>" + array[index].content + "</p></div>");
+            });
+            story_preview += "</div>";
+            
+            if ($("#superNav").html() == "") {
+              $("#superNav").replaceWith("<div id='superNav' style='display: none'>"+ story_preview + "</div>");
+              $("#chart-holder").css("width", "900px");
+              $('#superNav').show("slow");
+            } else {
+              $("#superNav").replaceWith("<div id='superNav'>"+ story_preview + "</div>");
+            }
+
+          });
       });
   }
 
@@ -195,7 +234,6 @@ function forceGraph() {
         .attr("y2", function(d) { return d.target.y; });
   }
 
-  // Color leaf nodes orange, and packages white or blue.
   function color(d) {
     return d._children ? "#73ffd5" : d.children ? "#14db24" : '#'+Math.floor(Math.random()*16777215).toString(16);
   }

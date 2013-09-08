@@ -79,8 +79,8 @@ $(document).ready(function() {
         .call(force.drag)
         .on("mousedown", function(d, i) { 
           d3.event.stopPropagation();
-          $("#chart").replaceWith("<div id='chart' class='reveal-modal' data-node='"+d["book_id"]+"'><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
-          $("#chart").foundation('reveal', 'open');
+          $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9-columns reveal-modal' ><div id='chart' class='small-6-columns' data-node='"+d["book_id"]+"'></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
+          $("#chart-holder").foundation('reveal', 'open');
           forceGraph();
         });
 
