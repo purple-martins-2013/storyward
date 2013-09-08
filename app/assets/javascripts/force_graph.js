@@ -128,7 +128,7 @@ function forceGraph(container) {
           $('#superNav').show("slow");
         } else {
           $("#superNav").replaceWith("<div id='superNav'>"+ story_preview + "</div>");
-          $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right' href='/stories/show/"+data+"'>Check out this story!</a>");
+          $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right' href='/stories/"+data+"'>Check out this story!</a>");
         }
 
       });
