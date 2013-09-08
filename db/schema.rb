@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 20130908030635) do
     t.integer "story_id"
   end
 
+  create_table "stars", force: true do |t|
+    t.integer  "story_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "stories", force: true do |t|
     t.string  "title"
     t.integer "user_id"
