@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+  source 'https://rubygems.org'
 
 #Core
 gem 'rails', '4.0.0'
@@ -15,6 +15,7 @@ end
 group :test, :development do
   gem 'faker'
   gem 'rspec-rails'
+  #gem 'jasmine'
   gem 'jasmine-rails'
   gem 'jasmine-jquery-rails'
   gem 'selenium-webdriver'
