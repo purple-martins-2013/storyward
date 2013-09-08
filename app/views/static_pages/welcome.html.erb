@@ -5,7 +5,7 @@
     <button id='sign_up'>Sign up</button>
   </div>
   <div class='sign_in_links', style='display:none;'>
-    <button><%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter') %></button><br>
+    <button><%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter') %></button>
     <button><%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook') %></button><br>
     <%= link_to "Sign in with email", new_user_session_path %>
   </div>
