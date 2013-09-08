@@ -2,7 +2,9 @@ class StoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @stories = Story.all
+    @book_nodes = Node.where(parent_node: 0)
+    @book_nodes = @book_nodes.map {|node| {id: node.id}}
+    @nodes = { children: @book_nodes }.to_json
   end
 
   def new
