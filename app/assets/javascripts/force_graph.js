@@ -116,10 +116,13 @@ function forceGraph() {
             
             if ($("#superNav").html() == "") {
               $("#superNav").replaceWith("<div id='superNav' style='display: none'>"+ story_preview + "</div>");
+              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='display: none; float: right' href='/stories/show/"+data+"'>Check out this story!</a>");
               $("#chart-holder").css("width", "900px");
               $('#superNav').show("slow");
+              $('#node-link').show("slow");
             } else {
               $("#superNav").replaceWith("<div id='superNav'>"+ story_preview + "</div>");
+              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right' href='/stories/show/"+data+"'>Check out this story!</a>");
             }
 
           });

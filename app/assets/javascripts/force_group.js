@@ -40,9 +40,10 @@ $(document).ready(function() {
   }
 
   function populateTitle(curElement) {
-    $.get("nodes/query/"+curElement.__data__["book_id"],
+    var book_id = curElement.__data__["book_id"];
+    $.get("nodes/query/"+book_id,
       function(response) {
-        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns' style='display: none; float: right; margin: -450px 10% 0 0'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
+        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns' style='display: none; float: right; margin: -450px 10% 0 0'><h2><a href='nodes/" + book_id + "'>"+response['title']+"</a></h2><h4>"+response['content']+"</h4></div>");
         $('#superNavTwo').slideDown();
       });
   }
@@ -77,7 +78,7 @@ $(document).ready(function() {
         .call(force.drag)
         .on("mousedown", function(d, i) { 
           d3.event.stopPropagation();
-          $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9-columns reveal-modal' ><div id='chart' class='small-6-columns' data-node='"+d["book_id"]+"'></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
+          $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9-columns reveal-modal' ><div id='chart' class='small-6-columns' data-node='"+d["book_id"]+"'></div><div><a id='node-link' style='display: none'></a></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
           $("#chart-holder").foundation('reveal', 'open');
           forceGraph();
         });
