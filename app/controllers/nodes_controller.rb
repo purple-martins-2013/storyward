@@ -20,7 +20,7 @@ class NodesController < ApplicationController
     unless @node.children_nodes.any?
       @node.update(nodes_params)
       @node.save
-      redirect_to story_node_path(params[:story_id], @node.id)
+      redirect_to @node
     else
       redirect_to :back, notice: "Node cannot be edited because it has children."
     end

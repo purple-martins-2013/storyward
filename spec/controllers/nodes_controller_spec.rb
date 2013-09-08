@@ -38,7 +38,7 @@ describe NodesController do
 
   describe 'PUT#update' do
     it 'finds correct node' do
-      put :update, :story_id => story_id, :id => node.id, node: (valid_params)
+      put :update, :id => node.id, node: (valid_params)
       assigns(:node).should eq(node)
     end
 
@@ -69,7 +69,7 @@ describe NodesController do
 
       it 'redirects to show path' do
         put :update, :story_id => story_id, :id => node.id, node: (valid_params)
-        expect(response).to redirect_to story_node_path(story_id, node.id)
+        expect(response).to redirect_to node
       end
     end
   end
