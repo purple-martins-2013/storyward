@@ -11,56 +11,14 @@ describe NodesController do
   before(:each) do
     sign_in(user)
   end
-  
+
   describe 'GET#index' do
 
     it 'returns an array of all nodes' do 
       nodes = []
       5.times {nodes << FactoryGirl.create(:node)}
-      
       get :index
       assigns(:nodes).should eq(nodes)
-    end
-  end
-
-  describe 'GET#new' do
-    it 'makes a new node' do
-      get :new, :story_id => story_id
-
-      assigns(:node).should be_new_record
-    end
-  end
-  
-  describe 'POST#create' do
-
-    context 'with correct params' do     
-      let(:valid_params) { FactoryGirl.attributes_for(:node) }
-
-      it 'saves the node into the database' do
-        post :create, :story_id => story_id, node: (valid_params)
-        Node.all.count.should eq(1)
-      end
-
-      it 'redirects to node' do
-        Node.any_instance.stub(:id).and_return(node_id)
-        post :create, :story_id => story_id, node: (valid_params)
-        expect(response).to redirect_to story_node_path(story_id, node_id)
-      end
-    end
-
-    context 'with incorrect params' do
-
-      let(:invalid_params) { {:title=>"", :content=>"", :parent_node=>1}}
-      
-      it 'does not save the node into the database' do
-        post :create, :story_id => 1, node: (invalid_params)
-        Node.all.count.should eq(0)
-      end
-
-      it 'renders new view' do
-        post :create, :story_id => story_id, node: (invalid_params)
-        should render_template(:new)
-      end
     end
   end
 
@@ -80,7 +38,7 @@ describe NodesController do
 
   describe 'PUT#update' do
     it 'finds correct node' do
-      put :update, :story_id => story_id, :id => node.id, node: (valid_params)
+      put :update, :id => node.id, node: (valid_params)
       assigns(:node).should eq(node)
     end
 
@@ -111,7 +69,7 @@ describe NodesController do
 
       it 'redirects to show path' do
         put :update, :story_id => story_id, :id => node.id, node: (valid_params)
-        expect(response).to redirect_to story_node_path(story_id, node.id)
+        expect(response).to redirect_to node
       end
     end
   end

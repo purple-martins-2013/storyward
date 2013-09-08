@@ -2,7 +2,7 @@
   <% if @stories.any? %>
     <% @stories.each do |story| %>
       <div class="story">
-        <h4><%= @story.title %></h4>
+        <h4><%= link_to story.title, story %></h4>
       </div>
     <% end %>
   <% else %>

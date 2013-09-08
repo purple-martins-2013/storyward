@@ -19,7 +19,7 @@ describe StoriesController do
 
   describe '#create' do
     it 'creates a story' do
-      expect { post :create, story: FactoryGirl.attributes_for(:story) }.to change(Story,:count).by(1)
+      expect { post :create, story: FactoryGirl.attributes_for(:story), node: FactoryGirl.attributes_for(:node) }.to change(Story,:count).by(1)
     end
   end
 

@@ -1,10 +1,8 @@
-<% if @story.errors.any? %>
-  <%= @story.errors.full_messages do |message| %>
-    <p class="error"><%= message %></p>
-  <% end %>
-<% end %>
-
 <%= form_for @story do |f| %>
   <%= f.text_field :title %>
+  <%= fields_for @story.node do |n| %>
+    <%= n.text_field :title %>
+    <%= n.text_field :content %>
+  <% end %>
   <%= f.submit %>
 <% end %>
