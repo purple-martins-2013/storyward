@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  has_many :stars
+  has_many :stories, through: :stars
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :twitter]
