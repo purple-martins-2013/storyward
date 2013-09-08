@@ -74,6 +74,11 @@ path {
   overflow-y: scroll;
 }
 
-.full-width {
+#index-page .full-width {
   width: 100% !important;
+}
+
+#node-page .full-width {
+  width: 80% !important;
+  float: right;
 }
