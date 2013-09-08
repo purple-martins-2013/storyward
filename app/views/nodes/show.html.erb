@@ -1,6 +1,14 @@
-<div class="show-story">
-  <h2><%= @node.title %></h2>
-  <p><%= @node.content %></p>
-</div>
+<div id="reading-page">
+  <div id="reading-background">
+    <button class="dimlights">Dim Lights</button>
+    <button class="brighten">Brighten</button>
+    <div id ="show-story">
+      <h2><%= @node.title %></h2>
+      <p><%= @node.content %></p>
+    </div>
 
-<%= link_to "Delete", story_node_path(1, @node), :method => :delete %>
+    <% if current_user.id == @node.user_id %>
+      <%= link_to "Delete", story_node_path(1, @node), :method => :delete %>
+    <% end %>
+  </div>
+</div>

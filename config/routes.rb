@@ -15,6 +15,8 @@ Storyward::Application.routes.draw do
   end
 
   get 'nodes' => 'nodes#index'
+
+  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
