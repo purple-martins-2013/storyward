@@ -13,16 +13,21 @@ class StoriesController < ApplicationController
   end
 
   def show
-    @story = Story.find(params[:id])
+    @node = Node.find(params[:id])
+    @story = build_chain(@node).reverse
   end
 
   def create
+    story_params = {}
+    story_params[:title] = node_params[:title]
     @story = Story.new(story_params)
     @story.user = current_user
-    @story.node = Node.new(node_params)
+    @story.node = Node.create(node_params)
+    @story.node.parent_node = 0
+    @story.node.save
     @story.node.user = current_user
     if @story.save
-      redirect_to @story, :notice => "#{@story.title} was created successfully."
+      redirect_to story_path(@story.node), :notice => "#{@story.title} was created successfully."
     else
       render :new, :alert => "Story could not be saved. Please see the errors below."
     end
@@ -44,9 +49,6 @@ class StoriesController < ApplicationController
   end
 
   private
-  def story_params
-    params.require(:story).permit(:title, node_attributes: [:id, :title, :content])
-  end
 
   def node_params
     params.require(:node).permit(:title, :content)
