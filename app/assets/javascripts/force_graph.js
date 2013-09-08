@@ -104,13 +104,11 @@ function forceGraph() {
 
   function populateNode(curElement) {
     var data = curElement.__data__["id"];
-    $.get("nodes/query"+data,
+    $.get("nodes/query/"+data,
       function(response) {
-        $.get("nodes/chain"+data,
+        $.get("nodes/chain/"+data,
           function(chain) {
             var story_preview = "<div id='story-preview'>";
-            
-            console.log(chain);
             chain.forEach(function(element, index, array) {
               story_preview += ("<div class='node-preview'><h4>" + array[index].title + "</h4><p class='preview'>" + array[index].content.slice(0, 15) + "...</p><p class='full' style='display: none'>" + array[index].content + "</p></div>");
             });

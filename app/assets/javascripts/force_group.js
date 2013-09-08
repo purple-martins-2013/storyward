@@ -42,7 +42,7 @@ $(document).ready(function() {
   function populateTitle(curElement) {
     $.get("nodes/query/"+curElement.__data__["book_id"],
       function(response) {
-        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns' style='display: none; float: right; margin-top: -250px'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
+        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns' style='display: none; float: right; margin: -450px 10% 0 0'><h2>"+response['title']+"</h2><h4>"+response['content']+"</h4></div>");
         $('#superNavTwo').slideDown();
       });
   }
