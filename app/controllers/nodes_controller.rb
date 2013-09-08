@@ -2,10 +2,6 @@ class NodesController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:index, :show]
 
-  def index
-    @nodes = Node.all 
-  end
-
   def new
     @node = Node.new #for form_for
   end
