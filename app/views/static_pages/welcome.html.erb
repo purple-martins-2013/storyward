@@ -8,7 +8,11 @@
       </p>
     </div>
     <div class="small-4 columns">
-      <h4><%= link_to "Create an Account", new_user_registration_path %></h4>
-      <h4><%= link_to "Log In", new_user_session_path %></h4>
+      <% unless current_user %>
+        <h4><%= link_to "Create an Account", new_user_registration_path %></h4>
+        <h4><%= link_to "Log In", new_user_session_path %></h4>
+      <% else %>
+        <h4>Welcome back to StoryWard, <%= current_user.name %>!</h4>
+      <% end %>
     </div>
 </div>
