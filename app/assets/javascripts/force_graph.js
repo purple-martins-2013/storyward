@@ -1,10 +1,16 @@
 $(document).ready(function() {
   forceGraph();
 
-  $(document).on("mouseenter mouseleave", "#superNav", function(e) {
+  $(document).on("mouseenter", "#superNav", function(e) {
     e.preventDefault();
-    $("#chart").toggle();
-    $("#superNav").toggleClass("full-width");
+    $("#chart").hide(400);
+    $("#superNav").addClass("full-width", 400);
+  });
+
+  $(document).on("mouseleave", "#superNav", function(e) {
+    e.preventDefault();
+    $("#chart").show();
+    $("#superNav").removeClass("full-width");
   });
 
   $(document).on("mouseenter", ".node-preview", function(e) {
@@ -90,7 +96,7 @@ function forceGraph() {
   createJson();
 
   function createJson() {
-    $.get("nodes/details/"+$("#chart").data("node"),
+    $.get("/nodes/details/"+$("#chart").data("node"),
       function(response) {
         json = response;
         takeJson();
@@ -104,9 +110,9 @@ function forceGraph() {
 
   function populateNode(curElement) {
     var data = curElement.__data__["id"];
-    $.get("nodes/query/"+data,
+    $.get("/nodes/query/"+data,
       function(response) {
-        $.get("nodes/chain/"+data,
+        $.get("/nodes/chain/"+data,
           function(chain) {
             var story_preview = "<div id='story-preview'>";
             chain.forEach(function(element, index, array) {
@@ -116,13 +122,12 @@ function forceGraph() {
             
             if ($("#superNav").html() == "") {
               $("#superNav").replaceWith("<div id='superNav' style='display: none'>"+ story_preview + "</div>");
-              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='display: none; float: right' href='/stories/show/"+data+"'>Check out this story!</a>");
+              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right; display: inline' href='/stories/"+data+"'>Check out this story!</a>");
               $("#chart-holder").css("width", "900px");
               $('#superNav').show("slow");
-              $('#node-link').show("slow");
             } else {
               $("#superNav").replaceWith("<div id='superNav'>"+ story_preview + "</div>");
-              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right' href='/stories/show/"+data+"'>Check out this story!</a>");
+              $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right; display: inline' href='/stories/show/"+data+"'>Check out this story!</a>");
             }
 
           });
