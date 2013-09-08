@@ -13,6 +13,7 @@ class NodesController < ApplicationController
     else
       render :new
     end
+  end
 
   def show
     @node = Node.find(params[:id])

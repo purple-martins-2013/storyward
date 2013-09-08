@@ -12,16 +12,6 @@ describe NodesController do
     sign_in(user)
   end
 
-  describe 'GET#index' do
-
-    it 'returns an array of all nodes' do 
-      nodes = []
-      5.times {nodes << FactoryGirl.create(:node)}
-      get :index
-      assigns(:nodes).should eq(nodes)
-    end
-  end
-
   describe 'GET#show' do
     it 'finds correct node' do
       get :show, :story_id => story_id, :id => node.id
