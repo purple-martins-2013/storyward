@@ -44,6 +44,36 @@ path {
   fill-rule: evenodd;
 }
 
-#chart {
+#chart-holder {
   width: auto;
+}
+
+#chart {
+  width: 74%;
+  float: left;
+}
+
+#superNav {
+  width: 25%;
+  float: right;
+}
+
+#story-preview {
+  overflow-y: scroll;
+  height: 600px;
+}
+
+.node-preview {
+  background-color: #f0d1db;
+}
+
+.full-color {
+  background-color: #d9ffcf;
+  height: 80%;
+  margin: 2% 0;
+  overflow-y: scroll;
+}
+
+.full-width {
+  width: 100% !important;
 }
