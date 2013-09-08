@@ -1,8 +1,13 @@
-<div class="story-list">
-  <% if @stories.any? %>
-    <% @stories.each do |story| %>
+<div id="index-page" class="story-list small-8-columns">
+  <div id="group-chart" class="small-5-columns" data-nodes="<%= @nodes %>"></div>
+  <div id="superNavTwo" class="small-3-columns" style="display: none; float: right; margin-top: -250px">All the content goes here</div>
+  <div id="chart-holder"><div id="chart" style="display: none" data-node="1"></div></div>
+
+  <% if @book_nodes.length > 0 %>
+    <% @book_nodes.each do |node| %>
+      <% @node = Node.find(node[:id]) %>
       <div class="story">
-        <h4><%= link_to story.title, story %></h4>
+        <h4><%= link_to @node.title, @node %></h4>
       </div>
     <% end %>
   <% else %>

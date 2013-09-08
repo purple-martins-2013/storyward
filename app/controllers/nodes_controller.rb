@@ -1,4 +1,5 @@
 class NodesController < ApplicationController
+  include NodeHelper
 
   skip_before_action :authenticate_user!, only: [:index, :show]
 
@@ -43,6 +44,20 @@ class NodesController < ApplicationController
     else
       redirect_to :back, notice: "Node cannot be deleted because it has children."
     end
+  end
+
+  def query
+    render json: Node.find(params[:id]).to_json
+  end
+
+  def details
+    @node = Node.find(params[:id])
+    render json: create_json(@node)[0].to_json
+  end
+
+  def chain
+    @node = Node.find(params[:id])
+    render json: build_chain(@node).reverse.to_json
   end
 
   private

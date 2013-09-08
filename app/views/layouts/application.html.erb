@@ -15,6 +15,9 @@
   </head>
 
   <body>
+    <% if current_user %>
+      <%= render "/layouts/nav" %>
+    <% end %>
     <div>
       <%= display_flash_messages %>
       <%= yield %>
