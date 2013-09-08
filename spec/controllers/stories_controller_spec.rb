@@ -10,12 +10,12 @@ describe StoriesController do
     sign_in user
   end
 
-  describe "#index" do
-    it "populates a list of stories" do
-      get :index
-      expect(assigns(:stories)).to eq([story])
-    end
-  end
+  # describe "#index" do
+  #   it "populates a list of stories" do
+  #     get :index
+  #     expect(assigns(:stories)).to eq([story])
+  #   end
+  # end
 
   describe '#create' do
     it 'creates a story' do
@@ -23,13 +23,13 @@ describe StoriesController do
     end
   end
 
-  describe '#update' do
-    it 'modifies a story in the database' do
-      put :update, id: story, story: FactoryGirl.attributes_for(:story, title: "FooBar")
-      story.reload
-      story.title.should eq("FooBar")
-    end
-  end
+  # describe '#update' do
+  #   it 'modifies a story in the database' do
+  #     put :update, id: story, story: FactoryGirl.attributes_for(:story, title: "FooBar")
+  #     story.reload
+  #     story.title.should eq("FooBar")
+  #   end
+  # end
 
   describe "#delete" do
     it 'removes an entry from the database' do
