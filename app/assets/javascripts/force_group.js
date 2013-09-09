@@ -49,7 +49,7 @@ function forceGroup(container) {
     var book_id = curElement.__data__["book_id"];
     $.get("nodes/query/"+book_id,
       function(response) {
-        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns' style='display: none; float: right; margin: -450px 10% 0 0'><h2><a href='nodes/" + book_id + "'>"+response['title']+"</a></h2><h4>"+response['content'].slice(0, 35)+"</h4></div>");
+        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns' style='margin: -450px 10% 0 0'><h2><a href='nodes/" + book_id + "'>"+response['title']+"</a></h2><h4>"+response['content'].slice(0, 35)+"</h4></div>");
         $('#superNavTwo').slideDown();
       });
   }
