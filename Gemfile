@@ -3,13 +3,14 @@ source 'https://rubygems.org'
 #Core
 gem 'rails', '4.0.0'
 gem 'pg'
+gem 'unicorn'
 
 group :development do
-  gem 'unicorn'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'guard-rspec'
   gem 'guard-rails'
+  gem 'guard-unicorn'
 end
 
 group :test, :development do
