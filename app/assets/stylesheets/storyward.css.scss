@@ -1,9 +1,7 @@
 body {
-  background-image: url(image_path('ricepaper2.png'));
-}
-
-.container {
-  padding: 20px;
+  background-image: url(ricepaper2.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1.inset {
