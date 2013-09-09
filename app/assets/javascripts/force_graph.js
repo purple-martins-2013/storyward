@@ -12,18 +12,6 @@ function forceGraph(container) {
     }
   }
 
-  $(container).on("mouseenter", "#superNav", function(e) {
-    e.preventDefault();
-    $("#chart").hide(600);
-    $("#superNav").addClass("full-width", 400);
-  });
-
-  $(container).on("mouseleave", "#superNav", function(e) {
-    e.preventDefault();
-    $("#chart").show();
-    $("#superNav").removeClass("full-width");
-  });
-
   $(container).on("mouseenter", ".node-preview", function(e) {
     e.preventDefault();
     $(this).find(".preview").hide();
