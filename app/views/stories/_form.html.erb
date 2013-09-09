@@ -1,7 +1,9 @@
 <%= form_for @story do |f| %>
   <%= fields_for @story.node do |n| %>
     <%= n.text_field :title %>
-    <%= n.text_field :content %>
+    <%= n.text_area :content, class: "tinymce", size: "60x9" %>
+    <%= tinymce %>
+    <p></p>
     <% if @parent_node %>
       <%= n.hidden_field :parent_node, value: @parent_node %>
     <% else %>
