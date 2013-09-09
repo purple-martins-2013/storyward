@@ -18,7 +18,7 @@
     <% if current_user %>
       <%= render "/layouts/nav" %>
     <% end %>
-    <div>
+    <div id="<%= content_for?(:page_id) ? yield(:page_id) : '' %>">
       <%= display_flash_messages %>
       <%= yield %>
     </div>
