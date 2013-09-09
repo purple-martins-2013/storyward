@@ -81,5 +81,6 @@ path {
 #superNavTwo {
   display: none;
   float: right;
-  margin-top: -250px;
+  margin: -450px 10% 0 0;
+  width: 300px;
 }
