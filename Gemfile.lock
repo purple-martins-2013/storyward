@@ -87,6 +87,8 @@ GEM
     guard-rspec (3.0.2)
       guard (>= 1.8)
       rspec (~> 2.13)
+    guard-unicorn (0.1.0)
+      guard (>= 1.1)
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
@@ -260,6 +262,7 @@ DEPENDENCIES
   foundation_rails_helper
   guard-rails
   guard-rspec
+  guard-unicorn
   jasmine-rails
   jbuilder (~> 1.2)
   jquery-rails
