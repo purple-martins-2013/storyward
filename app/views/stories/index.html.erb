@@ -7,7 +7,7 @@
     <% @book_nodes.each do |node| %>
       <% @node = Node.find(node[:id]) %>
       <div class="story">
-        <h4><%= link_to @node.title, story_path(@node) %></h4>
+        <h4><%= link_to @node.title, @node %></h4>
       </div>
     <% end %>
   <% else %>
