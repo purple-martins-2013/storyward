@@ -1,4 +1,4 @@
-<div id='welcome_screen'>
+<% content_for(:page_id, 'welcome_page') %>
   <div class='welcome_box'>
     <h2><p id='welcome_message'>Welcome to Storyward</p></h2>
     <div class='welcome_options'>
@@ -11,4 +11,6 @@
       <%= link_to "Sign in with email", new_user_session_path %>
     </div>
   </div>
-</div>  
+
+
+<!-- <%= image_tag "typographic_tree.jpg", id: "welcome_image" %> -->

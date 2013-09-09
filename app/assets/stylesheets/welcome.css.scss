@@ -1,7 +1,23 @@
-#welcome_screen {
-  background-image: url(typographic_tree.jpg);
-  background-repeat: no-repeat;
-  background-size: 100%;
+#welcome_page {
+	background-image: url(typographic_tree.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	padding-top: 34%;
+}
+
+img.welcome_image {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .welcome_box {
@@ -12,7 +28,7 @@
 	border-radius: 2em;
 	background-color: rgba(56,54,55,0.875);
 	position: relative;
-	top: 22em;
+	bottom: 5em;
 }
 
 #welcome_message {
