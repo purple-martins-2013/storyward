@@ -20,6 +20,19 @@ class StoriesController < ApplicationController
 
   def create
     story_params = {}
+    
+    if params[:story][:upload]
+      uploaded_io = params[:story][:upload]
+      filetype = uploaded_io.original_filename.split(".").last.downcase
+      if ["pdf", "doc", "docx", "txt", "rtf", "pages", "epub", "mobi", "html", "gdoc", "md"].include?(filetype)
+        File.open(Rails.root.join('public', 'uploads',
+          uploaded_io.original_filename), 'w') do |file|
+          file.write(uploaded_io.read)
+        end
+      end
+      
+    end
+
     story_params[:title] = node_params[:title]
     @story = Story.new(story_params)
     @story.user = current_user
