@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
 
   has_many :stars
-  has_many :stories, through: :stars
+  has_many :stories
+  has_many :starred_stories, through: :stars, source: :story
   has_many :nodes
 
   devise :database_authenticatable, :registerable,
