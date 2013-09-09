@@ -10,10 +10,6 @@ line.link {
   stroke-width: 1.5px;
 }
 
-svg {
-  border: 2px black solid;
-}
-
 circle {
   fill: #fff;
   stroke: steelblue;
@@ -69,7 +65,7 @@ path {
 
 .full-color {
   background-color: #d9ffcf;
-  height: 80%;
+  height: 25%;
   margin: 2% 0;
   overflow-y: scroll;
 }
@@ -82,4 +78,18 @@ path {
   width: 80% !important;
   clear: right;
   float: right;
+}
+
+.small-preview {
+  font-size: 12px;
+}
+
+.hide {
+  display: none;
+}
+
+#superNavTwo {
+  display: none;
+  float: right;
+  margin-top: -250px;
 }
