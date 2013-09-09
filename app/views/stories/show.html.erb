@@ -1,13 +1,13 @@
 <div class="row">
   <div id="show-story" class="show-story small-12-columns">
     <h2><%= @story.first[:title] %></h2>
-    <p><%= @story.first[:content] %></p>
+    <p><%= @story.first[:content].html_safe %></p>
     <% @story.drop(1).each_with_index do |node, index| %>
-      <div class="node-title" style="min-height: 30px"><h5 style="display:none; opacity: 0.7"><%= node[:title] %></h5></div>
+      <div class="node-title"><h5 class="title-text"><%= node[:title] %></h5></div>
       <p><%= node[:content] %></p>
       <% children_nodes = Node.find(node[:id]).children_nodes %>
       <% if children_nodes.length > 1 %>
-        <a href="#" data-dropdown="drop<%= node[:id] %>" class="button success round" style="opacity: 0.5">Check Out Another Branch</a>
+        <a href="#" data-dropdown="drop<%= node[:id] %>" class="button success round read-mode">Check Out Another Branch</a>
         <ul id="drop<%= node[:id] %>" class="f-dropdown" data-dropdown-content>
           <% children_nodes.each do |child_id| %>
             <% if @story[index + 2] %>
@@ -22,7 +22,7 @@
           <% end %>
         </ul>
       <% end %>
-      <%= link_to "Create a New Branch!", "/stories/new/#{node[:id]}", class:"button success round", style:"opacity: 0.5; float: right" %>
+      <%= link_to "Create a New Branch!", "/stories/new/#{node[:id]}", class:"button success round read-mode right" %>
     <% end %>
   </div>
 </div>
