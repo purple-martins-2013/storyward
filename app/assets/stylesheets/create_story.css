@@ -1,0 +1,9 @@
+#title-field {
+  width: 40%;
+}
+
+#content-field {
+  resize: both;
+  width: 50%;
+  min-height: 300px;
+}

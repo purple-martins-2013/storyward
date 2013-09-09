@@ -117,18 +117,18 @@ function forceGraph(container) {
       function(chain) {
         var story_preview = "<div id='story-preview'>";
         chain.forEach(function(element, index, array) {
-          story_preview += ("<div class='node-preview'><h4>" + array[index].title + "</h4><p class='preview'>" + array[index].content.slice(0, 15) + "...</p><p class='full' style='display: none'>" + array[index].content + "</p></div>");
+          story_preview += ("<div class='node-preview'><h4>" + array[index].title + "</h4><p class='preview'>" + array[index].content.slice(0, 15) + "...</p><p class='full hide'>" + array[index].content + "</p></div>");
         });
         story_preview += "</div>";
         
         if ($("#superNav").html() == "") {
-          $("#superNav").replaceWith("<div id='superNav' style='display: none'>"+ story_preview + "</div>");
-          $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right' href='/stories/"+data+"'>Check out this story!</a>");
+          $("#superNav").replaceWith("<div id='superNav' class='hide'>"+ story_preview + "</div>");
+          $("#node-link").replaceWith("<a id='node-link' class='button success round right' href='/stories/"+data+"'>Check out this story!</a>");
           $("#chart-holder").css("width", "900px");
           $('#superNav').show("slow");
         } else {
           $("#superNav").replaceWith("<div id='superNav'>"+ story_preview + "</div>");
-          $("#node-link").replaceWith("<a id='node-link' class='button success round' style='float: right' href='/stories/"+data+"'>Check out this story!</a>");
+          $("#node-link").replaceWith("<a id='node-link' class='button success round right' href='/stories/"+data+"'>Check out this story!</a>");
         }
 
       });
