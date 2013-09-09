@@ -1,12 +1,14 @@
-<div class='welcome_box'>
-  <h2><p id='welcome_message'>Welcome to Storyward</p></h2>
-  <div class='welcome_options'>
-    <button id='sign_in'>Sign in</button>
-    <button id='sign_up'>Sign up</button>
+<div id='welcome_screen'>
+  <div class='welcome_box'>
+    <h2><p id='welcome_message'>Welcome to Storyward</p></h2>
+    <div class='welcome_options'>
+      <button id='sign_in'>Sign in</button>
+      <button id='sign_up'>Sign up</button>
+    </div>
+    <div class='sign_in_links', style='display:none;'>
+      <button><%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter') %></button>
+      <button><%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook') %></button><br>
+      <%= link_to "Sign in with email", new_user_session_path %>
+    </div>
   </div>
-  <div class='sign_in_links', style='display:none;'>
-    <button><%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter') %></button>
-    <button><%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook') %></button><br>
-    <%= link_to "Sign in with email", new_user_session_path %>
-  </div>
-</div>
+</div>  
