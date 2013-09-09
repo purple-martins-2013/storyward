@@ -45,6 +45,20 @@ class NodesController < ApplicationController
     end
   end
 
+  def query
+    render json: Node.find(params[:id]).to_json
+  end
+
+  def details
+    @node = Node.find(params[:id])
+    render json: create_json(@node)[0].to_json
+  end
+
+  def chain
+    @node = Node.find(params[:id])
+    render json: build_chain(@node).reverse.to_json
+  end
+
   private
   def nodes_params
     params.require(:node).permit(:title, :content) 
