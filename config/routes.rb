@@ -2,9 +2,17 @@ Storyward::Application.routes.draw do
   root "static_pages#welcome"
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  get 'visualizations' => 'users#index'
+
+  get "stories/new/:id" => "stories#new"
+
   resources :profiles, :only => [:index, :show]
   resources :stories
   resources :nodes, :except => [:new, :create, :index]
+
+  get "nodes/details/:id" => "nodes#details"
+  get "nodes/query/:id" => "nodes#query"
+  get "nodes/chain/:id" => "nodes#chain"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
