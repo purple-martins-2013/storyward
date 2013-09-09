@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
                            provider:auth.provider,
                            uid:auth.uid,
                            email:auth.info.email,
-                           password:Devise.friendly_token[0,20]
+                           password:Devise.friendly_token[0,20],
+                           image_url: auth.info.image.gsub("square", "large")
                            )
     end
     user
@@ -29,7 +30,8 @@ class User < ActiveRecord::Base
                            provider:auth.provider,
                            uid:auth.uid,
                            email:auth.info.email || "#{auth.provider}-#{auth.uid}@storyward.com",
-                           password:Devise.friendly_token[0,20]
+                           password:Devise.friendly_token[0,20],
+                           image_url: auth.info.image.gsub('_normal','')
                            )
     end
     user
@@ -47,7 +49,6 @@ class User < ActiveRecord::Base
           user.email = data["email"] if user.email.blank?
         end
       else
-        raise "Invalid OAuth Provider"
       end
     end
   end
