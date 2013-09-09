@@ -14,6 +14,6 @@
   <div class='sign_up_links', style='display:none;'>
     <%= link_to "Sign up with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
     <%= link_to "Sign up with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
-    <%= link_to "Sign up with email", new_user_registration_path, {:class => 'button welcome-button'} %>
+    <%= link_to "Sign up with email", new_user_registration_path, {:class => 'button welcome-button', :data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %>
   </div>
 </div>
