@@ -105,7 +105,13 @@ function forceGraph(container) {
       function(chain) {
         var story_preview = "<div id='story-preview'>";
         chain.forEach(function(element, index, array) {
-          story_preview += ("<div class='node-preview'><h5>" + array[index].title + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 500) + "...</p></div>");
+          var div_short = document.createElement("div");
+          var div_long = document.createElement("div");
+          div_short.innerHTML = array[index].content.slice(0, 15);
+          div_long.innerHTML = array[index].content.slice(0, 500);
+          var short_content = div_short.textContent || div_short.innerText || "";
+          var long_content = div_long.textContent || div_long.innerText || "";
+          story_preview += ("<div class='node-preview'><h5>" + array[index].title + "</h5><p class='preview small-preview' >" + short_content + "...</p><p class='full hide small-preview'>" + long_content + "...</p></div>");
         });
         story_preview += "</div>";
         
