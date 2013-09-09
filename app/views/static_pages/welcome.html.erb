@@ -10,6 +10,12 @@
       <button><%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook') %></button><br>
       <%= link_to "Sign in with email", new_user_session_path %>
     </div>
+
+    <div class='sign_up_links', style='display:none;'>
+      <button><%= link_to "Sign up with Twitter", user_omniauth_authorize_path('twitter') %></button>
+      <button><%= link_to "Sign up with Facebook",user_omniauth_authorize_path('facebook') %></button><br>
+      <%= link_to "Sign up with email", new_user_registration_path %>
+    </div>
   </div>
 
 
