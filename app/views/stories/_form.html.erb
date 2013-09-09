@@ -2,6 +2,13 @@
   <%= fields_for @story.node do |n| %>
     <%= n.text_field :title %>
     <%= n.text_field :content %>
+    <%= n.text_field :title, id: "title-field" %>
+    <%= n.text_area :content, id: "content-field" %>
+    <%= f.file_field :upload %>
+    Accepted formats: PDF and TXT
+    <p></p>
+    If a file is uploaded, the content field will be appended to the file.
+    <p></p>
     <% if @parent_node %>
       <%= n.hidden_field :parent_node, value: @parent_node %>
     <% else %>
