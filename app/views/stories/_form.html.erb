@@ -2,6 +2,11 @@
   <%= fields_for @story.node do |n| %>
     <%= n.text_field :title %>
     <%= n.text_field :content %>
+    <% if @parent_node %>
+      <%= n.hidden_field :parent_node, value: @parent_node %>
+    <% else %>
+      <%= n.hidden_field :parent_node, value: "0" %>
+    <% end %>
   <% end %>
   <%= f.submit %>
 <% end %>
