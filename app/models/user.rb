@@ -47,7 +47,6 @@ class User < ActiveRecord::Base
           user.email = data["email"] if user.email.blank?
         end
       else
-        raise "Invalid OAuth Provider"
       end
     end
   end
