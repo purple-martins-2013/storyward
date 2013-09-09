@@ -10,6 +10,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'guard-rspec'
   gem 'guard-rails'
+  gem 'guard-unicorn'
 end
 
 group :test, :development do
