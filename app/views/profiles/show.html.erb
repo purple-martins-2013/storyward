@@ -2,29 +2,53 @@
   <div class="row">
 
     <div class="small-4 columns">
-      <div class="row">
-        <div class="small-5 columns">
-          <%= image_tag @user.image_url%>
-        </div>
-        <div class="small-7 columns">
-          <h2><%= @user.name %></h2>
-        </div>
+      <%= image_tag @user.image_url, size: '200x200', class: "th radius" %>
+      <h3><%= @user.name %></h3>
+      <div>
+
+      <h4>Stories Created</h4>
+      <% if @user.stories.any? %>
+        <% @user.stories.each do |story| %>
+          <h6><%= link_to story.title, story %></h6>
+        <% end %>
+      <% else %>
+        <h6>No stories created yet.</h6>
+      <% end %>
       </div>
-      <div class="small-12 columns">
-      	<h4>Stories Started</h4>
-      </div>
-      <div class="small-12 columns">
-      	<h4>Nodes Authored</h4>
+
+      <div>
+        <h4>Nodes Contributed</h4>
+        <% if @user.nodes.any? %>
+          <% @user.nodes.each do |node| %>
+            <h6><%= link_to node.title, node %></h6>
+          <% end %>
+        <% else %>
+          <h6>No nodes created yet.</h6>
+        <% end %>
       </div>
     </div>
 
     <div class="small-8 columns">
       <div class="row">
-        <div class="small-4 columns">
+        <div class="small-6 columns">
           <h4>Favorite Authors</h4>
+          <% if @user.favorite_authors.any? %>
+            <% @user.favorite_authors.each do |author| %>
+              <h6><%= link_to author.name, author %></h6>
+            <% end %>
+          <% else %>
+            <h6>No authors favorited yet.</h6>
+          <% end %>
         </div>
-        <div class="small-4 columns">
+        <div class="small-6 columns">
           <h4>Favorite Stories</h4>
+          <% if @user.starred_stories.any? %>
+            <% @user.starred_stories.each do |story| %>
+              <h6><%= link_to story.title, story %></h6>
+            <% end %>
+          <% else %>
+            <h6>No stories favorited yet.</h6>
+          <% end %>
       </div>
       <div class="small-12 columns">
       	<h4>Story Viewer</h4>
