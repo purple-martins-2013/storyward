@@ -17,11 +17,11 @@ describe "welcome page" do
     end
 
     it "has a link to create an account" do
-      page.should have_content "Create an Account"
+      page.should have_content "Sign up"
     end
 
     it "has a link to log in" do
-      page.should have_content "Log In"
+      page.should have_content "Sign in"
     end
 
   end
