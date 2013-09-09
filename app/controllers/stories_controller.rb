@@ -3,6 +3,7 @@ class StoriesController < ApplicationController
 
   def index
     @book_nodes = Node.where(parent_node: 0)
+    @book_nodes = @book_nodes.sort_by {|node| node.children_nodes.length }.reverse
     @book_nodes = @book_nodes.map {|node| {id: node.id}}
     @nodes = { children: @book_nodes }.to_json
   end
