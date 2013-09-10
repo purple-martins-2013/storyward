@@ -7,7 +7,7 @@ $(document).ready(function() {
 function forceGroup(container) {
 
   var width = 600,
-      height = 600,
+      height = 400,
       root;
 
   var curElement, lastElement, timeoutId, lastColor, lastWidth, lastStroke;
