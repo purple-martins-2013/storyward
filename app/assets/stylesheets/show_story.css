@@ -28,3 +28,11 @@
 #story-map:hover {
   opacity: 1.0;
 }
+
+#bookmark_icon {
+  opacity: 0.5;
+}
+
+#bookmark_icon:hover {
+  opacity: 1.0;
+}
