@@ -1,13 +1,17 @@
 class User < ActiveRecord::Base
 
   has_many :stars
-  has_many :stories, through: :stars
+  has_many :stories
+  has_many :starred_stories, through: :stars, source: :story
   has_many :nodes
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :twitter]
-  
+
+  def favorite_authors
+    self.starred_stories.map{|s| s.user}
+  end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first

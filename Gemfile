@@ -3,13 +3,18 @@
 #Core
 gem 'rails', '4.0.0'
 gem 'pg'
+gem 'unicorn'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development do
-  gem 'unicorn'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'guard-rspec'
   gem 'guard-rails'
+  gem 'guard-unicorn'
 end
 
 group :test, :development do
@@ -26,6 +31,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'shoulda'
+  gem 'simplecov', :require => false
 end
 
 #Assets
@@ -47,5 +53,5 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
-
-
+gem 'tinymce-rails'
+gem 'sanitize'

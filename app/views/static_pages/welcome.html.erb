@@ -1,18 +1,19 @@
-<div class="container">
-  <div class="row">
-    <div class="small-8 columns">
-      <h1 class="inset">StoryWard</h1>
-      <h2>Build literature, together.</h2>
-      <p>
-        There are two sides to every story. StoryWard is a platform for people to contribute to the process of writing a story collaboratively. A piece of a story is a "node", and nodes are combined together in sequence to make a story. You can "fork" a node, if the node's author allows it, and continue the story in your own words. Build the plot you like best from other user's nodes.
-      </p>
-    </div>
-    <div class="small-4 columns">
-      <% unless current_user %>
-        <h4><%= link_to "Create an Account", new_user_registration_path %></h4>
-        <h4><%= link_to "Log In", new_user_session_path %></h4>
-      <% else %>
-        <h4>Welcome back to StoryWard, <%= current_user.name %>!</h4>
-      <% end %>
-    </div>
+<% content_for(:page_id, 'welcome_page') %>
+<div class='welcome_box'>
+  <h2><p id='welcome_message'>Welcome to Storyward</p></h2>
+  <div class='welcome_options'>
+    <button id='sign_in'>Sign in</button><br>
+    <button id='sign_up'>Sign up</button>
+  </div>
+  <div class='sign_in_links', style='display:none;'>
+    <%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
+    <%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
+    <%= link_to "Sign in with email", new_user_session_path, {:class => 'button welcome-button', :data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %>
+  </div>
+
+  <div class='sign_up_links', style='display:none;'>
+    <%= link_to "Sign up with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
+    <%= link_to "Sign up with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
+    <%= link_to "Sign up with email", new_user_registration_path, {:class => 'button welcome-button', :data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %>
+  </div>
 </div>

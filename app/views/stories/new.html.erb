@@ -1,9 +1,13 @@
-<% if @parent_node %>
-  <h2><%= Node.find(@parent_node).title %></h3>
-  <h3>Continue the story!</h4>
-<% else %>
-  <h2>Create a New Story</h2>
-<% end %>
-<div class="new-form">
-  <%= render 'form' %>
+<div class="row">
+  <div class="small-12-columns">
+    <% if @parent_node %>
+      <h2><%= Node.find(@parent_node).title %></h3>
+      <h3>Continue the story!</h4>
+    <% else %>
+      <h2>Create a New Story</h2>
+    <% end %>
+    <div class="new-form">
+      <%= render 'form' %>
+    </div>
+  </div>
 </div>

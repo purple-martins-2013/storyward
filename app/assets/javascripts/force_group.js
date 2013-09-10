@@ -7,7 +7,7 @@ $(document).ready(function() {
 function forceGroup(container) {
 
   var width = 600,
-      height = 600,
+      height = 400,
       root;
 
   var curElement, lastElement, timeoutId, lastColor, lastWidth, lastStroke;
@@ -25,7 +25,7 @@ function forceGroup(container) {
       lastStroke = curElement.style.stroke;
       $("circle.node").css("opacity", "0.8");
       $(curElement).css("fill", "orange").css("opacity", "1.0").css("stroke", "red").css("stroke-width", "6px");
-    }, 600);
+    }, 300);
   });
 
   $("#group-chart").on("mouseleave", "circle.node", function() {
@@ -49,7 +49,10 @@ function forceGroup(container) {
     var book_id = curElement.__data__["book_id"];
     $.get("nodes/query/"+book_id,
       function(response) {
-        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns' style='display: none; float: right; margin: -450px 10% 0 0'><h2><a href='nodes/" + book_id + "'>"+response['title']+"</a></h2><h4>"+response['content']+"</h4></div>");
+        var div_short = document.createElement("div");
+        div_short.innerHTML = response['content'].slice(0, 150);
+        var short_content = div_short.textContent || div_short.innerText || "";
+        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns'><h2><a href='nodes/" + book_id + "'>" + response['title'] + "</a></h2><p><i>Started by " + response['author'] + "</i></p><h4><i>" + short_content + "...</i></h4></div>");
         $('#superNavTwo').slideDown();
       });
   }
