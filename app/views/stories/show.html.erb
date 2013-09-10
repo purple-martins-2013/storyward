@@ -1,10 +1,11 @@
 <div class="row">
   <div id="show-story" class="show-story small-12-columns">
     <h2><%= @story.first[:title] %></h2>
+    <p><i>Started by <%= @story.first[:author] %></i></p>
     <p><%= @story.first[:content].html_safe %></p>
     <%= render partial: "links", locals: {node: @story.first, story: @story, index: 0} %>
     <% @story.drop(1).each_with_index do |node, index| %>
-      <div class="node-title"><h5 class="title-text"><%= node[:title] %></h5></div>
+      <div class="node-title"><h5 class="title-text"><%= node[:title] %> <i>by <%= node[:author] %></i></h5></div>
       <p><%= node[:content].html_safe %></p>
       <%= render partial: "links", locals: {node: node, story: @story, index: index} %>
     <% end %>
