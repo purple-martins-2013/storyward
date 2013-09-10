@@ -7,8 +7,8 @@
       <div>
 
       <h4>Stories Created</h4>
-      <% if @user.stories.any? %>
-        <% @user.stories.each do |story| %>
+      <% if @parent_stories.length > 0 %>
+        <% @parent_stories.each do |story| %>
           <h6><%= link_to story.title, story %></h6>
         <% end %>
       <% else %>
@@ -18,9 +18,9 @@
 
       <div>
         <h4>Nodes Contributed</h4>
-        <% if @user.nodes.any? %>
-          <% @user.nodes.each do |node| %>
-            <h6><%= link_to node.title, node %></h6>
+        <% if @children_nodes.length > 0 %>
+          <% @children_nodes.each do |node| %>
+            <h6><%= link_to node.title, story_path(node) %></h6>
           <% end %>
         <% else %>
           <h6>No nodes created yet.</h6>
