@@ -17,10 +17,3 @@
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require jquery.ui.all
 //= require_tree .
-
-
-
-$(document).ready(function(){
-  var readingPage = new ReadingPage($('#reading-background'), $('#show-story')); 
-  new LightDimmer($('.buttons'), readingPage, $('#show-story'));
-});
