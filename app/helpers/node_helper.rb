@@ -24,20 +24,16 @@ module NodeHelper
       content = []
       case filetype
       when "pdf"
-        File.open(Rails.root.join('public', 'uploads', "filename"), 'w') do |file|
-          file << uploaded_io.read.force_encoding("utf-8")
+        File.open(uploaded_io.tempfile, "rb") do |io|
+          reader = PDF::Reader.new(io)
+          reader.pages.each do |page|
+            content << page.text.gsub(/\n\n\n*/, "</p><p>")
+          end
         end
-        reader = PDF::Reader.new("public/uploads/filename")
-        reader.pages.each do |page|
-          content << page.text.gsub(/\n\n\n\n*/, "\n\n\n")
-        end
-        params[:node][:content] = content.join("\n") + "\n" + params[:node][:content]
+        params[:node][:content] = "<p>" + content.join("</p><p>") + "</p>" + params[:node][:content]
 
-      when "txt"
-        File.open(Rails.root.join('public', 'uploads', "filename"), 'w') do |file|
-          file << uploaded_io.read.force_encoding("ISO-8859-1").encode("utf-8", replace: nil)
-        end
-        File.open("public/uploads/filename").each_line do |line|
+      when "txt"  
+        uploaded_io.read.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).each_line do |line|
           content << line
         end
         params[:node][:content] = (content.join(" ") + "\n" + params[:node][:content])
