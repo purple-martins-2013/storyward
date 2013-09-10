@@ -27,7 +27,7 @@ describe("ReadingPage", function() {
     storyPage = affix('#show-story');
 
     readingPageDom = affix('#reading-page');
-    // spyOn(readingPageDom, 'animate');
+    spyOn(readingPageDom, 'animate');
     readingPage = new ReadingPage(readingPageDom, storyPage);
 
     darkColor = new Color([4,5,6]);
@@ -60,8 +60,9 @@ describe("ReadingPage", function() {
     it("brightens the background color", function(){
       readingPage.brighten();
       console.log($('#reading-page').css("background"));
-      // expect($('<div style="display: none; margin: 10px;"></div>')).toHaveCss({margin: "10px"});
-      expect($('#reading-page')).toHaveCss({background: $('#reading-page').css("background")});
+      expect(readingPageDom.animate).toHaveBeenCalledWith({
+        backgroundColor: "rgb(1,2,3)"
+      }, 500);
     });
   });
   
