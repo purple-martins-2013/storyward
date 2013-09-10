@@ -108,7 +108,7 @@ function forceGraph(container) {
       function(chain) {
         var story_preview = "<div id='story-preview'>";
         chain.forEach(function(element, index, array) {
-         story_preview += ("<div class='node-preview'><h5>" + array[index].title.slice(0, 24) + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 400) + "...</p></div>");
+         story_preview += ("<div class='node-preview'><h5>" + array[index].title.slice(0, 20) + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 400) + "...</p></div>");
           vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == array[index].id})
             .style("fill", "silver")
             .style("stroke", "green")
