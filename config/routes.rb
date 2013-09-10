@@ -1,6 +1,6 @@
 Storyward::Application.routes.draw do
   root "static_pages#welcome"
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => {:registrations => "registrations"}
 
   get 'visualizations' => 'users#index'
 
