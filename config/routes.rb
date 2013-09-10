@@ -1,6 +1,6 @@
 Storyward::Application.routes.draw do
   root "static_pages#welcome"
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
 
   get 'visualizations' => 'users#index'
 
@@ -19,6 +19,10 @@ Storyward::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+
+  get 'nodes' => 'nodes#index'
+
+  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

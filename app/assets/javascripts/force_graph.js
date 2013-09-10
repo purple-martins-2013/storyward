@@ -2,6 +2,14 @@ $(document).ready(function() {
   if (document.getElementById("node-page")) {
     new forceGraph("#node-page")
   }
+
+  if (document.getElementById("reading-background")) {
+    $("#reading-background").on("click", "#story-map", function() {
+      $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9-columns reveal-modal' ><div id='chart' class='small-6-columns' data-node='"+$("#story-map").data("id")+"'></div><div><a id='node-link' style='display: none'></a></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
+      $("#chart-holder").foundation('reveal', 'open');
+      new forceGraph("#reading-background");
+    });
+  }
 });
 
 
@@ -32,7 +40,7 @@ function forceGraph(container) {
   });  
 
 
-  var curElement, lastElement, timeoutId, lastColor, lastWidth, lastStroke, clickedOnNode = false, zoomFactor = 4;
+  var curElement, timeoutId, clickedOnNode = false, zoomFactor = 4;
 
   $("#chart").on("mousedown", function() {
     clickedOnNode = true;
@@ -45,16 +53,8 @@ function forceGraph(container) {
   $("#chart").on("mouseenter", "circle.node", function() {
     curElement = this;
     timeoutId = setTimeout(function() {
-      if (lastElement) {
-        $(lastElement).css("fill", lastColor).css("stroke-width", lastWidth).css("stroke", lastStroke);
-      }
+      update();
       populateNode(curElement);
-      lastElement = curElement;
-      lastColor = curElement.style.fill;
-      lastWidth = curElement.style.strokeWidth;
-      lastStroke = curElement.style.stroke;
-      $("circle.node").css("opacity", "0.8");
-      $(curElement).css("fill", "orange").css("opacity", "1.0").css("stroke", "red").css("stroke-width", "6px");
     }, 600);
   });
 
@@ -97,6 +97,9 @@ function forceGraph(container) {
   function takeJson() {
     root = json;
     update();
+    if ($("#story-map").data("id")) {
+      populateNode(vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == $("#story-map").data("endnode")})[0][0] );
+    }
   }
 
   function populateNode(curElement) {
@@ -105,14 +108,17 @@ function forceGraph(container) {
       function(chain) {
         var story_preview = "<div id='story-preview'>";
         chain.forEach(function(element, index, array) {
-          var div_short = document.createElement("div");
-          var div_long = document.createElement("div");
-          div_short.innerHTML = array[index].content.slice(0, 15);
-          div_long.innerHTML = array[index].content.slice(0, 500);
-          var short_content = div_short.textContent || div_short.innerText || "";
-          var long_content = div_long.textContent || div_long.innerText || "";
-          story_preview += ("<div class='node-preview'><h5>" + array[index].title + "</h5><p class='preview small-preview' >" + short_content + "...</p><p class='full hide small-preview'>" + long_content + "...</p></div>");
-        });
+         story_preview += ("<div class='node-preview'><h5>" + array[index].title.slice(0, 20) + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 400) + "...</p></div>");
+          vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == array[index].id})
+            .style("fill", "silver")
+            .style("stroke", "green")
+            .style("stroke-width", "4px");
+          if (index < array.length - 1) {
+            vis.selectAll("line.link").filter(function(d, i) {return d.source["id"] == array[index].id && d.target["id"] == array[index + 1].id})
+            .style("stroke-width", "5px")
+            .style("stroke", "blue");
+          }
+       });
         story_preview += "</div>";
         
         if ($("#superNav").html() == "") {
@@ -124,6 +130,8 @@ function forceGraph(container) {
           $("#superNav").replaceWith("<div id='superNav'>"+ story_preview + "</div>");
           $("#node-link").replaceWith("<a id='node-link' class='button success round right' href='/stories/"+data+"'>Check out this story!</a>");
         }
+        $("circle.node").css("opacity", "0.8");
+        $(curElement).css("fill", "orange").css("opacity", "1.0").css("stroke", "red").css("stroke-width", "6px");
 
       });
   }
@@ -151,7 +159,9 @@ function forceGraph(container) {
 
     // Update the links…
     link = vis.selectAll("line.link")
-        .data(links, function(d) { return d.target.id; });
+        .data(links, function(d) { return d.target.id; })
+        .style("stroke-width", "1.5px")
+        .style("stroke", "#9ecae1");
 
     // Enter any new links.
     link.enter().insert("svg:line", ".node")
@@ -202,7 +212,9 @@ function forceGraph(container) {
     // Update the nodes…
     node = vis.selectAll("circle.node")
         .data(nodes, function(d) { return d.id; })
-        .style("fill", color);
+        .style("fill", color)
+        .style("stroke", "#3182bd")
+        .style("stroke-width", "1.5px");
 
     // Enter any new nodes.
     node.enter().append("svg:circle")
