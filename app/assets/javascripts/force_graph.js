@@ -2,6 +2,14 @@ $(document).ready(function() {
   if (document.getElementById("node-page")) {
     new forceGraph("#node-page")
   }
+
+  if (document.getElementById("show-story")) {
+    $("#show-story").on("click", "#story-map", function() {
+      $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9-columns reveal-modal' ><div id='chart' class='small-6-columns' data-node='"+$("#story-map").data("id")+"'></div><div><a id='node-link' style='display: none'></a></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
+      $("#chart-holder").foundation('reveal', 'open');
+      new forceGraph("#show-story")
+    });
+  }
 });
 
 
