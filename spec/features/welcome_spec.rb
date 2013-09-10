@@ -30,7 +30,10 @@ describe "welcome page" do
 
     before(:each) do
       @user = FactoryGirl.create(:user)
-      ApplicationController.any_instance.stub(:current_user).and_return(@user)
+      visit new_user_session_path
+      page.fill_in "Email", :with => @user.email
+      page.fill_in "Password", :with => @user.password
+      page.find('.button').click
       visit root_path
     end
 
@@ -45,7 +48,7 @@ describe "welcome page" do
       it "has a link to my profile" do
         page.should have_content "My Profile"
         click_link("My Profile")
-        current_url.should eq "http://www.example.com/"
+        current_url.should eq "http://www.example.com/profiles/#{@user.id}"
       end
 
     end
