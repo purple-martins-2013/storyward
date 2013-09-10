@@ -21,6 +21,6 @@
 
 
 $(document).ready(function(){
-  var readingPage = new ReadingPage($('#reading-page')); 
+  var readingPage = new ReadingPage($('#reading-background'), $('#show-story')); 
   new LightDimmer($('.buttons'), readingPage, $('#show-story'));
 });
