@@ -17,7 +17,7 @@ group :test, :development do
   gem 'rspec-rails'
   #gem 'jasmine'
   gem 'jasmine-rails'
-  gem 'jasmine-jquery-rails'
+  #gem 'jasmine-jquery-rails'
   gem 'selenium-webdriver'
   gem 'dotenv-rails'
 end

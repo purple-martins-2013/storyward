@@ -14,6 +14,12 @@
 //= require jquery_ujs
 //= require foundation
 //= require_tree ../../../vendor/assets/javascripts/.
-//= require_tree .
 //= require jquery.ui.all
-//= require jasmine-jquery
+//= require_tree .
+
+
+
+$(document).ready(function(){
+  var readingPage = new ReadingPage($('#reading-page')); 
+  new LightDimmer($('.buttons'), readingPage, $('#show-story'));
+});
