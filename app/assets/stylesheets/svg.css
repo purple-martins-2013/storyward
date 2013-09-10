@@ -56,18 +56,18 @@ path {
 
 #story-preview {
   overflow-y: scroll;
-  height: 600px;
 }
 
 .node-preview {
   background-color: #f0d1db;
-  height: 10%;
+  height: 16%;
+  margin: 4% 0;
 }
 
 .full-color {
   background-color: #d9ffcf;
-  height: 25%;
-  margin: 2% 0;
+  height: 30%;
+  margin: 4% 0;
   overflow-y: scroll;
 }
 
