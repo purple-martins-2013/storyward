@@ -19,4 +19,34 @@ module NodeHelper
     parent_node = Node.find(node.parent_node)
     return [{ id: node.id, title: node.title, content: node.content, author: node.user.name }].concat(build_chain(parent_node))
   end
+
+  def process_upload
+    if params[:story] && params[:story][:upload]
+      uploaded_io = params[:story][:upload]
+      filetype = uploaded_io.original_filename.split(".").last.downcase
+
+      content = []
+      case filetype
+      when "pdf"
+        File.open(Rails.root.join('public', 'uploads', "filename"), 'w') do |file|
+          file << uploaded_io.read.force_encoding("utf-8")
+        end
+        reader = PDF::Reader.new("public/uploads/filename")
+        reader.pages.each do |page|
+          content << page.text.gsub(/\n\n\n\n*/, "\n\n\n")
+        end
+        params[:node][:content] = content.join("\n") + "\n" + params[:node][:content]
+
+      when "txt"
+        File.open(Rails.root.join('public', 'uploads', "filename"), 'w') do |file|
+          file << uploaded_io.read.force_encoding("ISO-8859-1").encode("utf-8", replace: nil)
+        end
+        File.open("public/uploads/filename").each_line do |line|
+          content << line
+        end
+        params[:node][:content] = (content.join(" ") + "\n" + params[:node][:content])
+      end
+    end
+  end  
+
 end

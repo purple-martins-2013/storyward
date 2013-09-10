@@ -21,6 +21,7 @@ class StoriesController < ApplicationController
 
   def create
     story_params = {}
+    process_upload
     story_params[:title] = node_params[:title]
     @story = Story.new(story_params)
     @story.user = current_user
