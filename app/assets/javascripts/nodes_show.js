@@ -1,4 +1,4 @@
-function LightDimmer(buttons, readingPage, story) {
+function LightDimmer(buttons, readingPage) {
   this.readingPage = readingPage;
   this.buttons = buttons;
   this.bindButton();
