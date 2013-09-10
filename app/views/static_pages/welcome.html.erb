@@ -1,22 +1,19 @@
 <% content_for(:page_id, 'welcome_page') %>
-  <div class='welcome_box'>
-    <h2><p id='welcome_message'>Welcome to Storyward</p></h2>
-    <div class='welcome_options'>
-      <button id='sign_in'>Sign in</button>
-      <button id='sign_up'>Sign up</button>
-    </div>
-    <div class='sign_in_links', style='display:none;'>
-      <%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
-      <%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
-      <%= link_to "Sign in with email", new_user_session_path, {:class => 'button welcome-button'} %>
-    </div>
-
-    <div class='sign_up_links', style='display:none;'>
-      <%= link_to "Sign up with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
-      <%= link_to "Sign up with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
-      <%= link_to "Sign up with email", new_user_registration_path, {:class => 'button welcome-button'} %>
-    </div>
+<div class='welcome_box'>
+  <h2><p id='welcome_message'>Welcome to Storyward</p></h2>
+  <div class='welcome_options'>
+    <button id='sign_in'>Sign in</button><br>
+    <button id='sign_up'>Sign up</button>
+  </div>
+  <div class='sign_in_links', style='display:none;'>
+    <%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
+    <%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
+    <%= link_to "Sign in with email", new_user_session_path, {:class => 'button welcome-button', :data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %>
   </div>
 
-
-<!-- <%= image_tag "typographic_tree.jpg", id: "welcome_image" %> -->
+  <div class='sign_up_links', style='display:none;'>
+    <%= link_to "Sign up with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
+    <%= link_to "Sign up with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
+    <%= link_to "Sign up with email", new_user_registration_path, {:class => 'button welcome-button', :data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %>
+  </div>
+</div>
