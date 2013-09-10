@@ -9,4 +9,6 @@ class Story < ActiveRecord::Base
   validates :title, :user, presence: true
 
   accepts_nested_attributes_for :node
+
+  acts_as_taggable
 end

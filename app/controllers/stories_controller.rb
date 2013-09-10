@@ -26,6 +26,7 @@ class StoriesController < ApplicationController
     @story.user = current_user
     @story.node = Node.create(node_params)
     @story.node.user = current_user
+    @story.tag_list = params[:story][:tag_list]
     if @story.save
       redirect_to story_path(@story.node), :notice => "#{@story.title} was created successfully."
     else
