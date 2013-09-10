@@ -1,7 +1,7 @@
 <%= form_for @story do |f| %>
   <%= fields_for @story.node do |n| %>
-    <%= n.text_field :title, id: "title-field" %>
-    <%= n.text_area :content, class: "tinymce", id: "content-field" %>
+    <%= n.text_field :title %>
+    <%= n.text_area :content, class: "tinymce" %>
     <%= tinymce %>
     <p></p>
     <% if @parent_node %>
