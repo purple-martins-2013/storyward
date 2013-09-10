@@ -6,8 +6,8 @@ $(document).ready(function() {
 
 function forceGroup(container) {
 
-  var width = 600,
-      height = 400,
+  var width = window.innerWidth / 2,
+      height = window.innerHeight/ 1.5,
       root;
 
   var curElement, lastElement, timeoutId, lastColor, lastWidth, lastStroke;
