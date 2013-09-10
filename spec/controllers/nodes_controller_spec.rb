@@ -104,4 +104,77 @@ describe NodesController do
     end
 
   end
+
+  describe 'query' do
+
+    before(:each) do
+      get :query, :id => node.id
+    end
+
+    it "locates the created node" do
+      assigns(:node).should eq node
+    end
+
+    it "renders metadata json for the node" do
+      @expected = { title: node.title, content: node.content, author: node.user.name }.to_json
+      expect(response.body).to eq @expected
+    end
+
+  end
+
+  describe 'details' do
+
+    it "locates the created node" do
+      get :details, :id => node.id
+      assigns(:node).should eq node
+    end
+
+    it "renders first-level json given no children nodes" do
+      @expected = { id: node.id, author: node.user.name}.to_json
+      get :details, :id => node.id
+      expect(response.body).to eq @expected
+    end
+
+    it "renders nested json given a child node" do
+      second_node = FactoryGirl.create(:node)
+      node.children_nodes << second_node.id
+      node.children_nodes_will_change!
+      node.save
+      second_node.parent_node = node.id
+      second_node.save
+
+      @expected = {id: node.id, author: node.user.name, children: [ { id: second_node.id, author: second_node.user.name } ], size: 4.0 }.to_json
+      get :details, :id => node.id
+      expect(response.body).to eq @expected
+    end
+
+  end
+
+  describe 'chain' do
+
+    it "locates the created node" do
+      get :chain, :id => node.id
+      assigns(:node).should eq node
+    end
+
+    it "renders first-level json with id, title, content and author" do
+      @expected = [{ id: node.id, title: node.title, content: node.content, author: node.user.name }].to_json
+      get :chain, :id => node.id
+      expect(response.body).to eq @expected
+    end
+
+    it "renders chained json given a child node" do
+      second_node = FactoryGirl.create(:node)
+      node.children_nodes << second_node.id
+      node.children_nodes_will_change!
+      node.save
+      second_node.parent_node = node.id
+      second_node.save
+
+      @expected = [{ id: node.id, title: node.title, content: node.content, author: node.user.name }, { id: second_node.id, title: second_node.title, content: second_node.content, author: second_node.user.name }].to_json
+      get :chain, :id => second_node.id
+      expect(response.body).to eq @expected
+    end
+
+  end
 end
