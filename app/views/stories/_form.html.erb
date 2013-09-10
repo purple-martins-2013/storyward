@@ -1,7 +1,9 @@
 <%= form_for @story do |f| %>
   <%= fields_for @story.node do |n| %>
     <%= n.text_field :title %>
-    <%= n.text_area :content %>
+    <%= n.text_area :content, class: "tinymce" %>
+    <%= tinymce %>
+    <p></p>
     <% if @parent_node %>
       <%= n.hidden_field :parent_node, value: @parent_node %>
     <% else %>
@@ -11,5 +13,6 @@
   <%= f.file_field :upload %>
   <p>Accepted formats: PDF and TXT</p>
   <p>If a file is uploaded, the content field will be appended to the file.</p>
+  <%= f.text_field :tag_list %>
   <%= f.submit %>
 <% end %>

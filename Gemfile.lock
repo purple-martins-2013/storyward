@@ -27,6 +27,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     afm (0.2.0)
+    acts-as-taggable-on (2.4.1)
+      rails (>= 3, < 5)
     arel (4.0.0)
     atomic (1.1.13)
     bcrypt-ruby (3.1.2)
@@ -276,6 +278,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   better_errors
   binding_of_caller
   capybara

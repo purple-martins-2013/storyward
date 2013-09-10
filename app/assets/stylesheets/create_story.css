@@ -1,8 +1,8 @@
-#title-field {
+#node_title {
   width: 40%;
 }
 
-#content-field {
+#node_content {
   min-height: 300px;
   min-width: 80%;
   max-width: 80%;

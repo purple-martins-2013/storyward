@@ -45,4 +45,14 @@ module NodeHelper
     end
   end  
 
+  def create_nodes
+    @story.node = Node.create(node_params)
+    @story.node.user = current_user
+    unless @story.node.parent_node == 0
+      @parent_node = Node.find(@story.node.parent_node)
+      @parent_node.children_nodes << @story.node.id
+      @parent_node.children_nodes_will_change!
+      @parent_node.save
+    end
+  end
 end
