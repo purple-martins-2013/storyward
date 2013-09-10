@@ -1,18 +1,21 @@
 function LightDimmer(buttons, readingPage, story) {
   this.readingPage = readingPage;
   this.buttons = buttons;
-  var self = this;
-  var lightDimmer = this;
+  this.bindButton();
+}
 
+LightDimmer.prototype.bindButton = function() {
+   var lightDimmer = this;
 
-  buttons.on('click', '.dimlights', function(){
+   this.buttons.on('click', '.dimlights', function(){
     lightDimmer.dimPage($(this));
   });
 
-  buttons.on('click', '.brighten', function(){
+  this.buttons.on('click', '.brighten', function(){
     lightDimmer.brightenPage($(this));
-  });
+  }); 
 }
+
 
 LightDimmer.prototype.dimPage = function(button) {
     this.buttons.unbind('click');
@@ -26,7 +29,6 @@ LightDimmer.prototype.brightenPage = function(button) {
     this.toggleButton(button);
 };
 
-
 LightDimmer.prototype.toggleButton = function(button) {
   button.toggle();
   button.siblings('button').toggle();
@@ -34,17 +36,11 @@ LightDimmer.prototype.toggleButton = function(button) {
 
 LightDimmer.prototype.updateColor = function(color) {
   var lightDimmer = this;
-  console.log(lightDimmer);
 
   this.readingPage.page.animate({
-    backgroundColor: color.toRGB()
+    backgroundColor: color
   }, 500, function(){
-    lightDimmer.buttons.on('click', '.brighten', function(){
-      lightDimmer.brightenPage($(this));
-    });
-    lightDimmer.buttons.on('click', '.dimlights', function(){
-      lightDimmer.dimPage($(this));
-    });
+    lightDimmer.bindButton();
   });
 };
 
@@ -57,12 +53,12 @@ function ReadingPage(page, story) {
 
 ReadingPage.prototype.dimColor = function() {
   this.story.addClass('box-shadowify');
-  return this.__color().saturate(1/2);
+  return this.__color().saturate(1/2).toRGB();
 };
 
 ReadingPage.prototype.brightColor = function() {
   this.story.removeClass('box-shadowify');
-  return this.__color().saturate(2);
+  return this.__color().saturate(2).toRGB();
 };
 
 ReadingPage.prototype.__color = function() {

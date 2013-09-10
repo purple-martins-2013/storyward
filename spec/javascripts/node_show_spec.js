@@ -1,25 +1,5 @@
 //= require helpers/spec_helper
 
-describe("LightDimmer", function() {
-  describe("clicking on .dimlights", function() {
-    it("dims the readingPage", function() {
-      var buttons = affix('.buttons')
-      buttons.affix('.dimlights');
-      buttons.affix('.brighten');
-      var readingPage = {
-        dim: jasmine.createSpy(),
-        brighten: jasmine.createSpy()
-      }
-
-      var dimmer = new LightDimmer(buttons, readingPage);
-
-      $('.dimlights').trigger('click');
-
-      expect(readingPage.dim).toHaveBeenCalled();
-    });
-  });
-});
-
 describe("ReadingPage", function() {
   var storyPage, readingPage, brightColor, darkColor;
   
@@ -37,32 +17,25 @@ describe("ReadingPage", function() {
     });
   });
 
-  describe("dim", function() {
+  describe("dimColor", function() {
     it("adds box-shadowify to the storyPage", function() {
-      readingPage.dim();
+      readingPage.dimColor();
       expect(storyPage).toHaveClass('box-shadowify');
     });
 
-    it("darkens the background color", function() {
-      readingPage.dim();
-      expect(readingPageDom.animate).toHaveBeenCalledWith({
-        backgroundColor: "rgb(4,5,6)"
-      }, 500);
+    it("returns dark background color", function() {
+      expect(readingPage.dimColor()).toEqual("rgb(4,5,6)");
     });
   });
 
-  describe("brighten", function(){
+  describe("brightColor", function(){
     it("removes box-shadowify to the storyPage", function() {
-      readingPage.brighten();
+      readingPage.brightColor();
       expect(storyPage).not.toHaveClass('box-shadowify');
     });
 
-    it("brightens the background color", function(){
-      readingPage.brighten();
-      console.log($('#reading-page').css("background"));
-      expect(readingPageDom.animate).toHaveBeenCalledWith({
-        backgroundColor: "rgb(1,2,3)"
-      }, 500);
+    it("returns bright background color", function(){
+      expect(readingPage.brightColor()).toEqual("rgb(1,2,3)");
     });
   });
   
