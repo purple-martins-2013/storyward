@@ -1,16 +1,30 @@
 function LightDimmer(buttons, readingPage, story) {
   this.readingPage = readingPage;
+  this.buttons = buttons;
   var self = this;
-  buttons.on('click', '.dimlights', function() {
-    readingPage.dim();
-    self.toggleButton($(this));
+  var lightDimmer = this;
+
+
+  buttons.on('click', '.dimlights', function(){
+    lightDimmer.dimPage($(this));
   });
 
-  buttons.on('click', '.brighten', function() {
-    readingPage.brighten();
-    self.toggleButton($(this));
+  buttons.on('click', '.brighten', function(){
+    lightDimmer.brightenPage($(this));
   });
 }
+
+LightDimmer.prototype.dimPage = function(button) {
+    this.buttons.unbind('click');
+    this.updateColor(this.readingPage.dimColor());
+    this.toggleButton(button);
+};
+
+LightDimmer.prototype.brightenPage = function(button) {
+    this.buttons.unbind('click');
+    this.updateColor(this.readingPage.brightColor());
+    this.toggleButton(button);
+};
 
 
 LightDimmer.prototype.toggleButton = function(button) {
@@ -18,32 +32,43 @@ LightDimmer.prototype.toggleButton = function(button) {
   button.siblings('button').toggle();
 };
 
+LightDimmer.prototype.updateColor = function(color) {
+  var lightDimmer = this;
+  console.log(lightDimmer);
+
+  this.readingPage.page.animate({
+    backgroundColor: color.toRGB()
+  }, 500, function(){
+    lightDimmer.buttons.on('click', '.brighten', function(){
+      lightDimmer.brightenPage($(this));
+    });
+    lightDimmer.buttons.on('click', '.dimlights', function(){
+      lightDimmer.dimPage($(this));
+    });
+  });
+};
+
+
+
 function ReadingPage(page, story) {
   this.page = page;
   this.story = story;
 }
 
-ReadingPage.prototype.dim = function() {
+ReadingPage.prototype.dimColor = function() {
   this.story.addClass('box-shadowify');
-  this.__updateColor(this.__color().saturate(1/2));
+  return this.__color().saturate(1/2);
 };
 
-ReadingPage.prototype.brighten = function(color) {
+ReadingPage.prototype.brightColor = function() {
   this.story.removeClass('box-shadowify');
-  this.__updateColor(this.__color().saturate(2));
-};
-
-ReadingPage.prototype.__updateColor = function(color) {
-  this.page.animate({
-    backgroundColor: color.toRGB()
-  }, 500);
+  return this.__color().saturate(2);
 };
 
 ReadingPage.prototype.__color = function() {
   var cssColor = this.page.css("background-color").match(/\d{1,3}/g);
   return new Color(cssColor);
 };
-
 
 function Color(rgbArray) {
   this.rgbArray = rgbArray;

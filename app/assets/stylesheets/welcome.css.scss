@@ -1,8 +1,23 @@
 #welcome_page {
-	background-image: image-url('typographic_tree.jpg');
+	background-image: url(typographic_tree.jpg);
 	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	height: 53em;
+	background-size: cover;
+  padding-top: 34%;
+}
+
+img.welcome_image {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .welcome_box {
@@ -13,79 +28,24 @@
 	border-radius: 2em;
 	background-color: rgba(56,54,55,0.875);
 	position: relative;
-	top: 50%;
+	bottom: 5em;
 }
 
 #welcome_message {
 	text-align: center;
 	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-	margin-bottom: 0px;
 }
 
 .welcome_options {
 	text-align: center;
 	button {
-	   border: 1px solid #5e5e5e;
-	   background: #808080;
-	   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#808080));
-	   background: -webkit-linear-gradient(top, #000000, #808080);
-	   background: -moz-linear-gradient(top, #000000, #808080);
-	   background: -ms-linear-gradient(top, #000000, #808080);
-	   background: -o-linear-gradient(top, #000000, #808080);
-	   padding: 7.5px 15px;
-	   -webkit-border-radius: 13px;
-	   -moz-border-radius: 13px;
-	   border-radius: 13px;
-	   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-	   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-	   box-shadow: rgba(0,0,0,1) 0 1px 0;
-	   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-	   color: white;
-	   font-size: 16px;
-	   font-family: Georgia, Serif;
-	   text-decoration: none;
-	   vertical-align: middle;
-	   }
-	button:hover {
-    border-top-color: #5e5e5e;
-    background: #5e5e5e;
-    color: #ccc;
-  }
+		color: white;
+	}
 }
 
 .sign_in_links {
 	text-align: center;
-}
-
-.sign_up_links {
-	text-align: center;
-}
-
-.welcome-button {
-  border: 1px solid #5e5e5e;
-  background: #808080;
-  background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#808080));
-  background: -webkit-linear-gradient(top, #000000, #808080);
-  background: -moz-linear-gradient(top, #000000, #808080);
-  background: -ms-linear-gradient(top, #000000, #808080);
-  background: -o-linear-gradient(top, #000000, #808080);
-  padding: 7.5px 15px;
-  -webkit-border-radius: 13px;
-  -moz-border-radius: 13px;
-  border-radius: 13px;
-  -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-  -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-  box-shadow: rgba(0,0,0,1) 0 1px 0;
-  text-shadow: rgba(0,0,0,.4) 0 1px 0;
-  color: white;
-  font-size: 16px;
-  font-family: Georgia, Serif;
-  text-decoration: none;
-  vertical-align: middle;
-}
-
-.welcome-button:hover {
-  border-top-color: #5e5e5e;
-  background: #5e5e5e;
-  color: #ccc;
+	a {
+		color: white;
+	}
 }
