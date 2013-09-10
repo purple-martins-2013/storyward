@@ -19,18 +19,4 @@ module NodeHelper
     parent_node = Node.find(node.parent_node)
     return [{ id: node.id, title: node.title, content: node.content, author: node.user.name }].concat(build_chain(parent_node))
   end
-
-  def clean_up(content)
-    regex_map = {
-      /&lt;\/script&gt;/ => "",
-      /&lt;script[^>]*&gt;/ => "",
-      /&lt;img[^>]*&gt;/ => "",
-      /&lt;\/a&gt;/ => "",
-      /&lt;a [^>]*&gt;/ => "",
-      /&lt;iframe[^>]*&gt;/ => ""
-    }
-    regex_map.each {|f, t| content.gsub!(f, t)}
-    content
-  end
-
 end
