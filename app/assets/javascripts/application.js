@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tokeninput
 //= require foundation
 //= require tinymce-jquery
 //= require_tree ../../../vendor/assets/javascripts/.

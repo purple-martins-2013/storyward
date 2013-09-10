@@ -6,6 +6,11 @@ class StoriesController < ApplicationController
     @book_nodes = @book_nodes.sort_by {|node| node.children_nodes.length }.reverse
     @book_nodes = @book_nodes.map {|node| {id: node.id}}
     @nodes = { children: @book_nodes }.to_json
+    @tags = ActsAsTaggableOn::Tag.order(:name)
+    respond_to do |format|
+      format.html
+      format.json { render json: @tags }
+    end
   end
 
   def new

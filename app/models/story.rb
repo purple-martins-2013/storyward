@@ -5,10 +5,12 @@ class Story < ActiveRecord::Base
 
   has_many :stars
   has_many :users, through: :stars
+  attr_reader :tag_tokens
 
   validates :title, :user, presence: true
 
   accepts_nested_attributes_for :node
 
   acts_as_taggable
+
 end
