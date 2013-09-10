@@ -64,8 +64,8 @@ function forceGraph(container) {
     }
   });
 
-  var w = 600,
-      h = 600,
+  var w = window.innerWidth / 2,
+      h = window.innerHeight / 1.5,
       r = 15,
       node,
       link,
@@ -106,7 +106,7 @@ function forceGraph(container) {
     var data = curElement.__data__["id"];
     $.get("/nodes/chain/"+data,
       function(chain) {
-        var story_preview = "<div id='story-preview'>";
+        var story_preview = "<div id='story-preview' style='height: "+ window.innerHeight / 1.7 + "px'>";
         chain.forEach(function(element, index, array) {
          story_preview += ("<div class='node-preview'><h5>" + array[index].title.slice(0, 20) + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 400) + "...</p></div>");
           vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == array[index].id})

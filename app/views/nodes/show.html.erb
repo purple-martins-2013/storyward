@@ -1,6 +1,8 @@
 <div id="node-page" class="show-story">
   <h2><%= @node.title %></h2>
-  <p><i>Started by <%= @node.user.name %></i></p>
+  <% if @node.user %>
+    <p><i>Started by <%= @node.user.name %></i></p>
+  <% end %>
 
   <div id='chart' class='small-6-columns' data-node='<%= @node.id %>'></div><div><a id='node-link' class="hide"></a></div><div id='superNav'></div>
 
