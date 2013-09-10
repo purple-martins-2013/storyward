@@ -285,5 +285,4 @@ DEPENDENCIES
   shoulda
   uglifier (>= 1.3.0)
   unicorn
-  warden
   zurb-foundation

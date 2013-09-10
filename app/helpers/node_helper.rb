@@ -17,7 +17,7 @@ module NodeHelper
   end
 
   def process_upload
-    if params[:story][:upload]
+    if params[:story] && params[:story][:upload]
       uploaded_io = params[:story][:upload]
       filetype = uploaded_io.original_filename.split(".").last.downcase
 

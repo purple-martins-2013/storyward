@@ -24,7 +24,6 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'shoulda'
-  gem 'warden'
 end
 
 #Assets
