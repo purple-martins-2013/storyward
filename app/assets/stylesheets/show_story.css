@@ -14,3 +14,12 @@
 .space {
   height: 80px;
 }
+
+#story-map {
+  margin-top: 50px;
+  opacity: 0.5;
+}
+
+#story-map:hover {
+  opacity: 1.0;
+}

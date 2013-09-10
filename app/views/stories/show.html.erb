@@ -1,6 +1,6 @@
 <div class="row">
   <div id="show-story" class="show-story small-12-columns">
-    <div class="fixed right" style="margin-top:50px; opacity: 0.7"><span><img id="story-map" src="/map.png" width="45" data-id="<%= @story.first[:id] %>" data-endnode="<%= @story.last[:id] %>"></span></div>
+    <div class="fixed right"><span><img id="story-map" src="/map.png" width="45" data-id="<%= @story.first[:id] %>" data-endnode="<%= @story.last[:id] %>"></span></div>
     <div id="chart-holder"></div>
     <h2><%= @story.first[:title] %></h2>
     <p><i>Started by <%= @story.first[:author] %></i></p>
