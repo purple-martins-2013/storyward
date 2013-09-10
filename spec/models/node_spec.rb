@@ -16,5 +16,11 @@ describe Node do
       node = Node.new
       expect(node.children_nodes).to eq []
     end
+
+    it "should sanitize HTML content" do
+      node = FactoryGirl.create(:node, :content => '<script type="text/javascript">alert("foo!");</script>A Message')
+      node.save
+      expect(node.content).to eq('alert("foo!");A Message')
+    end
   end
 end
