@@ -22,7 +22,6 @@ class StoriesController < ApplicationController
   def create
     story_params = {}
     story_params[:title] = node_params[:title]
-    params[:node][:content] = clean_up(params[:node][:content])
     @story = Story.new(story_params)
     @story.user = current_user
     @story.node = Node.create(node_params)
