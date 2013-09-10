@@ -67,8 +67,8 @@ $default-float: left;
 
 // Colors
 
-// $primary-color: #2ba6cb;
-// $secondary-color: #e9e9e9;
+   $primary-color: #3c2f1c;
+   $secondary-color: #f4eed9;
 // $alert-color: #c60f13;
 // $success-color: #5da423;
 
@@ -163,7 +163,7 @@ $default-float: left;
    $header-font-family: "Montserrat", "Helvetica", Helvetica, Arial, sans-serif;
 // $header-font-weight: bold;
 // $header-font-style: normal;
-// $header-font-color: #222;
+   $header-font-color: $primary-color;
 // $header-line-height: 1.4;
 // $header-top-margin: .2em;
 // $header-bottom-margin: .5em;
@@ -1234,7 +1234,7 @@ $default-float: left;
 
 // Background color for the top bar
 
-// $topbar-bg: #111;
+   $topbar-bg: $secondary-color;
 
 // Height and margin
 
@@ -1247,7 +1247,7 @@ $default-float: left;
 
 // Controlling the styles for the title in the top bar
 
-// $topbar-title-weight: bold;
+   $topbar-title-weight: normal;
 // $topbar-title-font-size: emCalc(17);
 
 // Style the top bar dropdown elements
@@ -1261,7 +1261,7 @@ $default-float: left;
 
 // Set the link colors and styles for top-level nav
 
-// $topbar-link-color: #fff;
+   $topbar-link-color: $primary-color;
 // $topbar-link-color-hover: #fff;
 // $topbar-link-color-active: #fff;
 // $topbar-link-weight: bold;
