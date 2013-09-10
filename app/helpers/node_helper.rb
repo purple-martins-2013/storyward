@@ -20,6 +20,31 @@ module NodeHelper
     return [{ id: node.id, title: node.title, content: node.content, author: node.user.name }].concat(build_chain(parent_node))
   end
 
+  def process_upload
+    if params[:story] && params[:story][:upload]
+      uploaded_io = params[:story][:upload]
+      filetype = uploaded_io.original_filename.split(".").last.downcase
+
+      content = []
+      case filetype
+      when "pdf"
+        File.open(uploaded_io.tempfile, "rb") do |io|
+          reader = PDF::Reader.new(io)
+          reader.pages.each do |page|
+            content << page.text.gsub(/\n\n\n*/, "</p><p>")
+          end
+        end
+        params[:node][:content] = "<p>" + content.join("</p><p>") + "</p>" + params[:node][:content]
+
+      when "txt"  
+        uploaded_io.read.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).each_line do |line|
+          content << line
+        end
+        params[:node][:content] = (content.join(" ") + "\n" + params[:node][:content])
+      end
+    end
+  end  
+
   def create_nodes
     @story.node = Node.create(node_params)
     @story.node.user = current_user
