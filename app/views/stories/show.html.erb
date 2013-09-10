@@ -3,9 +3,11 @@
     <div class='buttons'>
       <button class="dimlights">Dim Lights</button>
       <button class="brighten">Brighten</button>
+      <div id="map-offset"><span><img id="story-map" src="/map.png" data-id="<%= @story.first[:id] %>" data-endnode="<%= @story.last[:id] %>"></span></div>
     </div>
     <div class="row">
       <div id="show-story" class="show-story small-12-columns">
+        <div id="chart-holder"></div>
         <h2><%= @story.first[:title] %></h2>
         <p><i>Started by <%= @story.first[:author] %></i></p>
         <p><%= @story.first[:content].html_safe %></p>

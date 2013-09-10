@@ -45,7 +45,7 @@ describe "welcome page" do
       it "has a link to my profile" do
         page.should have_content "My Profile"
         click_link("My Profile")
-        current_url.should eq "http://www.example.com/users/sign_in"
+        current_url.should eq "http://www.example.com/"
       end
 
     end
