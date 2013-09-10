@@ -46,7 +46,8 @@ class NodesController < ApplicationController
   end
 
   def query
-    render json: Node.find(params[:id]).to_json
+    @node = Node.find(params[:id])
+    render json: metadata(@node).to_json
   end
 
   def details

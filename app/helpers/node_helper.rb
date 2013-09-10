@@ -1,5 +1,9 @@
 module NodeHelper
 
+  def metadata(node)
+    { title: node.title, content: node.content, author: node.user.name }
+  end
+
   def create_json(node)
     return { id: node.id }, 1 if node.children_nodes.length == 0
     child_nodes = []
