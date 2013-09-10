@@ -24,8 +24,8 @@ class StoriesController < ApplicationController
     story_params[:title] = node_params[:title]
     @story = Story.new(story_params)
     @story.user = current_user
-    @story.node = Node.create(node_params)
-    @story.node.user = current_user
+    create_nodes
+    @story.tag_list = params[:story][:tag_list]
     if @story.save
       redirect_to story_path(@story.node), :notice => "#{@story.title} was created successfully."
     else

@@ -1,10 +1,12 @@
 <% content_for(:page_id, 'welcome_page') %>
 <div class='welcome_box'>
   <h2><p id='welcome_message'>Welcome to Storyward</p></h2>
-  <div class='welcome_options'>
-    <button id='sign_in'>Sign in</button><br>
-    <button id='sign_up'>Sign up</button>
-  </div>
+  <% unless current_user %>
+    <div class='welcome_options'>
+      <button id='sign_in'>Sign in</button><br>
+      <button id='sign_up'>Sign up</button>
+    </div>
+  <% end %>
   <div class='sign_in_links', style='display:none;'>
     <%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
     <%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
