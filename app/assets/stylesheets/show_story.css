@@ -15,9 +15,13 @@
   height: 80px;
 }
 
-#story-map {
+#map-offset {
   margin-top: 50px;
+}
+
+#story-map {
   opacity: 0.5;
+  width: 45px;
 }
 
 #story-map:hover {
