@@ -7,7 +7,7 @@ $(document).ready(function() {
     $("#show-story").on("click", "#story-map", function() {
       $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9-columns reveal-modal' ><div id='chart' class='small-6-columns' data-node='"+$("#story-map").data("id")+"'></div><div><a id='node-link' style='display: none'></a></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
       $("#chart-holder").foundation('reveal', 'open');
-      new forceGraph("#show-story")
+      new forceGraph("#show-story");
     });
   }
 });
@@ -97,6 +97,9 @@ function forceGraph(container) {
   function takeJson() {
     root = json;
     update();
+    if ($("#story-map").data("id")) {
+      populateNode(vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == $("#story-map").data("endnode")})[0][0] );
+    }
   }
 
   function populateNode(curElement) {
@@ -105,7 +108,7 @@ function forceGraph(container) {
       function(chain) {
         var story_preview = "<div id='story-preview'>";
         chain.forEach(function(element, index, array) {
-         story_preview += ("<div class='node-preview'><h5>" + array[index].title + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 500) + "...</p></div>");
+         story_preview += ("<div class='node-preview'><h5>" + array[index].title.slice(0, 24) + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 400) + "...</p></div>");
           vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == array[index].id})
             .style("fill", "silver")
             .style("stroke", "green")
