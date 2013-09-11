@@ -20,42 +20,69 @@ describe NodesController do
   end
 
   describe 'DELETE#destroy' do
-    it 'finds correct node' do
-      delete :destroy, :story_id => story_id, :id => node.id
-      assigns(:node).should eq(node)
-    end
 
-    context 'it has children' do
+    context "when incorrect user" do
       before(:each) do
         request.env["HTTP_REFERER"] = "where_i_came_from"
+        node.user = nil
+        node.save
       end
 
       it 'redirects back with notice' do
-        Node.stub(:find).and_return(node)
-        node.stub(:children_nodes).and_return([1, 3, 4])
-
-        delete :destroy, :story_id => story_id, :id => node.id
+        delete :destroy, :id => node
         expect(response).to redirect_to("where_i_came_from")
-        flash[:notice].should eq("Node cannot be deleted because it has children.") 
+        flash[:notice].should eq("This isn't your node!")
       end
+
+      it 'does not delete the node' do
+        expect{ delete :destroy, id: node }.to change(Node,:count).by(0)
+      end
+
     end
+    
+    context "when correct user is logged in" do
 
-    context 'it has no children' do
       before(:each) do
-        Node.stub(:find).and_return(node)
-        node.stub(:children_nodes).and_return([])
+        request.env["HTTP_REFERER"] = "where_i_came_from"
+        node.user = user
+        node.save
       end
 
-      it 'deletes node' do 
-        id = node.id
-        delete :destroy, :story_id => story_id, :id => id
-        Node.all.count.should eq(0)
-      end
-
-      it 'redirects to root' do
+      it 'finds correct node' do
         delete :destroy, :story_id => story_id, :id => node.id
-        expect(response).to redirect_to root_url
+        assigns(:node).should eq(node)
       end
+
+      context 'it has children' do
+        
+        it 'redirects back with notice' do
+          Node.stub(:find).and_return(node)
+          node.stub(:children_nodes).and_return([1, 3, 4])
+
+          delete :destroy, :story_id => story_id, :id => node.id
+          expect(response).to redirect_to("where_i_came_from")
+          flash[:notice].should eq("Node cannot be deleted because it has children.") 
+        end
+      end
+
+      context 'it has no children' do
+        before(:each) do
+          Node.stub(:find).and_return(node)
+          node.stub(:children_nodes).and_return([])
+        end
+
+        it 'deletes node' do 
+          id = node.id
+          delete :destroy, :story_id => story_id, :id => id
+          Node.all.count.should eq(0)
+        end
+
+        it 'redirects to root' do
+          delete :destroy, :story_id => story_id, :id => node.id
+          expect(response).to redirect_to root_url
+        end
+      end
+
     end
 
   end
