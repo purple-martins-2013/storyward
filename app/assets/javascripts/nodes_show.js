@@ -19,12 +19,11 @@ LightDimmer.prototype.bindButton = function() {
 };
 
 LightDimmer.prototype.fullscreenify = function() {
-  var elem = document.getElementById("reading-page");
+  console.log("hi");
   $('#reading-page').fullScreen();
 };
 
 LightDimmer.prototype.unfullscreenify = function() {
-  var elem = document.getElementById("reading-page");
   $('#reading-page').fullScreen(); 
 };
 
