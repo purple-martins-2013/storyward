@@ -20,11 +20,11 @@ LightDimmer.prototype.bindButton = function() {
 
 LightDimmer.prototype.fullscreenify = function() {
   console.log("hi");
-  $('#reading-page').fullScreen();
+  $('#reading-background').fullScreen();
 };
 
 LightDimmer.prototype.unfullscreenify = function() {
-  $('#reading-page').fullScreen(); 
+  $('#reading-background').fullScreen(); 
 };
 
 LightDimmer.prototype.dimPage = function(button) {
