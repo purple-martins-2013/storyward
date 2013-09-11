@@ -81,4 +81,12 @@ module NodeHelper
     @story.node.update(node_params)
   end
 
+  def populate_edit_fields
+    @existing_title = @story.title
+    @existing_content = @story.node.content
+    @existing_tags = @story.tag_list
+    @parent_node = @story.node.parent_node.to_s if @story.node.parent_node != 0
+    @story.build_node
+  end
+
 end

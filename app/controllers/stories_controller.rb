@@ -38,7 +38,13 @@ class StoriesController < ApplicationController
     end
   end
 
+  def edit
+    @story = Node.find(params[:id]).stories.first
+    populate_edit_fields
+  end
+
   def update
+    @story_params = {}
     @story = Story.find(params[:id])
     if @story.user == current_user
       process_upload
@@ -49,8 +55,8 @@ class StoriesController < ApplicationController
       else
         update_story
         update_node
-        if @story.update(node_params)
-          redirect_to @story, :notice => "#{@story.title} was updated succesfully."
+        if @story.update(@story_params)
+          redirect_to story_path(@story.node), :notice => "#{@story.title} was updated succesfully."
         else
           render :update, :alert => "Updates could not be saved. Please see the errors below."
         end

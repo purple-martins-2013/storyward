@@ -7,7 +7,7 @@
       <h2>Create a New Story</h2>
     <% end %>
     <div class="new-form">
-      <%= render 'form' %>
+      <%= render partial: 'form', :locals => {story: @story, parent_node: @parent_node, title_value: @saved_title, content_value: @uploaded_content, tags_value: @saved_tags} %>
     </div>
   </div>
 </div>

@@ -6,10 +6,6 @@ class NodesController < ApplicationController
     @node = Node.find(params[:id])
   end
 
-  def edit
-    @node = Node.find(params[:id])
-  end
-
   def destroy
     @node = Node.find(params[:id])
     if @node.user == current_user

@@ -1,16 +1,16 @@
-<%= form_for @story do |f| %>
-  <%= fields_for @story.node do |n| %>
-    <% if @uploaded_content %>
-      <%= n.text_field :title, value: @saved_title %>
-      <%= n.text_area :content, class: "tinymce", value: @uploaded_content %>
+<%= form_for story do |f| %>
+  <%= fields_for story.node do |n| %>
+    <% if title_value %>
+      <%= n.text_field :title, value: title_value %>
+      <%= n.text_area :content, class: "tinymce", value: content_value %>
     <% else %>
       <%= n.text_field :title %>
       <%= n.text_area :content, class: "tinymce" %>
     <% end %>
     <%= tinymce %>
     <p></p>
-    <% if @parent_node %>
-      <%= n.hidden_field :parent_node, value: @parent_node %>
+    <% if parent_node %>
+      <%= n.hidden_field :parent_node, value: parent_node %>
     <% else %>
       <%= n.hidden_field :parent_node, value: "0" %>
     <% end %>
@@ -18,8 +18,8 @@
   <%= f.file_field :upload %>
   <p>Accepted formats: PDF and TXT</p>
   <p>If a file is uploaded, the content field will be appended to the file.</p>
-  <% if @saved_tags %>
-    <%= f.text_field :tag_list, value: @saved_tags %>
+  <% if tags_value %>
+    <%= f.text_field :tag_list, value: tags_value %>
   <% else %>
     <%= f.text_field :tag_list %>
   <% end %>

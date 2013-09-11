@@ -27,7 +27,7 @@
       <% if @children_nodes.length > 0 %>
         <% @children_nodes.each do |node| %>
           <h6><%= link_to node.title, story_path(node) %></h6>
-          <%= link_to "Edit", edit_node_path(node), class: "success button round" %>
+          <%= link_to "Edit", edit_story_path(node.stories.first), class: "success button round" %>
           <%= link_to "Delete", node_path(node), method: :delete, class: "alert button round" %>
         <% end %>
       <% else %>
