@@ -57,8 +57,17 @@ class StoriesController < ApplicationController
 
   def destroy
     story = Story.find(params[:id])
-    story.destroy
-    redirect_to stories_path, :notice => "Story removed successfully."
+    if story.user == current_user
+      if story.node.children_nodes.length > 0
+        redirect_to :back, :notice => "This story has branches, and unfortunately cannot be deleted."
+      else
+        story.node.destroy
+        story.destroy
+        redirect_to stories_path, :notice => "Story removed successfully."
+      end
+    else
+      redirect_to :back, :notice => "You don't own this story!"
+    end
   end
 
   private
