@@ -13,4 +13,13 @@ class Story < ActiveRecord::Base
 
   acts_as_taggable
 
+  def find_parent
+    recurse_parent(self.node)
+  end
+
+  def recurse_parent(node)
+    return node if node.parent_node == 0
+    return recurse_parent(Node.find(node.parent_node))
+  end
+
 end
