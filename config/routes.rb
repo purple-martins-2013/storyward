@@ -9,9 +9,6 @@ Storyward::Application.routes.draw do
   resources :profiles, :only => [:index, :show]
   resources :stories
   resources :nodes, :except => [:new, :create, :index]
-  resources :stars, :only => [:create, :destroy]
-
-
 
   get "nodes/details/:id" => "nodes#details"
   get "nodes/query/:id" => "nodes#query"
