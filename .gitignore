@@ -22,5 +22,5 @@ pickle-email-*.html
 .project
 config/initializers/secret_token.rb   git config --global core.excludesfile '~/.gitignore_global'
 .env
-/app/assets/.DS_Store
+.DS_Store
 coverage
