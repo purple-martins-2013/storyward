@@ -1,5 +1,3 @@
-require "spec_helper"
-
 describe "allow log in via views" do
 
   before(:each) do
@@ -30,5 +28,4 @@ describe "allow log in via views" do
     page.find('.button').click
     current_path.should eq root_path
   end
-
 end

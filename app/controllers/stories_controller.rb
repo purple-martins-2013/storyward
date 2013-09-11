@@ -2,8 +2,8 @@ class StoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @book_nodes = Node.where(parent_node: 0)
-    @book_nodes = @book_nodes.sort_by {|node| node.children_nodes.length }.reverse
+    @book_nodes = Node.where(parent_node: 0).order("ARRAY_LENGTH(children_nodes, 1) DESC")
+    #@book_nodes = @book_nodes.sort_by {|node| node.children_nodes.length }.reverse
     @book_nodes = @book_nodes.map {|node| {id: node.id}}
     @nodes = { children: @book_nodes }.to_json
   end
@@ -15,8 +15,10 @@ class StoriesController < ApplicationController
   end
 
   def show 
-    @node = Node.find(params[:id])
-    @story = build_chain(@node).reverse
+    #@node = Node.find(params[:id])
+    #@story = build_chain(@node).reverse
+    #-----------------------------REFACTOR----------------------------
+    @story = Story.find(params[:id])
   end
 
   def create
@@ -28,7 +30,7 @@ class StoriesController < ApplicationController
     create_nodes
     @story.tag_list = params[:story][:tag_list]
     if @story.save
-      redirect_to story_path(@story.node), :notice => "#{@story.title} was created successfully."
+      redirect_to story_path(@story), :notice => "#{@story.title} was created successfully."
     else
       render :new, :alert => "Story could not be saved. Please see the errors below."
     end
