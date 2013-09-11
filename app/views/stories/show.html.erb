@@ -1,23 +1,24 @@
 <div id="reading-background">
   <div class='buttons'>
-    <!--<button class="dimlights">Dim Lights</button>
-    <button class="brighten">Brighten</button>-->
     <div id="map-offset"><span><img id="story-map" src="/map.png" data-id="<%= @story.node.parent_chain.first %>" data-endnode="<%= @story.node.parent_chain.last %>"></span></div>
   </div>
   <div class="row">
     <div id="show-story" class="show-story small-12-columns">
       <div id="chart-holder"></div>
-      <h2><%= @story.node.parent_chain.first.title %></h2>
-      <p><i>Started by <%= @story.node.parent_chain.first.user.name %></i></p>
-      <p><%= @story.node.parent_chain.first.content.html_safe %></p>
-      <%= render partial: "links", locals: {node: @story.node.parent_chain.first, story: @story.node, index: 0} %>
-      <% @story.node.parent_chain.drop(1).each_with_index do |node, index| %>
-        <div class="node-title"><h5 class="title-text"><%= node[:title] %> <i>by <%= node[:author] %></i></h5></div>
-        <p><%= node[:content].html_safe %></p>
-        <%= render partial: "links", locals: {node: node, story: @story.node, index: index} %>
+      
+      <!-- show all parent nodes for this story's node if they exist -->
+      <% unless @story.node.parent_chain.empty? %>
+        <% @story.node.parent_chain.each do |node| %>
+          <%= render 'nested_node_display', :node => node %>
+          <%= render 'links', :node => node %>
+        <% end %>
       <% end %>
+
+      <!-- show this story's node content --> 
+      <%= render 'nested_node_display', :node => @story.node %>
+      <%= render 'links', :node => @story.node %>
+      
       <hr class="space">
     </div>
   </div>
 </div>
-
