@@ -1,10 +1,10 @@
-<div id="index-page" class="story-list small-8-columns">
-  <div id="group-chart" class="small-5-columns" data-nodes="<%= @nodes %>"></div>
-  <div id="superNavTwo" class="small-3-columns">All the content goes here</div>
+<div id="index-page" class="story-list small-12 columns">
+  <div id="group-chart" class="small-7 columns" data-nodes="<%= @nodes %>"></div>
+  <div id="superNavTwo" class="small-5 columns">All the content goes here</div>
   <div id="chart-holder"><div id="chart" class="hide" data-node="1"></div></div>
 
   <div class="row">
-    <div class="small-12-columns">
+    <div class="small-12 columns">
       <% if @book_nodes.length > 0 %>
         <% @book_nodes.each do |node| %>
           <% @node = Node.find(node[:id]) %>
