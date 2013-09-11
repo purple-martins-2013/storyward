@@ -16,7 +16,7 @@ describe StoriesController do
     end
 
     it 'with invalid params' do
-      post :create, story: FactoryGirl.attributes_for(:story), node: {title: ''}
+      post :create, story: FactoryGirl.attributes_for(:story), node: FactoryGirl.attributes_for(:node, title: '')
       response.should render_template('new')
     end
   end
