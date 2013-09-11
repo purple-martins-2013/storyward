@@ -31,7 +31,6 @@ class User < ActiveRecord::Base
                            password:Devise.friendly_token[0,20],
                            image_url: auth.info.image.gsub("square", "large")
                            )
-      p "HERE"
     end
     user
   end
