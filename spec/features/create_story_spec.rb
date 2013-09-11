@@ -52,7 +52,7 @@ describe "create story page" do
     before(:each) do
       fill_in "Content", :with => @node.content
       @story = FactoryGirl.create(:story)
-      Story.stub(:find_by_id).and_return(@story)
+      Story.stub(:find).and_return(@story)
       click_button("Create Story")
     end
 
@@ -66,7 +66,7 @@ describe "create story page" do
     end
 
     it "contains content from the created story" do
-      assert page.has_content? @node.content
+      expect(page.has_content? @node.content).to be_true
     end
 
   end
@@ -77,7 +77,7 @@ describe "create story page" do
     before(:each) do
       attach_file("story_upload", File.expand_path("public/robots.txt"))
       @story = FactoryGirl.create(:story)
-      Story.stub(:find_by_id).and_return(@story)
+      Story.stub(:find).and_return(@story)
       click_button("Create Story")
     end
 
@@ -86,7 +86,7 @@ describe "create story page" do
     end
 
     it "contains content from the uploaded file" do
-      assert page.has_content? "documentation on how to use"
+      expect(page.has_content? "documentation on how to use").to be_true
     end
 
   end
@@ -98,8 +98,9 @@ describe "create story page" do
       fill_in "Content", :with => @node.content
       attach_file("story_upload", File.expand_path("public/robots.txt"))
       @story = FactoryGirl.create(:story)
-      Story.stub(:find_by_id).and_return(@story)
+      Story.stub(:find).and_return(@story)
       click_button("Create Story")
+      save_and_open_page
     end
 
     it "creates a new node" do
@@ -107,8 +108,8 @@ describe "create story page" do
     end
 
     it "contains content from both the uploaded file and the content entry" do
-      assert page.has_content? "documentation on how to use"
-      assert page.has_content? @node.content
+      expect(page.has_content? "documentation on how to use").to be_true
+      expect(page.has_content? @node.content).to be_true
     end
 
   end
@@ -119,7 +120,7 @@ describe "create story page" do
       fill_in "Content", :with => @node.content
       attach_file("story_upload", File.expand_path("public/robots.pdf"))
       @story = FactoryGirl.create(:story)
-      Story.stub(:find_by_id).and_return(@story)
+      Story.stub(:find).and_return(@story)
       click_button("Create Story")
     end
 
@@ -128,8 +129,8 @@ describe "create story page" do
     end
 
     it "contains content from both the uploaded file and the content entry" do
-      assert page.has_content? "Challenges in Building Robots That Imitate People"
-      assert page.has_content? @node.content
+      expect(page.has_content? "Challenges in Building Robots That Imitate People").to be_true
+      expect(page.has_content? @node.content).to be_true
     end
 
   end
