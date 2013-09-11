@@ -6,6 +6,11 @@ class StoriesController < ApplicationController
     #@book_nodes = @book_nodes.sort_by {|node| node.children_nodes.length }.reverse
     @book_nodes = @book_nodes.map {|node| {id: node.id}}
     @nodes = { children: @book_nodes }.to_json
+    @tags = ActsAsTaggableOn::Tag.order(:name)
+    respond_to do |format|
+      format.html
+      format.json { render json: @tags.where("name like ?", "%#{params[:q]}%") }
+    end
   end
 
   def new
@@ -37,6 +42,23 @@ class StoriesController < ApplicationController
     story = Story.find(params[:id])
     story.destroy
     redirect_to stories_path, :notice => "Story removed successfully."
+  end
+
+  def search
+    if params[:search_bar] != ""
+      find_by_title_author_content
+      if params[:tag_tokens] != ""
+        @found_stories = Story.all if @found_stories == []
+        find_stories_by_tag
+      end
+    else
+      if params[:tag_tokens] != ""
+        @found_stories = Story.all
+        find_stories_by_tag
+      else
+        @found_stories = []
+      end
+    end
   end
 
   private

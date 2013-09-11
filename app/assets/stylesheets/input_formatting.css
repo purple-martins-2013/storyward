@@ -5,3 +5,20 @@ label {
 input {
   font-size: 17px;
 }
+
+.token-input-dropdown-facebook {
+  z-index: 9999 !important;
+}
+
+.token-input-input-token-facebook, #token-input-tag_tokens {
+  width: 500px !important;
+}
+
+#search_bar {
+  width: 500px;
+}
+
+#search-holder {
+  width: 600px;
+
+}

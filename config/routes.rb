@@ -5,6 +5,7 @@ Storyward::Application.routes.draw do
   get 'visualizations' => 'users#index'
 
   get "stories/new/:id" => "stories#new"
+  post "stories/search" => "stories#search"
 
   resources :profiles, :only => [:show]
   resources :stories, :except => [:edit, :update]
