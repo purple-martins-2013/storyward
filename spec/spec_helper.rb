@@ -45,3 +45,17 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, :type => :controller
 end
+
+OmniAuth.config.test_mode = true
+
+omniauth_facebook_hash =
+      {:provider => "facebook",
+       :uid      => "1234",
+       :info     => {:name => "John Facebook Doe", :email => "johndoefacebook@email.com"}, :credentials => {:token => "testtoken1234"}}
+omniauth_twitter_hash =
+      {:provider => "twitter",
+       :uid      => "1234",
+       :info     => {:name => "John Twitter Doe", :email => "johndoetwitter@email.com"}, :credentials => {:token => "testtoken1234"}}
+
+OmniAuth.config.add_mock(:facebook, omniauth_facebook_hash)
+OmniAuth.config.add_mock(:twitter, omniauth_twitter_hash)
