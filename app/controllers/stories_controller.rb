@@ -56,9 +56,9 @@ class StoriesController < ApplicationController
         update_story
         update_node
         if @story.update(@story_params)
-          redirect_to story_path(@story.node), :notice => "#{@story.title} was updated succesfully."
+          redirect_to story_path(@story.node), :notice => "#{@story.title} was updated successfully."
         else
-          render :update, :alert => "Updates could not be saved. Please see the errors below."
+          render :edit, :alert => "Updates could not be saved. Please see the errors below."
         end
       end
     else

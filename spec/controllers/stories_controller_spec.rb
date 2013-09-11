@@ -15,6 +15,12 @@ describe StoriesController do
       expect { post :create, story: FactoryGirl.attributes_for(:story), node: FactoryGirl.attributes_for(:node) }.to change(Story,:count).by(1)
     end
 
+    it "shows a notice when story creation succeeds" do
+      new_node = FactoryGirl.attributes_for(:node)
+      post :create, story: FactoryGirl.attributes_for(:story), node: new_node
+      flash[:notice].should eq("#{new_node[:title]} was created successfully.")
+    end
+
     it 'will show an alert if story creation fails' do
       node_without_title = FactoryGirl.attributes_for(:node)
       node_without_title[:title] = ""
@@ -23,6 +29,57 @@ describe StoriesController do
       Node.all.length.should eq 0
     end
 
+  end
+
+  describe "#update" do
+
+    context "correct user" do
+
+      before(:each) do
+        story.user = user
+        story.save
+      end
+      
+      it "updates a story" do
+        post :update, id: story, story: {}, node: {title: "Whistling Hounds", content: "Minified!", parent_node: 0}
+        story = Story.first
+        story.title.should eq "Whistling Hounds"
+        story.node.content.should eq "Minified!"
+      end
+
+      it "shows a notice when the story update succeeds" do
+        post :update, id: story, story: {}, node: {title: "Whistling Hounds", content: "Minified!", parent_node: 0}
+        revised_story = Story.first
+        flash[:notice].should eq("#{revised_story.title} was updated successfully.")
+      end
+
+      it "will not update the story if the story update fails" do
+        post :update, id: story, story: {}, node: {title: "", content: "Minified!", parent_node: 0}
+        story = Story.first
+        story.title.should_not eq ""
+        story.node.content.should_not eq "Minified!"
+      end
+
+    end
+
+    context "incorrect user" do
+
+      before(:each) do
+        post :update, id: story, story: FactoryGirl.attributes_for(:story), node: {title: "Whistling Hounds", content: "Minified!", parent_node: 0}
+      end
+
+      it "refuses to update a story if the incorrect user is logged in" do
+        story = Story.first
+        story.title.should_not eq "Whistling Hounds"
+        story.node.content.should_not eq "Minified!"
+      end
+
+      it "provides an alert if the user is incorrect" do
+        flash[:notice].should eq("You don't own this part of the story!")
+      end
+
+    end
+    
   end
 
   describe "#delete" do
@@ -56,4 +113,5 @@ describe StoriesController do
     end
 
   end
+
 end
