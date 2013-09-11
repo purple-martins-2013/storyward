@@ -71,11 +71,6 @@ describe "browsing and reading stories" do
       assert page.has_content? @node.content
     end
 
-    it "contains multiple buttons for reading comfort" do
-      page.should have_button "Dim Lights"
-      page.should have_button "Brighten"
-    end
-
     it "contains a link to creating a new branch" do
       assert page.has_link? "Create a New Branch!", "/storiesnew/#{@node.id}"
     end

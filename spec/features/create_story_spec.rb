@@ -7,11 +7,11 @@ describe "allow log in via views" do
     visit new_user_session_path
   end
 
-  it "takes you to the home page on successful login" do
+  it "takes you to your profile page on successful login" do
     page.fill_in "Email", :with => @user.email
     page.fill_in "Password", :with => @user.password
     page.find('.button').click
-    current_path.should eq "/"
+    current_path.should eq profile_path(@user)
   end
 
   it "shows the nav bar after logging in, reflecting a successful login" do
@@ -24,11 +24,11 @@ describe "allow log in via views" do
     assert page.has_content? "Logout"
   end
 
-  it "redirects you to the log in page on unsuccessful login" do
+  it "redirects you to the home page on unsuccessful login" do
     page.fill_in "Email", :with => @user.email
     page.fill_in "Password", :with => "incorrect"
     page.find('.button').click
-    current_path.should eq "/users/sign_in"
+    current_path.should eq root_path
   end
 
 end
@@ -51,6 +51,8 @@ describe "create story page" do
 
     before(:each) do
       fill_in "Content", :with => @node.content
+      @story = FactoryGirl.create(:story)
+      Story.stub(:find_by_id).and_return(@story)
       click_button("Create Story")
     end
 
@@ -74,6 +76,8 @@ describe "create story page" do
 
     before(:each) do
       attach_file("story_upload", File.expand_path("public/robots.txt"))
+      @story = FactoryGirl.create(:story)
+      Story.stub(:find_by_id).and_return(@story)
       click_button("Create Story")
     end
 
@@ -93,6 +97,8 @@ describe "create story page" do
     before(:each) do
       fill_in "Content", :with => @node.content
       attach_file("story_upload", File.expand_path("public/robots.txt"))
+      @story = FactoryGirl.create(:story)
+      Story.stub(:find_by_id).and_return(@story)
       click_button("Create Story")
     end
 
@@ -112,6 +118,8 @@ describe "create story page" do
     before(:each) do
       fill_in "Content", :with => @node.content
       attach_file("story_upload", File.expand_path("public/robots.pdf"))
+      @story = FactoryGirl.create(:story)
+      Story.stub(:find_by_id).and_return(@story)
       click_button("Create Story")
     end
 
