@@ -36,15 +36,6 @@ class StoriesController < ApplicationController
     end
   end
 
-  def update
-    @story = Story.find(params[:id])
-    if @story.update(node_params)
-      redirect_to @story, :notice => "#{@story.title} was updated succesfully."
-    else
-      render :update, :alert => "Updates could not be saved. Please see the errors below."
-    end
-  end
-
   def destroy
     story = Story.find(params[:id])
     story.destroy

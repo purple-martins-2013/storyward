@@ -7,7 +7,7 @@ Storyward::Application.routes.draw do
   get "stories/new/:id" => "stories#new"
 
   resources :profiles, :only => [:index, :show]
-  resources :stories
+  resources :stories, :except => [:edit, :update]
   resources :nodes, :except => [:new, :create, :index]
 
   get "nodes/details/:id" => "nodes#details"
