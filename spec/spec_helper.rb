@@ -57,6 +57,7 @@ omniauth_facebook_hash =
 omniauth_twitter_hash =
       {:provider => "twitter",
        :uid      => "1234",
+       :extra    => {:raw_info => {:name => "John Twitter Doe"} },
        :info     => {:name => "John Twitter Doe", :email => "johndoetwitter@email.com", :image => 'testimage'}, 
        :credentials => {:token => "testtoken1234"}}
 
