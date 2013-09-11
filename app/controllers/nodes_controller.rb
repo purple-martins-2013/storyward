@@ -36,8 +36,4 @@ class NodesController < ApplicationController
     render json: build_chain(@node).reverse.to_json
   end
 
-  private
-  def nodes_params
-    params.require(:node).permit(:title, :content) 
-  end
 end
