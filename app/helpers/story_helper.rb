@@ -11,10 +11,10 @@ module StoryHelper
   end
 
   def find_by_title_author_content
-    first_search = Story.where("title like ?", "%#{params[:search_bar]}%").sort_by {|story| story.stars.length }.reverse
-    second_search = User.where("name like ?", "%#{params[:search_bar]}%").map {|user| user.stories}.flatten.sort_by {|story| story.stars.length }.reverse
-    third_search = Node.where("content like ?", "%#{params[:search_bar]}%").map {|node| node.stories.first}.sort_by {|story| story.stars.length }.reverse
+    first_search = Story.fuzzy_search(title: params[:search_bar]).sort_by {|story| story.stars.length }.reverse
+    second_search = User.fuzzy_search(name: params[:search_bar]).map {|user| user.stories}.flatten.sort_by {|story| story.stars.length }.reverse
+    third_search = Node.fuzzy_search(content: params[:search_bar]).map {|node| node.stories.first}.sort_by {|story| story.stars.length }.reverse
     @found_stories = first_search + second_search + third_search
-end
+  end
 
 end
