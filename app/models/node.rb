@@ -10,4 +10,8 @@ class Node < ActiveRecord::Base
   def sanitize_content
     self.content = Sanitize.clean(self.content, Sanitize::Config::RESTRICTED)
   end
+
+  def as_hash
+  	{ id: self.id, title: self.title, content: self.content, author: self.user.name }
+  end
 end

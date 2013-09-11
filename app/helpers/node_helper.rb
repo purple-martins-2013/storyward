@@ -1,9 +1,5 @@
 module NodeHelper
 
-  def metadata(node)
-    { title: node.title, content: node.content, author: node.user.name }
-  end
-
   def create_json(node)
     return { id: node.id, author: node.user.name }, 1 if node.children_nodes.length == 0
     child_nodes = []
@@ -15,9 +11,9 @@ module NodeHelper
   end
 
   def build_chain(node)
-    return [{ id: node.id, title: node.title, content: node.content, author: node.user.name }] if node.parent_node == 0
+    return [node.as_hash] if node.parent_node == 0
     parent_node = Node.find(node.parent_node)
-    return [{ id: node.id, title: node.title, content: node.content, author: node.user.name }].concat(build_chain(parent_node))
+    return [node.as_hash].concat(build_chain(parent_node))
   end
 
   def process_upload
