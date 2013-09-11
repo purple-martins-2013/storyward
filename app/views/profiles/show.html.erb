@@ -34,7 +34,9 @@
           <h4>Favorite Authors</h4>
           <% if @user.favorite_authors.any? %>
             <% @user.favorite_authors.each do |author| %>
-              <h6><%= link_to author.name, author %></h6>
+              <% unless author == current_user %>
+                <h6><%= link_to author.name, profile_path(author) %></h6>
+              <% end %>
             <% end %>
           <% else %>
             <h6>No authors favorited yet.</h6>
