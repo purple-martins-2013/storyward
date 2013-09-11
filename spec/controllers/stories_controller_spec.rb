@@ -14,6 +14,15 @@ describe StoriesController do
     it 'creates a story' do
       expect { post :create, story: FactoryGirl.attributes_for(:story), node: FactoryGirl.attributes_for(:node) }.to change(Story,:count).by(1)
     end
+
+    it 'will show an alert if story creation fails' do
+      node_without_title = FactoryGirl.attributes_for(:node)
+      node_without_title[:title] = ""
+      post :create, story: FactoryGirl.attributes_for(:story), node: node_without_title
+      flash[:alert].should eq("Story could not be saved. Please see the errors below.")
+      Node.all.length.should eq 0
+    end
+
   end
 
   describe "#delete" do
