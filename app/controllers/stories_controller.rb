@@ -15,10 +15,7 @@ class StoriesController < ApplicationController
   end
 
   def show 
-    #@node = Node.find(params[:id])
-    #@story = build_chain(@node).reverse
-    #-----------------------------REFACTOR----------------------------
-    @story = Story.find(params[:id])
+   @story = Story.find(params[:id])
   end
 
   def create
