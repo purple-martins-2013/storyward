@@ -16,6 +16,8 @@ describe "story creation page" do
 	  	visit new_story_path
 	  	page.fill_in "Title", :with => 'Test Title'
 	  	page.fill_in "Content", :with => 'Test Content'
+	  	@story = FactoryGirl.create(:story)
+    	Story.stub(:find_by_id).and_return(@story)
 	  end
 
 
