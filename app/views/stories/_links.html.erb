@@ -1,18 +1,9 @@
-<% children_nodes = Node.find(node[:id]).children_nodes %>
-<% if children_nodes.length > 1 %>
+<% if node.children_nodes.length > 1 %>
   <a href="#" data-dropdown="drop<%= node[:id] %>" class="button success round read-mode">Check Out Another Branch</a>
-  <ul id="drop<%= node[:id] %>" class="f-dropdown" data-dropdown-content>
-    <% children_nodes.each do |child_id| %>
-      <% if story[index + 2] %>
-        <% if child_id != story[index + 2][:id] %>
-          <% child_node = Node.find(child_id) %>
-          <li><%= link_to child_node.title, story_path(child_node) %></li>
-        <% end %>
-      <% else %>
-        <% child_node = Node.find(child_id) %>
-        <li><%= link_to child_node.title, story_path(child_node) %></li>
-      <% end %>
+  <ul id="drop<%= node.id %>" class="f-dropdown" data-dropdown-content>
+    <% node.children_objects.each do |child| %>
+      <li><%= link_to child.title, story_path(child) %></li>
     <% end %>
   </ul>
 <% end %>
-<%= link_to "Create a New Branch!", "/stories/new/#{node[:id]}", class:"button success round read-mode right" %>
+<%= link_to "Create a New Branch!", "/stories/new/#{node.id}", class:"button success round read-mode right" %>

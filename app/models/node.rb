@@ -14,4 +14,21 @@ class Node < ActiveRecord::Base
   def as_hash
   	{ id: self.id, title: self.title, content: self.content, author: self.user.name }
   end
+
+  #TODO - this is really, really, incredibly expensive. Refactor when time allows! 
+  def parent_chain
+  	parent_nodes = []
+  	node = self
+  	while node.parent_node != 0
+  		parent = self.class.find(node.parent_node)
+  		parent_nodes << parent
+  		node = parent
+  	end
+  	parent_nodes.reverse
+  end
+
+  def children_objects
+  	self.children_nodes.map{|id| self.class.find(id)}
+  end
+
 end
