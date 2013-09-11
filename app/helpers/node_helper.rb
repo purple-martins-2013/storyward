@@ -55,4 +55,30 @@ module NodeHelper
       @parent_node.save
     end
   end
+
+  def upload_into_content
+    @saved_title = params[:node][:title]
+    @uploaded_content = params[:node][:content]
+    @saved_tags = params[:story][:tag_list]
+    @parent_node = params[:node][:parent_node] if params[:node][:parent_node] != "0"
+    @story = Story.new
+    @story.build_node
+  end
+
+  def create_story
+    @story_params[:title] = node_params[:title]
+    @story = Story.new(@story_params)
+    @story.user = current_user
+    @story.tag_list = params[:story][:tag_list]
+  end
+
+  def update_story
+    @story_params[:title] = node_params[:title]
+    @story.tag_list = params[:story][:tag_list]
+  end
+
+  def update_node
+    @story.node.update(node_params)
+  end
+
 end

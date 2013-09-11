@@ -10,18 +10,6 @@ class NodesController < ApplicationController
     @node = Node.find(params[:id])
   end
 
-  def update
-    Node.find(params[:id])
-    @node = Node.find(params[:id])
-    unless @node.children_nodes.any?
-      @node.update(nodes_params)
-      @node.save
-      redirect_to @node
-    else
-      redirect_to :back, notice: "Node cannot be edited because it has children."
-    end
-  end
-
   def destroy
     @node = Node.find(params[:id])
     if @node.user == current_user

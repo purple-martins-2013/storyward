@@ -20,23 +20,15 @@ class StoriesController < ApplicationController
   end
 
   def create
-    story_params = {}
+    @story_params = {}
     process_upload
     if params[:story] && params[:story][:upload]
-      @saved_title = params[:node][:title]
-      @uploaded_content = params[:node][:content]
-      @saved_tags = params[:story][:tag_list]
-      @parent_node = params[:node][:parent_node] if params[:node][:parent_node] != "0"
-      @story = Story.new
-      @story.build_node
+      upload_into_content
       flash.now[:success] = "File uploaded!  Please edit for formatting as you see fit."
       render :new
     else
-      story_params[:title] = node_params[:title]
-      @story = Story.new(story_params)
-      @story.user = current_user
+      create_story
       create_nodes
-      @story.tag_list = params[:story][:tag_list]
       if @story.save
         redirect_to story_path(@story.node), :notice => "#{@story.title} was created successfully."
       else
@@ -48,10 +40,23 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find(params[:id])
-    if @story.update(node_params)
-      redirect_to @story, :notice => "#{@story.title} was updated succesfully."
+    if @story.user == current_user
+      process_upload
+      if params[:story] && params[:story][:upload]
+        upload_into_content
+        flash.now[:success] = "File uploaded!  Please edit for formatting as you see fit."
+        render :new
+      else
+        update_story
+        update_node
+        if @story.update(node_params)
+          redirect_to @story, :notice => "#{@story.title} was updated succesfully."
+        else
+          render :update, :alert => "Updates could not be saved. Please see the errors below."
+        end
+      end
     else
-      render :update, :alert => "Updates could not be saved. Please see the errors below."
+      redirect_to profile_path(current_user), :notice => "You don't own this part of the story!"
     end
   end
 
