@@ -5,6 +5,10 @@ $(document).ready(function() {
     populateTags();
   });
 
+  $("body").on("click", ".close-reveal-modal", function() {
+    $(".token-input-list-facebook").remove();
+  });
+
 });
 
 function populateTags() {

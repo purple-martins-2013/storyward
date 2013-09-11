@@ -11,5 +11,14 @@ input {
 }
 
 .token-input-input-token-facebook, #token-input-tag_tokens {
-  width: 400px !important;
+  width: 500px !important;
+}
+
+#search_bar {
+  width: 500px;
+}
+
+#search-holder {
+  width: 600px;
+
 }

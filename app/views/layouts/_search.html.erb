@@ -2,6 +2,7 @@
   <%= form_tag "/stories/search", :name => "searchForm" do %>
     <%= label_tag :tag_tokens, "Search by Tag:" %>
     <%= text_field_tag :tag_tokens %>
+    <p></p>
     <%= label_tag :search_bar, "Search by title, keyword or author:" %>
     <%= text_field_tag :search_bar %>
     <%= submit_tag "Search!" %>
