@@ -19,7 +19,6 @@ LightDimmer.prototype.bindButton = function() {
 };
 
 LightDimmer.prototype.fullscreenify = function() {
-  console.log("hi");
   $('#reading-background').fullScreen();
 };
 
