@@ -28,10 +28,18 @@
   opacity: 1.0;
 }
 
-#bookmark_icon {
+#unbookmarked_icon {
   opacity: 0.5;
 }
 
-#bookmark_icon:hover {
+#unbookmarked_icon:hover {
   opacity: 1.0;
+}
+
+#bookmarked_icon {
+  opacity: 1.0;
+}
+
+#bookmarked_icon:hover {
+  opacity: 0.5;
 }
