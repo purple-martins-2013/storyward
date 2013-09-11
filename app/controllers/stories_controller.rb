@@ -22,15 +22,27 @@ class StoriesController < ApplicationController
   def create
     story_params = {}
     process_upload
-    story_params[:title] = node_params[:title]
-    @story = Story.new(story_params)
-    @story.user = current_user
-    create_nodes
-    @story.tag_list = params[:story][:tag_list]
-    if @story.save
-      redirect_to story_path(@story.node), :notice => "#{@story.title} was created successfully."
+    if params[:story] && params[:story][:upload]
+      @saved_title = params[:node][:title]
+      @uploaded_content = params[:node][:content]
+      @saved_tags = params[:story][:tag_list]
+      @parent_node = params[:node][:parent_node] if params[:node][:parent_node] != "0"
+      @story = Story.new
+      @story.build_node
+      flash.now[:success] = "File uploaded!  Please edit for formatting as you see fit."
+      render :new
     else
-      render :new, :alert => "Story could not be saved. Please see the errors below."
+      story_params[:title] = node_params[:title]
+      @story = Story.new(story_params)
+      @story.user = current_user
+      create_nodes
+      @story.tag_list = params[:story][:tag_list]
+      if @story.save
+        redirect_to story_path(@story.node), :notice => "#{@story.title} was created successfully."
+      else
+        flash.now[:alert] = "Story could not be saved. Please see the errors below."
+        render :new
+      end
     end
   end
 
