@@ -9,13 +9,24 @@ LightDimmer.prototype.bindButton = function() {
 
    this.buttons.on('click', '.dimlights', function(){
     lightDimmer.dimPage($(this));
+    lightDimmer.fullscreenify();
   });
 
   this.buttons.on('click', '.brighten', function(){
     lightDimmer.brightenPage($(this));
-  }); 
-}
+    lightDimmer.unfullscreenify();
+  });
+};
 
+LightDimmer.prototype.fullscreenify = function() {
+  var elem = document.getElementById("reading-page");
+  $('#reading-page').fullScreen();
+};
+
+LightDimmer.prototype.unfullscreenify = function() {
+  var elem = document.getElementById("reading-page");
+  $('#reading-page').fullScreen(); 
+};
 
 LightDimmer.prototype.dimPage = function(button) {
     this.buttons.unbind('click');
@@ -43,8 +54,6 @@ LightDimmer.prototype.updateColor = function(color) {
     lightDimmer.bindButton();
   });
 };
-
-
 
 function ReadingPage(page, story) {
   this.page = page;
@@ -80,3 +89,8 @@ Color.prototype.saturate = function(ratio) {
 Color.prototype.toRGB = function() {
   return "rgb("+this.rgbArray[0]+","+this.rgbArray[1]+","+this.rgbArray[2]+")";
 };
+
+$(document).ready(function(){
+  readingPage = new ReadingPage($('#reading-background'), $('#show-story'));
+  new LightDimmer($('.buttons'), readingPage);
+});
