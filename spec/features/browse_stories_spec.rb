@@ -13,6 +13,8 @@ describe "browsing and reading stories" do
     visit new_story_path
     page.fill_in "Title", :with => @node.title
     fill_in "Content", :with => @node.content
+    @story = FactoryGirl.create(:story)
+    Story.stub(:find_by_id).and_return(@story)
     click_button("Create Story")
   end
     
