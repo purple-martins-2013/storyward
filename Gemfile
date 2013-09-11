@@ -32,6 +32,7 @@ group :test do
   gem 'capybara'
   gem 'shoulda'
   gem 'simplecov', :require => false
+  gem 'launchy'
 end
 
 #Assets
