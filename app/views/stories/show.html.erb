@@ -1,6 +1,8 @@
 <div id="reading-background">
   <div class='buttons'>
-    <div id="map-offset"><span><img id="story-map" src="/map.png" data-id="<%= @story.node.parent_chain.first.id %>" data-endnode="<%= @story.node.parent_chain.last.id %>"></span></div>
+   <% if @story.node.parent_chain.any? %>
+     <div id="map-offset"><span><img id="story-map" src="/map.png" data-id="<%= @story.node.parent_chain.first.id %>" data-endnode="<%= @story.node.parent_chain.last.id %>"></span></div>
+   <% end %>
   </div>
   <div class="row">
     <div id="show-story" class="show-story small-12-columns">
