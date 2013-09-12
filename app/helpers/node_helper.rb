@@ -24,7 +24,7 @@ module NodeHelper
       content = []
       case filetype
       when "pdf"
-        File.open(uploaded_io.tempfile, "rb") do |io|
+        File.open(uploaded_io, "rb") do |io|
           reader = PDF::Reader.new(io)
           reader.pages.each do |page|
             content << page.text.gsub(/\n\n\n*/, "</p><p>")
