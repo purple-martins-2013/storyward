@@ -5,30 +5,36 @@ class Node < ActiveRecord::Base
   belongs_to :user
   has_many :stories, :inverse_of => :node
 
+  before_create :build_parent_path
   before_save :sanitize_content
-
-  def sanitize_content
-    self.content = Sanitize.clean(self.content, Sanitize::Config::RESTRICTED)
-  end
 
   def as_hash
   	{ id: self.id, title: self.title, content: self.content, author: self.user.name }
   end
 
-  #TODO - this is really, really, incredibly expensive. Refactor when time allows! 
   def parent_chain
-  	parent_nodes = []
-  	node = self
-  	while node.parent_node != 0
-  		parent = self.class.find(node.parent_node)
-  		parent_nodes << parent
-  		node = parent
-  	end
-  	parent_nodes.reverse
+    find_ordered_from_array(self.parent_path)
   end
 
   def children_objects
-  	self.children_nodes.map{|id| self.class.find(id)}
+    find_ordered_from_array(self.children_nodes)
   end
 
+  private
+  def sanitize_content
+    self.content = Sanitize.clean(self.content, Sanitize::Config::RESTRICTED)
+  end
+
+  def build_parent_path
+    unless self.parent_node == 0
+      self.parent_path = self.class.find(parent_node).parent_path
+      self.parent_path.push(parent_node)
+      self.parent_path_will_change!
+    end
+  end
+
+  def find_ordered_from_array(ids_array)
+  	unordered_nodes = self.class.find(ids_array)
+    ids_array.map{|id| unordered_nodes.detect{|each| each.id == id}}
+  end
 end
