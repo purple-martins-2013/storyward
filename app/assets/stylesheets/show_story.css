@@ -11,3 +11,20 @@
 #story-map:hover {
   opacity: 1.0;
 }
+
+
+#unbookmarked_icon {
+  opacity: 0.5;
+}
+
+#unbookmarked_icon:hover {
+  opacity: 1.0;
+}
+
+#bookmarked_icon {
+  opacity: 1.0;
+}
+
+#bookmarked_icon:hover {
+  opacity: 0.5;
+}
