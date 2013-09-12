@@ -11,4 +11,8 @@ class Story < ActiveRecord::Base
   accepts_nested_attributes_for :node
 
   acts_as_taggable
+
+	def bookmarked?(user)
+  	Star.where(user_id: user.id, story_id: self.id).any?
+	end
 end
