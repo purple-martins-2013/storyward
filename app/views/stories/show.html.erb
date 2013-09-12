@@ -5,6 +5,7 @@
   <div class="row">
     <div id="show-story" class="show-story small-12-columns">
       <div id="chart-holder"></div>
+      <%= render partial: 'bookmark' %>
       
       <!-- show all parent nodes for this story's node if they exist -->
       <% unless @story.node.parent_chain.empty? %>
