@@ -44,6 +44,7 @@ gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'zurb-foundation'
 gem 'foundation_rails_helper'
+gem 'foundation-icons-sass-rails'
 
 group :doc do
   gem 'sdoc', require: false
