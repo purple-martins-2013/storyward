@@ -219,7 +219,7 @@ $default-float: left;
 
 // $hr-border-width: 1px;
 // $hr-border-style: solid;
-// $hr-border-color: #ddd;
+   $hr-border-color: $primary-color;
 // $hr-margin: emCalc(20);
 
 // Style lists
@@ -1239,7 +1239,7 @@ $default-float: left;
 // Height and margin
 
    $topbar-height: 60px;
-// $topbar-margin-bottom: emCalc(30);
+   $topbar-margin-bottom: emCalc(15);
 
 // Control Input height for top bar
 
