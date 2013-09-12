@@ -1,17 +1,11 @@
-<div class='buttons'>
-  <% if @story.node.parent_chain.any? %>
-    <h4><i id="story-map" class="fi-map" data-id="<%= @story.node.parent_chain.first.id %>" data-endnode="<%= @story.node.parent_chain.last.id %>"></i></h4>
-  <% end %>
+<% params[:story_id] ||= params[:id] %>
 
-  <% params[:story_id] ||= params[:id] %>
-
-  <% if @story.bookmarked?(current_user) %>
-    <%= link_to star_path(params[:story_id], :story_id => params[:story_id]), :data => { :remote => true, :method => 'delete', :id => params[:story_id] }, :id => 'bookmarked_icon' do %>
-      <h4><i class="fi-book-bookmark"></i></h4>
-    <% end %>
-  <% else %>
-    <%= link_to stars_path(:story_id => params[:id]), :data => { :remote => true, :method => 'post', :id => params[:story_id] }, :id => 'unbookmarked_icon' do %>
-      <h4><i class="fi-book-bookmark"></i></h4>
-    <% end %>
+<% if @story.bookmarked?(current_user) %>
+  <%= link_to star_path(params[:story_id], :story_id => params[:story_id]), :data => { :remote => true, :method => 'delete', :id => params[:story_id] }, :id => 'bookmarked_icon' do %>
+    <h4><i class="fi-book-bookmark"id="bookmarked_icon" ></i></h4>
   <% end %>
-</div>
+<% else %>
+  <%= link_to stars_path(:story_id => params[:id]), :data => { :remote => true, :method => 'post', :id => params[:story_id] }, :id => 'unbookmarked_icon' do %>
+    <h4><i class="fi-book-bookmark" id="unbookmarked_icon"></i></h4>
+  <% end %>
+<% end %>
