@@ -15,4 +15,20 @@ describe User do
   it { should_not allow_value("example.com").for(:email) }
   it { should allow_value("email@example.com").for(:email) }
 
+
+  describe '#find_or_create_from_oauth' do
+
+    it "should create new user with facebook info" do
+      auth = OmniAuth.config.mock_auth[:facebook]
+      @user = User.find_or_create_from_oauth(auth)
+      expect(@user.name).to eq "John Facebook Doe"
+    end
+
+    it "should create a new user with twitter info" do
+      auth = OmniAuth.config.mock_auth[:twitter]
+      @user = User.find_or_create_from_oauth(auth)
+      expect(@user.name).to eq "John Twitter Doe"
+    end
+  end
+
 end
