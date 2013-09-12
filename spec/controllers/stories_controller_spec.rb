@@ -29,6 +29,10 @@ describe StoriesController do
       end
 
       it "accepts and parses a PDF file" do
+        @file = fixture_file_upload('files/test.pdf', 'application/pdf')
+        @node = FactoryGirl.attributes_for(:node, content: 'TEST')
+        post :create, node: @node, :story => { title: 'test', :upload => @file, node: @node, user: FactoryGirl.attributes_for(:user) }
+        expect(Story.last.node.content).to eq ' TEST PDF' + ' TEST'
       end
 
     end
