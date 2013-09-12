@@ -41,6 +41,8 @@ function forceGroup(container) {
   takeJson();
 
   function takeJson() {
+    console.log('takeJson')
+    console.log(json)
     root = json;
     update();
   }

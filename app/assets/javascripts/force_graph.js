@@ -64,7 +64,7 @@ function forceGraph(container) {
     }
   });
 
-  var w = window.innerWidth / 2,
+  var w = window.innerWidth/ 2,
       h = window.innerHeight / 1.5,
       r = 15,
       node,
@@ -74,7 +74,8 @@ function forceGraph(container) {
 
   var force = d3.layout.force()
       .on("tick", tick)
-      .size([w, h]);
+      .size([w, h])
+      .linkDistance([20]);
 
   var vis = d3.select("#chart").append("svg:svg")
       .attr("width", w)
@@ -96,6 +97,8 @@ function forceGraph(container) {
 
   function takeJson() {
     root = json;
+    
+    
     update();
     if ($("#story-map").data("id")) {
       populateNode(vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == $("#story-map").data("endnode")})[0][0] );
@@ -104,14 +107,15 @@ function forceGraph(container) {
 
   function populateNode(curElement) {
     var data = curElement.__data__["id"];
-    $.get("/nodes/chain/"+data,
+    
+    $.get("/nodes/chain/"+data,//getting ancestory chain for curElement
       function(chain) {
         var story_preview = "<div id='story-preview' style='height: "+ window.innerHeight / 1.7 + "px'>";
         chain.forEach(function(element, index, array) {
          story_preview += ("<div class='node-preview'><h5>" + array[index].title.slice(0, 20) + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 400) + "...</p></div>");
           vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == array[index].id})
-            .style("fill", "silver")
-            .style("stroke", "green")
+            .style("fill", "silver")//these are the selected nodes 
+            .style("stroke", "#fcb483")
             .style("stroke-width", "4px");
           if (index < array.length - 1) {
             vis.selectAll("line.link").filter(function(d, i) {return d.source["id"] == array[index].id && d.target["id"] == array[index + 1].id})
@@ -148,10 +152,13 @@ function forceGraph(container) {
   }
 
   function update() {
+    
     var nodes = flatten(root),
         links = d3.layout.tree().links(nodes);
-
+    
+    
     // Restart the force layout.
+
     force
         .nodes(nodes)
         .links(links)
@@ -161,7 +168,7 @@ function forceGraph(container) {
     link = vis.selectAll("line.link")
         .data(links, function(d) { return d.target.id; })
         .style("stroke-width", "1.5px")
-        .style("stroke", "#9ecae1");
+        .style("stroke", linkColor);
 
     // Enter any new links.
     link.enter().insert("svg:line", ".node")
@@ -200,14 +207,14 @@ function forceGraph(container) {
         force.resume();
     }
 
-    function dblclick(d) {
-      nodes.forEach(function(d, i) {
-        d.x += (Math.random() - 0.5) * 40;
-        d.y += (Math.random() - 0.5) * 40;
-        d.fixed = false;
-      });
-      force.resume();
-    }
+    // function dblclick(d) {
+    //   nodes.forEach(function(d, i) {
+    //     d.x += (Math.random() - 0.5) * 40;
+    //     d.y += (Math.random() - 0.5) * 40;
+    //     d.fixed = false;
+    //   });
+    //   force.resume();
+    // }
 
     // Update the nodes…
     node = vis.selectAll("circle.node")
@@ -224,8 +231,18 @@ function forceGraph(container) {
         .attr("r", function(d) { return d.size * 1.5 || 6; })
          // || Math.sqrt(d.children.length) * 4 -- at some point; children does become null though, when expanding closed children
         .style("fill", color)
-        .on("mouseup", click)
+        //.on("mouseup", click)
         .on("dblclick", dblclick)
+        // .append("svg:text")
+        // .text("hi")
+        // .on("mouseover",function(d,i){ 
+        //   d3.select(this.parentNode)
+        //   .insert("svg:text", this.nextSibling).text("hi!");  
+        // })
+        // .on("mouseover", function(d) {
+        //   console.log(this)
+        //   d3.select(this).append("p").text("hi").style('fill','purple')
+        // })
         .call(node_drag);
 
     // Exit any old nodes.
@@ -243,36 +260,58 @@ function forceGraph(container) {
   }
 
   function color(d) {
-    return d._children ? "#73ffd5" : d.children ? "#14db24" : '#'+Math.floor(Math.random()*16777215).toString(16);
+    //return '#77270e'
+    return d._children ? "#81390e" : d.children ? "#81390e" : '#222222';
+  }
+
+  function linkColor(d) {
+    return '#fcb483'
+    //return d._children ? "#fcb483" : d.children ? "#14db24" : '#'+Math.floor(Math.random()*16777215).toString(16);
+  }
+
+  //show title on hover
+  function mouseover(d) {
+    return d.id;
   }
 
   // Toggle children on click.
-  function click(d) {
-    var isRightMB;
-    if ("which" in d3.event) {
-      isRightMB = d3.event.which == 3;
-    } else if ("button" in d) {
-      isRightMB = d3.event.button == 2;
+  function dblclick(d) {
+    console.log("hi")
+    if (d.children) {
+      d._children = d.children;
+      d.children = null;
+    } else {
+      d.children = d._children;
+      d._children = null;
     }
-    if (isRightMB) {
-      if (d.children) {
-        d._children = d.children;
-        d.children = null;
-      } else {
-        d.children = d._children;
-        d._children = null;
-      }
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      update();
-    }
-    if (d3.event.shiftKey) {
-      vis.transition().attr("transform", "translate(" + 
-        (-parseInt(vis.select(".node").attr("cx"))*zoomFactor + w/2) + "," +
-        (-parseInt(vis.select(".node").attr("cy"))*zoomFactor + h/2) +
-        ")scale(" + zoomFactor + ")");
-    }
+    update();
+    // var isRightMB;
+    // 
+    
+    // if ("which" in d3.event) {
+    //   isRightMB = d3.event.which == 3;
+    // } else if ("button" in d) {
+    //   isRightMB = d3.event.button == 2;
+    // }
+    // if (isRightMB) {
+    //   if (d.children) {
+    //     d._children = d.children;
+    //     d.children = null;
+    //   } else {
+    //     d.children = d._children;
+    //     d._children = null;
+    //   }
+    //   if (timeoutId) {
+    //     clearTimeout(timeoutId);
+    //   }
+    //   update();
+    // }
+    // if (d3.event.shiftKey) {
+    //   vis.transition().attr("transform", "translate(" + 
+    //     (-parseInt(vis.select(".node").attr("cx"))*zoomFactor + w/2) + "," +
+    //     (-parseInt(vis.select(".node").attr("cy"))*zoomFactor + h/2) +
+    //     ")scale(" + zoomFactor + ")");
+    // }
   }
 
   // Returns a list of all nodes under the root.
@@ -282,10 +321,13 @@ function forceGraph(container) {
     function recurse(node) {
       if (node.children) node.children.forEach(recurse);
       if (!node.id) node.id = ++i;
-      nodes.push(node);
+      nodes.push(node);///last node in the array is always initial node
     }
-
+    
+    
     recurse(root);
+    
+    
     return nodes;
   }
 }
