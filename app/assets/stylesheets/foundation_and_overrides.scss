@@ -233,9 +233,9 @@ $default-float: left;
 
 // Style blockquotes
 
-// $blockquote-font-color: lighten($header-font-color, 30%);
+   $blockquote-font-color: lighten($primary-color,15%);
 // $blockquote-padding: emCalc(9, 20, 0, 19);
-// $blockquote-border: 1px solid #ddd;
+   $blockquote-border: none;
 // $blockquote-cite-font-size: emCalc(13);
 // $blockquote-cite-font-color: lighten($header-font-color, 20%);
 // $blockquote-cite-link-color: $blockquote-cite-font-color;
