@@ -81,6 +81,7 @@ GEM
     foundation_rails_helper (0.4)
       actionpack (>= 3.0)
       railties (>= 3.0)
+    gravatar_image_tag (1.1.3)
     guard (1.8.2)
       formatador (>= 0.2.4)
       listen (>= 1.0.0)
@@ -297,6 +298,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   foundation_rails_helper
+  gravatar_image_tag
   guard-rails
   guard-rspec
   guard-unicorn
