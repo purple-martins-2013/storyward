@@ -35,6 +35,6 @@ class Node < ActiveRecord::Base
 
   def find_ordered_from_array(ids_array)
   	unordered_nodes = self.class.find(ids_array)
-    objects.map{|id| unordered_nodes.detect{|each| each.id == id}}  
+    ids_array.map{|id| unordered_nodes.detect{|each| each.id == id}}
   end
 end
