@@ -1,27 +1,22 @@
 <div id="reading-background">
-  <div class='buttons'>
-   <% if @story.node.parent_chain.any? %>
-     <div id="map-offset"><span><img id="story-map" src="/map.png" data-id="<%= @story.node.parent_chain.first.id %>" data-endnode="<%= @story.node.parent_chain.last.id %>"></span></div>
-   <% end %>
   </div>
   <div class="row">
     <div id="show-story" class="show-story small-12-columns">
       <div id="chart-holder"></div>
       <%= render partial: 'bookmark' %>
-      
+
       <!-- show all parent nodes for this story's node if they exist -->
       <% unless @story.node.parent_chain.empty? %>
         <% @story.node.parent_chain.each do |node| %>
-          <%= render 'nested_node_display', :node => node %>
-          <%= render 'links', :node => node %>
-        <% end %>
+        <%= render 'nested_node_display', :node => node %>
+        <%= render 'links', :node => node %>
       <% end %>
+    <% end %>
 
       <!-- show this story's node content --> 
       <%= render 'nested_node_display', :node => @story.node %>
       <%= render 'links', :node => @story.node %>
-      
-      <hr class="space">
+
     </div>
   </div>
 </div>
