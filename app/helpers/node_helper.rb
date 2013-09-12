@@ -74,11 +74,11 @@ module NodeHelper
 
   def update_story
     @story_params[:title] = node_params[:title]
-    @story.tag_list = params[:story][:tag_list]
+    @story_params[:tag_list] = params[:story][:tag_list]
   end
 
   def update_node
-    @story.node.update(node_params)
+    @story.node.update_attributes(node_params)
   end
 
   def populate_edit_fields
@@ -86,7 +86,13 @@ module NodeHelper
     @existing_content = @story.node.content
     @existing_tags = @story.tag_list
     @parent_node = @story.node.parent_node.to_s if @story.node.parent_node != 0
-    @story.build_node
+  end
+
+  def edit_page_upload
+    @existing_title = params[:node][:title]
+    @existing_content = params[:node][:content]
+    @existing_tags = params[:story][:tag_list]
+    @parent_node = params[:node][:parent_node] if params[:node][:parent_node] != "0"
   end
 
 end

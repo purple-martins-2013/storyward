@@ -49,13 +49,13 @@ class StoriesController < ApplicationController
     if @story.user == current_user
       process_upload
       if params[:story] && params[:story][:upload]
-        upload_into_content
+        edit_page_upload
         flash.now[:success] = "File uploaded!  Please edit for formatting as you see fit."
-        render :new
+        render :edit
       else
         update_story
         update_node
-        if @story.update(@story_params)
+        if @story.update_attributes(@story_params)
           redirect_to story_path(@story.node), :notice => "#{@story.title} was updated successfully."
         else
           render :edit, :alert => "Updates could not be saved. Please see the errors below."
