@@ -1,0 +1,14 @@
+<div class="user-index">
+  <div class="row" style="margin-top: 20px">
+    <% @users.each do |user| %>
+      <div class="small-4 columns">
+        <% if user.image_url %>
+          <%= image_tag user.image_url, size: '80%', class: "th radius" %>
+        <% else %>
+          <%= image_tag '/placeholder.jpg', size: '80%', class: "th radius" %>
+        <% end %>
+        <h3 class="text-center"><%= user.name %></h3>
+      </div>
+    <% end %>
+  </div>
+</div>

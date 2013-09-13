@@ -17,6 +17,7 @@
   <body>
     <% if current_user %>
       <%= render "/layouts/nav" %>
+      <%= render '/layouts/search' %>
     <% end %>
     <div <%= content_for :container_modifier %> class="container small-9 small-centered columns">
       <%= display_flash_messages %>

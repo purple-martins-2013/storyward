@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="small-12-columns">
+  <div class="small-12 columns">
     <% if @parent_node %>
       <h2><%= Node.find(@parent_node).title %></h3>
       <h3>Continue the story!</h4>
@@ -7,7 +7,7 @@
       <h2>Create a New Story</h2>
     <% end %>
     <div class="new-form">
-      <%= render 'form' %>
+      <%= render partial: 'form', :locals => {story: @story, parent_node: @parent_node, title_value: @saved_title, content_value: @uploaded_content, tags_value: @saved_tags} %>
     </div>
   </div>
 </div>
