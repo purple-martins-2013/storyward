@@ -24,7 +24,7 @@ module NodeHelper
       content = []
       case filetype
       when "pdf"
-        File.open(uploaded_io, "rb") do |io|
+        File.open(uploaded_io.tempfile, "rb") do |io|
           reader = PDF::Reader.new(io)
           reader.pages.each do |page|
             content << page.text.gsub(/\n\n\n*/, "</p><p>")
@@ -48,7 +48,46 @@ module NodeHelper
       @parent_node = Node.find(@story.node.parent_node)
       @parent_node.children_nodes << @story.node.id
       @parent_node.children_nodes_will_change!
-      @parent_node.save
     end
   end
+
+  def upload_into_content
+    @saved_title = params[:node][:title]
+    @uploaded_content = params[:node][:content]
+    @saved_tags = params[:story][:tag_list]
+    @parent_node = params[:node][:parent_node] if params[:node][:parent_node] != "0"
+    @story = Story.new
+    @story.build_node
+  end
+
+  def create_story
+    @story_params[:title] = node_params[:title]
+    @story = Story.new(@story_params)
+    @story.user = current_user
+    @story.tag_list = params[:story][:tag_list]
+  end
+
+  def update_story
+    @story_params[:title] = node_params[:title]
+    @story_params[:tag_list] = params[:story][:tag_list]
+  end
+
+  def update_node
+    @story.node.update_attributes(node_params)
+  end
+
+  def populate_edit_fields
+    @existing_title = @story.title
+    @existing_content = @story.node.content
+    @existing_tags = @story.tag_list
+    @parent_node = @story.node.parent_node.to_s if @story.node.parent_node != 0
+  end
+
+  def edit_page_upload
+    @existing_title = params[:node][:title]
+    @existing_content = params[:node][:content]
+    @existing_tags = params[:story][:tag_list]
+    @parent_node = params[:node][:parent_node] if params[:node][:parent_node] != "0"
+  end
+
 end
