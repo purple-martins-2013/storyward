@@ -62,9 +62,16 @@ function forceGroup2(container) {
 
   function populateNode(curElement) {
     var data = curElement.__data__["id"];
+    console.log('populateNode')
+    console.log(data)
     
     $.get("/nodes/chain/"+data,//getting ancestory chain for curElement
       function(chain) {
+
+        var title = chain[0].title
+        var author = chain[0].author
+        var content = chain[0].content
+        
         var story_preview = "<div id='story-preview' style='height: "+ window.innerHeight / 1.7 + "px'>";
         chain.forEach(function(element, index, array) {
          story_preview += ("<div class='node-preview'><h5>" + array[index].title.slice(0, 20) + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 400) + "...</p></div>");
@@ -79,7 +86,10 @@ function forceGroup2(container) {
           }
        });
         story_preview += "</div>";
-        
+
+        $('#preview-story').children().remove();
+        $('#preview-story').append(story_preview);
+
         if ($("#superNav").html() == "") {
           $("#superNav").replaceWith("<div id='superNav' class='hide'>"+ story_preview + "</div>");
           $("#node-link").replaceWith("<a id='node-link' class='button success round right' href='/stories/"+data+"'>Check out this story!</a>");
