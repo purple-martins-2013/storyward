@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @stories = Story.all
+    @stories = Story.find(:all, :include => :node, :conditions => {:nodes => {:parent_node => 0}})
   end
 
   def new
