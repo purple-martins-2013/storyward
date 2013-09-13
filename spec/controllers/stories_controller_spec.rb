@@ -119,24 +119,6 @@ describe StoriesController do
       end
 
     end
-
-    context "with a file upload" do
-      
-      it "accepts and parses a TXT file" do
-        @file = fixture_file_upload('files/test.txt', 'text/txt')
-        @node = FactoryGirl.attributes_for(:node, content: 'TEST')
-        post :create, node: @node, :story => { title: 'test', :upload => @file, node: @node, user: FactoryGirl.attributes_for(:user) }
-        expect(Story.last.node.content).to eq 'TEST TXT' + "\n" + 'TEST'
-      end
-
-      it "accepts and parses a PDF file" do
-        @file = fixture_file_upload('files/test.pdf', 'application/pdf')
-        @node = FactoryGirl.attributes_for(:node, content: 'TEST')
-        post :create, node: @node, :story => { title: 'test', :upload => @file, node: @node, user: FactoryGirl.attributes_for(:user) }
-        expect(Story.last.node.content).to eq ' TEST PDF' + ' TEST'
-      end
-
-    end
   end
 
   describe '#show' do
@@ -260,7 +242,7 @@ describe StoriesController do
       end
 
       it "allows for fuzzy search" do
-        search_term = @story.title.split(" ").drop(3).join(" ").upcase
+        search_term = @story.title.upcase
         post :search, search_bar: search_term, tag_tokens: ""
         assigns(:found_stories).should eq [@story]
       end

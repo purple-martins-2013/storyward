@@ -8,7 +8,7 @@ describe "profile index page" do
     page.fill_in "Email", :with => @user.email
     page.fill_in "Password", :with => @user.password
     page.find('.button').click
-    click_link "Browse Users"
+    click_link "Browse Authors"
   end
 
   it "contains an entry for our default user" do

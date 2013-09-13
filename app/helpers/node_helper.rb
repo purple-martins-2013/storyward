@@ -24,7 +24,7 @@ module NodeHelper
       content = []
       case filetype
       when "pdf"
-        File.open(uploaded_io, "rb") do |io|
+        File.open(uploaded_io.tempfile, "rb") do |io|
           reader = PDF::Reader.new(io)
           reader.pages.each do |page|
             content << page.text.gsub(/\n\n\n*/, "</p><p>")
@@ -48,7 +48,6 @@ module NodeHelper
       @parent_node = Node.find(@story.node.parent_node)
       @parent_node.children_nodes << @story.node.id
       @parent_node.children_nodes_will_change!
-      @parent_node.save
     end
   end
 

@@ -1,23 +1,5 @@
 <div class="show-user">
-  <div class="row" style="margin-top: 20px">
-    <div class="small-3 columns">
-      <% if @user.image_url %>
-        <%= image_tag @user.image_url, size: '100%', class: "th radius" %>
-      <% else %>
-        <%= image_tag '/placeholder.jpg', size: '100%', class: "th radius" %>
-      <% end %>
-      <h3 class="text-center"><%= @user.name %></h3>
-    </div>
-    <div class="small-3 columns"></div>
-    <div class="small-6 columns">
-      <h4>Story Viewer</h4>
-    </div>
-  </div>
   <div class="row">
-<<<<<<< HEAD
-    <div class="small-3 columns">
-      <h4>Stories Created</h4>
-=======
 
     <div class="small-4 columns">
       <% if @user.image_url %>
@@ -31,26 +13,13 @@
       <hr>
       <h4 class='profile-list-headers'>Stories Created</h4>
       <hr>
->>>>>>> search
       <% if @parent_stories.length > 0 %>
         <% @parent_stories.last(5).each do |story| %>
           <h6><%= link_to story.title, story %></h6>
-          <%= link_to "Edit", edit_story_path(story), class: "success button round" %>
-          <%= link_to "Delete", story_path(story), method: :delete, class: "alert button round" %>
         <% end %>
       <% else %>
         <h6>No stories created yet.</h6>
       <% end %>
-<<<<<<< HEAD
-    </div>
-    <div class="small-3 columns">
-      <h4>Nodes Contributed</h4>
-      <% if @children_nodes.length > 0 %>
-        <% @children_nodes.each do |node| %>
-          <h6><%= link_to node.title, story_path(node) %></h6>
-          <%= link_to "Edit", edit_story_path(node.stories.first), class: "success button round" %>
-          <%= link_to "Delete", node_path(node), method: :delete, class: "alert button round" %>
-=======
       </div>
 
       <div>
@@ -63,34 +32,10 @@
           <% end %>
         <% else %>
           <h6>No nodes created yet.</h6>
->>>>>>> search
         <% end %>
-      <% else %>
-        <h6>No nodes created yet.</h6>
-      <% end %>
+      </div>
     </div>
 
-<<<<<<< HEAD
-    <div class="small-3 columns">
-      <h4>Favorite Authors</h4>
-      <% if @user.favorite_authors.any? %>
-        <% @user.favorite_authors.each do |author| %>
-          <h6><%= link_to author.name, author %></h6>
-        <% end %>
-      <% else %>
-        <h6>No authors favorited yet.</h6>
-      <% end %>
-    </div>
-    <div class="small-3 columns">
-      <h4>Favorite Stories</h4>
-      <% if @user.starred_stories.any? %>
-        <% @user.starred_stories.each do |story| %>
-          <h6><%= link_to story.title, story %></h6>
-        <% end %>
-      <% else %>
-        <h6>No stories favorited yet.</h6>
-      <% end %>
-=======
     <div class="small-8 columns">
       <div class="row">
         <div class="small-6 columns">
@@ -118,9 +63,9 @@
           <% end %>
       </div>
       <div id='story-viewer' class="small-12 columns">
-      	<h4>Story Viewer</h4>
+        <h4>Story Viewer</h4>
       </div>
->>>>>>> search
     </div>
+
   </div>
 </div>

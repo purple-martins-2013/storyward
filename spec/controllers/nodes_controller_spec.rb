@@ -95,7 +95,7 @@ describe NodesController do
     end
 
     it "renders metadata json for the node" do
-      @expected = { id: node.id, title: node.title, content: node.content, author: node.user.name }.to_json
+      @expected = { id: @node.id, title: @node.title, content: @node.content, author: @node.user.name }.to_json
       expect(response.body).to eq @expected
     end
 

@@ -34,8 +34,10 @@ class StoriesController < ApplicationController
       create_story
       create_nodes
       if @story.save
+        @parent_node.save if @parent_node
         redirect_to story_path(@story.node), :notice => "#{@story.title} was created successfully."
       else
+        @story.node.destroy
         flash.now[:alert] = "Story could not be saved. Please see the errors below."
         render :new
       end
