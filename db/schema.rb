@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910175738) do
+ActiveRecord::Schema.define(version: 20130911225057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "nodes", force: true do |t|
     t.integer  "user_id"
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(version: 20130910175738) do
     t.boolean  "terminal"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_path",    default: [], array: true
   end
 
   create_table "nodes_stories", force: true do |t|

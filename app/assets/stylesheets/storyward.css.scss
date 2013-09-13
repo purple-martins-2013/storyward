@@ -1,3 +1,23 @@
+@import 'foundation_and_overrides.scss';
+
 body {
-  background-image: image-url("texture.png");
+  background: image-url('bookshelf-cartoon.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.container {
+  background: $secondary-color;
+  padding: 1em;
+  height: 100%;
+  overflow: auto;
+}
+
+.nav_logo {
+  height: 45px;
 }

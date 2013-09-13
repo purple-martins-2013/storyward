@@ -56,16 +56,28 @@ path {
 
 #story-preview {
   overflow-y: scroll;
+  margin-right: 2em;
 }
 
 .node-preview {
-  background-color: #f0d1db;
+  border-radius: 1em;
+  background-color: #FFD39B;
   height: 16%;
   margin: 4% 0;
 }
 
+.node-preview h5 {
+  margin-left: 1em;
+  margin-top: 0.5em;
+}
+
+.node-preview p {
+  margin-left: 2em;
+  margin-top: 0.5em;
+}
+
 .full-color {
-  background-color: #d9ffcf;
+  background-color: #EEC591;
   height: 30%;
   margin: 4% 0;
   overflow-y: scroll;
@@ -84,4 +96,8 @@ path {
   float: right;
   margin: -40% 10% 0 0;
   width: 300px;
+}
+
+#node-link {
+  margin-right: 5em;
 }

@@ -130,7 +130,7 @@ describe "create story page" do
       assert page.has_content? "Challenges in Building Robots That Imitate People"
       assert page.has_content? @node.content
     end
-
+    
   end
 
 end

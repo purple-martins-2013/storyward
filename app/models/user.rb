@@ -13,7 +13,17 @@ class User < ActiveRecord::Base
     self.starred_stories.map{|s| s.user}
   end
 
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  def self.find_or_create_from_oauth(auth)
+    if auth.provider == 'twitter'
+      find_for_twitter_oauth(auth)
+    elsif auth.provider == 'facebook'
+      find_for_facebook_oauth(auth)
+    end
+  end
+
+  private
+
+  def self.find_for_facebook_oauth(auth)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
       user = User.create(name:auth.extra.raw_info.name,
@@ -27,7 +37,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
+  def self.find_for_twitter_oauth(auth)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
       user = User.create!(name:auth.extra.raw_info.name,
@@ -40,21 +50,4 @@ class User < ActiveRecord::Base
     end
     user
   end
-
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      case user.provider
-      when 'facebook'
-        if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-          user.email = data["email"] if user.email.blank?
-        end
-      when 'twitter'
-        if data = session["devise.twitter_data"] && session["devise.twitter_data"]["extra"]["raw_info"]
-          user.email = data["email"] if user.email.blank?
-        end
-      else
-      end
-    end
-  end
-
 end

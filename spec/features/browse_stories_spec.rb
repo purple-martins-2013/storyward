@@ -14,6 +14,8 @@ describe "browsing and reading stories" do
     page.fill_in "Title", :with => @node.title
     fill_in "Content", :with => @node.content
     click_button("Create Story")
+
+    @story = FactoryGirl.create(:story)
   end
     
   context "browse all stories page" do
@@ -23,20 +25,20 @@ describe "browsing and reading stories" do
     end
 
     it "contains the created story/node" do
-      assert page.has_content? @node.title
-      assert page.has_content? "Started by #{@user.name}"
+      expect(page.has_content? @node.title).to be_true
+      expect(page.has_content? "Started by #{@user.name}").to be_true
     end
 
     it "has a title link to the correct story/path" do
       @node = Node.where(title: @node.title).first
-      assert page.has_link? @node.title, node_path(@node)
+      expect(page.has_link? @node.title, node_path(@node)).to be_true
     end
 
     it "has story content on the story parent node view page" do
       @node = Node.where(title: @node.title).first
       click_link @node.title
       current_path.should eq "/nodes/#{@node.id}"
-      assert page.has_content? @node.content
+      expect(page.has_content? @node.content).to be_true
     end
 
   end
@@ -49,9 +51,9 @@ describe "browsing and reading stories" do
     end
 
     it "contains story information for the first node" do
-      assert page.has_content? @node.title
-      assert page.has_content? "Started by #{@user.name}"
-      assert page.has_content? @node.content
+      expect(page.has_content? @node.title).to be_true
+      expect(page.has_content? "Started by #{@user.name}").to be_true
+      expect(page.has_content? @node.content).to be_true
     end
 
   end
@@ -59,29 +61,23 @@ describe "browsing and reading stories" do
   context "when reading a story chain" do
 
     before(:each) do
-      @node = Node.where(title: @node.title).first
-      visit story_path(@node)
+      @node = @story.node
+      visit story_path(@story)
     end
 
     it "contains story information for the existing node" do
-      assert page.has_content? @node.title
-      assert page.has_content? "Started by #{@user.name}"
-      assert page.has_content? @node.content
-    end
-
-    it "contains multiple buttons for reading comfort" do
-      page.should have_button "Dim Lights"
-      page.should have_button "Brighten"
+      expect(page.has_content? @node.title).to be_true
+      expect(page.has_content? @node.content).to be_true
     end
 
     it "contains a link to creating a new branch" do
-      assert page.has_link? "Create a New Branch!", "/storiesnew/#{@node.id}"
+      expect(page.has_link? "Create a New Branch!", "/stories/new/#{@node.id}").to be_true
     end
 
     it "allows the user to navigate to create a new branch of the existing node" do
       click_link "Create a New Branch!"
-      assert page.has_content? @node.title
-      assert page.has_content? "Continue the story!"
+      expect(page.has_content? @node.title).to be_true
+      expect(page.has_content? "Continue the story!").to be_true
     end
 
   end

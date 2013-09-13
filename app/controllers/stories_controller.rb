@@ -2,10 +2,15 @@ class StoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @book_nodes = Node.where(parent_node: 0)
-    @book_nodes = @book_nodes.sort_by {|node| node.children_nodes.length }.reverse
+    @book_nodes = Node.where(parent_node: 0).order("ARRAY_LENGTH(children_nodes, 1) DESC")
+    #@book_nodes = @book_nodes.sort_by {|node| node.children_nodes.length }.reverse
     @book_nodes = @book_nodes.map {|node| {id: node.id}}
     @nodes = { children: @book_nodes }.to_json
+    @tags = ActsAsTaggableOn::Tag.order(:name)
+    respond_to do |format|
+      format.html
+      format.json { render json: @tags.where("name like ?", "%#{params[:q]}%") }
+    end
   end
 
   def new
@@ -15,8 +20,7 @@ class StoriesController < ApplicationController
   end
 
   def show 
-    @node = Node.find(params[:id])
-    @story = build_chain(@node).reverse
+   @story = Story.find(params[:id])
   end
 
   def create
@@ -78,6 +82,23 @@ class StoriesController < ApplicationController
       end
     else
       redirect_to :back, :notice => "You don't own this story!"
+    end
+  end
+
+  def search
+    if params[:search_bar] != ""
+      find_by_title_author_content
+      if params[:tag_tokens] != ""
+        @found_stories = Story.all if @found_stories == []
+        find_stories_by_tag
+      end
+    else
+      if params[:tag_tokens] != ""
+        @found_stories = Story.all
+        find_stories_by_tag
+      else
+        @found_stories = []
+      end
     end
   end
 
