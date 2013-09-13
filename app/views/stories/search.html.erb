@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="small-12-columns">
+    <% if @found_stories.empty? %>
+      <h2>No stories found!</h2>
+    <% else %>
+      <h2>Stories:</h2>
+      <% @found_stories.each do |story| %>
+        <h3><%= link_to story.find_parent.title, story_path(story.node) %></h3>
+        <p><i><%= story.stars.length %> favorites!
+          <% if story.user.name == story.find_parent.user.name %>
+            <%= "Story written by #{story.user.name}" %>
+          <% else %>
+            Last part of story written by <%= story.user.name %>, originally started by <%= story.find_parent.user.name %>
+          <% end %>
+          </i></p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

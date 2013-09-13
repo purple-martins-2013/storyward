@@ -2,23 +2,23 @@
   <div class="row">
     <div id="show-story" class="show-story small-12-columns">
       <div id="chart-holder"></div>
-      <% if @story.node.parent_chain.any? %>
-        <h4><i id="story-map" class="fi-map" data-id="<%= @story.node.parent_chain.first.id %>" data-endnode="<%= @story.node.parent_chain.last.id %>"></i></h4>
+        <% if @story.node.parent_chain.any? %>
+          <h4><i id="story-map" class="fi-map" data-me="<%= @story.node.id %>" data-id="<%= @story.node.parent_chain.first.id %>" data-endnode="<%= @story.node.parent_chain.last.id %>"></i></h4>
+        <% end %>
+        <%= render partial: 'bookmark' %>
+
+        <!-- show all parent nodes for this story's node if they exist -->
+        <% unless @story.node.parent_chain.empty? %>
+          <% @story.node.parent_chain.each do |node| %>
+            <%= render 'nested_node_display', :node => node %>
+            <%= render 'links', :node => node %>
+        <% end %>
       <% end %>
-      <%= render partial: 'bookmark' %>
 
-      <!-- show all parent nodes for this story's node if they exist -->
-      <% unless @story.node.parent_chain.empty? %>
-        <% @story.node.parent_chain.each do |node| %>
-        <%= render 'nested_node_display', :node => node %>
-        <%= render 'links', :node => node %>
-      <% end %>
-    <% end %>
-
-      <!-- show this story's node content --> 
-      <%= render 'nested_node_display', :node => @story.node %>
-      <%= render 'links', :node => @story.node %>
-
+        <!-- show this story's node content --> 
+        <%= render 'nested_node_display', :node => @story.node %>
+        <%= render 'links', :node => @story.node %>
+      </div>
     </div>
   </div>
 </div>

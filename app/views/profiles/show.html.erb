@@ -1,71 +1,77 @@
-<div class="show-user">
-  <div class="row">
-
-    <div class="small-4 columns">
+<div class="show-user text-center" id="show-user">
+  <div class="row" style="margin-top: 20px">
+    <div class="small-3 columns">
       <% if @user.image_url %>
-        <%= image_tag @user.image_url, size: '200x200', class: "th radius" %>
+        <%= image_tag @user.image_url, size: '100%', class: "th radius" %>
       <% else %>
-        <%= gravatar_image_tag(@user.email) %>
+        <%= gravatar_image_tag(@user.email, alt: "/placeholder.jpg", size: '100%', class: "th radius") %>
       <% end %>
       <h3><%= @user.name %></h3>
-      <div>
-
-      <hr>
+    </div>
+    <div class="small-9 columns">
+      <div id="story-viewer">
+        <h1 id="viewer-title"></h1>
+        <div id="chart-holder"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="min-height: 400px">
+    <div class="small-3 columns">
       <h4 class='profile-list-headers'>Stories Created</h4>
-      <hr>
       <% if @parent_stories.length > 0 %>
         <% @parent_stories.last(5).each do |story| %>
-          <h6><%= link_to story.title, story %></h6>
+          <div class="viewer-box spacing" data-type="node" data-me="<%= story.id %>" data-id="<%= story.id %>">
+            <h5><%= link_to story.title, story %></h5>
+            <div>
+              <%= link_to "Edit", edit_story_path(story), class: "success button small round" %>
+              <%= link_to "Delete", story_path(story), method: :delete, class: "alert button small round" %>
+            </div>
+          </div>
         <% end %>
       <% else %>
-        <h6>No stories created yet.</h6>
+        <h5 class='spacing'>No stories created yet.</h5>
       <% end %>
-      </div>
-
-      <div>
-        <hr>
-        <h4 class='profile-list-headers'>Nodes Contributed</h4>
-        <hr>
-        <% if @children_nodes.length > 0 %>
-          <% @children_nodes.last(5).each do |node| %>
-            <h6><%= link_to node.title, story_path(node) %></h6>
-          <% end %>
-        <% else %>
-          <h6>No nodes created yet.</h6>
+    </div>
+    <div class="small-3 columns">
+      <h4 class='profile-list-headers'>Nodes Contributed</h4>
+      <% if @children_nodes.length > 0 %>
+        <% @children_nodes.last(5).each do |node| %>
+          <div class="viewer-box spacing" data-type="node" data-me="<%= node.id %>" data-id="<%= node.parent_chain.first.id %>">
+            <h5><%= link_to node.title, story_path(node) %></h5>
+            <div>
+              <%= link_to "Edit", edit_story_path(node.stories.first), class: "success button small round" %>
+              <%= link_to "Delete", node_path(node), method: :delete, class: "alert button small round" %>
+            </div>
+          </div>
         <% end %>
-      </div>
+      <% else %>
+        <h5 class='spacing'>No nodes created yet.</h5>
+      <% end %>
     </div>
 
-    <div class="small-8 columns">
-      <div class="row">
-        <div class="small-6 columns">
-          <hr>
-          <h4 class='profile-list-headers'>Favorite Authors</h4>
-          <hr>
-          <% if @user.favorite_authors.any? %>
-            <% @user.favorite_authors.uniq.last(5).each do |author| %>
-              <h6><%= link_to author.name, profile_path(author) %></h6>
-            <% end %>
-          <% else %>
-            <h6>No authors favorited yet.</h6>
-          <% end %>
-        </div>
-        <div class="small-6 columns">
-          <hr>
-          <h4 class='profile-list-headers'>Favorite Stories</h4>
-          <hr>
-          <% if @user.starred_stories.any? %>
-            <% @user.starred_stories.last(5).each do |story| %>
-              <h6><%= link_to story.title, story %></h6>
-            <% end %>
-          <% else %>
-            <h6>No stories favorited yet.</h6>
-          <% end %>
-      </div>
-      <div id='story-viewer' class="small-12 columns">
-      	<h4>Story Viewer</h4>
-      </div>
+    <div class="small-3 columns">
+      <h4 class='profile-list-headers'>Favorite Authors</h4>
+      <% if @user.favorite_authors.any? %>
+        <% @user.favorite_authors.uniq.last(5).each do |author| %>
+          <div class="viewer-box spacing" data-type="author">
+            <h5><%= link_to author.name, author %></h5>
+          </div>
+        <% end %>
+      <% else %>
+        <h5 class='spacing'>No authors favorited yet.</h5>
+      <% end %>
     </div>
-
+    <div class="small-3 columns">
+      <h4 class='profile-list-headers'>Favorite Stories</h4>
+      <% if @user.starred_stories.any? %>
+        <% @user.starred_stories.last(5).each do |story| %>
+          <div class="viewer-box spacing" data-type="node" data-me="<%= story.id %>" data-id="<%= story.parent_chain.first.id %>">
+            <h5><%= link_to story.title, story %></h5>
+          </div>
+        <% end %>
+      <% else %>
+        <h5 class='spacing'>No stories favorited yet.</h5>
+      <% end %>
+    </div>
   </div>
 </div>

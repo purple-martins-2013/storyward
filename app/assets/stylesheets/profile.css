@@ -1,11 +1,38 @@
-#story-viewer {
-	text-align: center;
-}
-
 hr {
 	border-color: rgba(205,170,125,0.5);
 }
 
 .profile-list-headers {
 	font-style: italic;
+  text-align: center;
+}
+
+.spacing {
+  margin: 23px 1px 1px 1px;
+}
+
+.select-entry {
+  border: 1px #bbb solid;
+  margin: 18px 0 -1px -1px;
+}
+
+.select-entry div {
+  padding: 0 2px;
+}
+
+.animated {
+  background-image: url("/d3_animation.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  height: 200px;
+}
+
+#viewer-title {
+  padding-top: 75px;
+  color: #555;
+}
+
+.center-this {
+  left: 20% !important;
 }

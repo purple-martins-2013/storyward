@@ -64,7 +64,7 @@ function forceGraph(container) {
     }
   });
 
-  var w = window.innerWidth/ 2,
+  var w = window.innerWidth / 2.5,
       h = window.innerHeight / 1.5,
       r = 15,
       node,
@@ -88,7 +88,6 @@ function forceGraph(container) {
   createJson();
 
   function createJson() {
-    console.log($("#chart").data("node"))
     $.get("/nodes/details/"+$("#chart").data("node"),
       function(response) {
         json = response;
@@ -99,17 +98,23 @@ function forceGraph(container) {
   function takeJson() {
     root = json;
     
-    initialize();
-    // update();
+    if (container == "#reading-background" || container == "#show-user") {
+      update();
+    } else {
+      initialize();
+    }
+
     if ($("#story-map").data("id")) {
-      populateNode(vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == $("#story-map").data("endnode")})[0][0] );
+      populateNode(vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == $("#story-map").data("me")})[0][0] );
+    } else if ($("#story-viewer").data("id")) {
+      populateNode(vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == $("#story-viewer").data("id")})[0][0] );
     }
   }
 
   function populateNode(curElement) {
     var data = curElement.__data__["id"];
     
-    $.get("/nodes/chain/"+data,//getting ancestory chain for curElement
+    $.get("/nodes/chain/"+data,//getting ancestry chain for curElement
       function(chain) {
         var story_preview = "<div id='story-preview' style='height: "+ window.innerHeight / 1.7 + "px'>";
         chain.forEach(function(element, index, array) {
@@ -159,7 +164,6 @@ function forceGraph(container) {
 
 
   function initialize() {
-      console.log('initialize');
         var nodes = flatten(root),
         links = d3.layout.tree().links(nodes);
     
@@ -188,32 +192,6 @@ function forceGraph(container) {
     // Exit any old links.
     link.exit().remove();
 
-    // var node_drag = d3.behavior.drag()
-    //     .on("dragstart", dragstart)
-    //     .on("drag", dragmove)
-    //     .on("dragend", dragend);
-
-    // function dragstart(d, i) {
-    //     d3.event.sourceEvent.stopPropagation();
-    //     force.stop() // stops the force auto positioning before you start dragging
-    // }
-
-    // function dragmove(d, i) {
-    //     d3.event.sourceEvent.stopPropagation();
-    //     d.px += d3.event.dx;
-    //     d.py += d3.event.dy;
-    //     d.x += d3.event.dx;
-    //     d.y += d3.event.dy; 
-    //     tick(); // this is the key to make it work together with updating both px,py,x,y on d !
-    // }
-
-    // function dragend(d, i) {
-    //     d3.event.sourceEvent.stopPropagation();
-    //     d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
-    //     tick();
-    //     force.resume();
-    // }
-
     
         // Update the nodes…
     node = vis.selectAll("circle.node")
@@ -230,7 +208,6 @@ function forceGraph(container) {
  
 
   function update() {
-    console.log('update');
     var nodes = flatten(root),
         links = d3.layout.tree().links(nodes);
     
@@ -335,7 +312,6 @@ function forceGraph(container) {
   }
 
   function toggleChildren(d) {
-    console.log("hi");
     if (d.children) {
       d._children = d.children;
       d.children = null;

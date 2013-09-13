@@ -7,7 +7,7 @@ $(document).ready(function() {
 function forceGroup(container) {
 
   var width = window.innerWidth / 2,
-      height = window.innerHeight/ 1.5,
+      height = window.innerHeight/ 2,
       root;
 
   var curElement, lastElement, timeoutId, lastColor, lastWidth, lastStroke;
@@ -52,9 +52,9 @@ function forceGroup(container) {
     $.get("nodes/query/"+book_id,
       function(response) {
         var div_short = document.createElement("div");
-        div_short.innerHTML = response['content'].slice(0, 150);
+        div_short.innerHTML = response['content'].slice(0, 50);
         var short_content = div_short.textContent || div_short.innerText || "";
-        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3-columns'><h2><a href='nodes/" + book_id + "'>" + response['title'] + "</a></h2><p><i>Started by " + response['author'] + "</i></p><h4><i>" + short_content + "...</i></h4></div>");
+        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3 columns'><h2><a href='nodes/" + book_id + "'>" + response['title'].slice(0, 26) + "</a></h2><p><i>Started by " + response['author'] + "</i></p><h4><i>" + short_content + "...</i></h4></div>");
         $('#superNavTwo').slideDown();
       });
   }
@@ -90,7 +90,7 @@ function forceGroup(container) {
         .call(force.drag)
         .on("mousedown", function(d, i) { 
           d3.event.stopPropagation();
-          $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9-columns reveal-modal' ><div id='chart' class='small-6-columns' data-node='"+d["book_id"]+"'></div><div><a id='node-link' style='display: none'></a></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
+          $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9 columns reveal-modal' ><div id='chart' class='small-6 columns' data-node='"+d["book_id"]+"'></div><div><a id='node-link' style='display: none'></a></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
           $("#chart-holder").foundation('reveal', 'open');
           new forceGraph(container);
         });

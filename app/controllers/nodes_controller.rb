@@ -6,29 +6,18 @@ class NodesController < ApplicationController
     @node = Node.find(params[:id])
   end
 
-  def edit
-    @node = Node.find(params[:id])
-  end
-
-  def update
-    Node.find(params[:id])
-    @node = Node.find(params[:id])
-    unless @node.children_nodes.any?
-      @node.update(nodes_params)
-      @node.save
-      redirect_to @node
-    else
-      redirect_to :back, notice: "Node cannot be edited because it has children."
-    end
-  end
-
   def destroy
     @node = Node.find(params[:id])
-    unless @node.children_nodes.any?
-      @node.destroy
-      redirect_to root_url
+    if @node.user == current_user
+      unless @node.children_nodes.any?
+        @node.stories.destroy_all
+        @node.destroy
+        redirect_to root_url, notice: "Node successfully deleted!"
+      else
+        redirect_to :back, notice: "Node cannot be deleted because it has children."
+      end
     else
-      redirect_to :back, notice: "Node cannot be deleted because it has children."
+      redirect_to :back, notice: "This isn't your node!"
     end
   end
 
@@ -47,8 +36,4 @@ class NodesController < ApplicationController
     render json: build_chain(@node).reverse.to_json
   end
 
-  private
-  def nodes_params
-    params.require(:node).permit(:title, :content) 
-  end
 end

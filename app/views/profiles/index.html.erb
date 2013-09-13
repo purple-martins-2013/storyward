@@ -1,0 +1,17 @@
+<div class="user-index">
+  <div class="row" style="margin-top: 20px">
+    <% @users.each do |user| %>
+      <div class="small-4 columns text-center">
+        <a href="profiles/<%= user.id %>">
+          <% if user.image_url %>
+            <%= image_tag user.image_url, class: "th radius" %>
+            <h3 class="text-center"><%= user.name %></h3>
+          <% else %>
+            <%= gravatar_image_tag(user.email, alt: "/placeholder.jpg", class: "th radius") %>
+            <h3 class="text-center"><%= user.name %></h3>
+          <% end %>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>

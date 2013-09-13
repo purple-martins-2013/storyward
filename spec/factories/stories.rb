@@ -4,4 +4,5 @@ FactoryGirl.define do
     user
     node
 	end
+
 end

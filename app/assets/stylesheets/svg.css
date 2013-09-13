@@ -94,11 +94,10 @@ path {
 #superNavTwo {
   display: none;
   float: right;
-  margin: -30% 15% 0 0;
+  margin: -275px 10% 0 0;
   width: 300px;
 }
 
 #node-link {
   margin-right: 5px;
 }
-
