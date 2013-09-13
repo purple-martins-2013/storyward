@@ -1,27 +1,62 @@
 <div id="index-page" class="story-list small-8-columns">
-  <div id="group-chart" class="small-5-columns" data-nodes="<%= @nodes %>"></div>
+<!--   <div id="group-chart" class="small-5-columns" data-nodes="<%= @nodes %>"></div>
   <div id="superNavTwo" class="small-3-columns">All the content goes here</div>
-<!--   <div id="chart-holder"><div id="chart" class="hide" data-node="1"></div></div> -->
-<div id='preview-story'>
+  <div id="chart-holder"><div id="chart" class="hide" data-node="1"></div></div> -->
 
-</div>
 
- <!--  <div class="row">
-    <div class="small-12-columns">
-      <% if @book_nodes.length > 0 %>
-        <% @book_nodes.each do |node| %>
+<div class="row">
+  <div class="story-show">
+    <% book_count = @book_nodes.length %>
+    <% book_per_row = book_count/3 %>
+
+    <% if @book_nodes.length > 0 %>
+      <div class="small-4 columns">
+      <% @book_nodes[0...book_per_row].each do |node| %>
           <% @node = Node.find(node[:id]) %>
-          <div class="story">
-            <h4><%= link_to @node.title, @node %></h4>
-            <% if @node.user %>
-              <p><i>Started by <%= @node.user.name %></i></p>
-            <% end %>
-          </div>
-        <% end %>
-      <% else %>
-        <h4>There are no stories to show.</h4>
+          <h4><%= link_to @node.title, @node %></h4>
+          <p><i>Started by <%= @node.user.name if @node.user%></i></p>
       <% end %>
-    </div>
+      </div>
+        
+      <div class="small-4 columns">
+      <% @book_nodes[book_per_row...book_per_row*2].each do |node| %>
+          <% @node = Node.find(node[:id]) %>
+          <h4><%= link_to @node.title, @node %></h4>
+          <p><i>Started by <%= @node.user.name if @node.user%></i></p>
+      <% end %>
+      </div>
+
+      <div class="small-4 columns">
+      <% @book_nodes[book_per_row*2...book_per_row*3].each do |node| %>
+          <% @node = Node.find(node[:id]) %>
+          <h4><%= link_to @node.title, @node %></h4>
+          <p><i>Started by <%= @node.user.name if @node.user%></i></p>
+      <% end %>
+      </div>
+
+    <% else %>
+      <h4>There are no stories to show.</h4>
+    <% end %>
   </div>
 </div>
- -->
+
+
+<!--         <div class="story-show">
+        <% if @book_nodes.length > 0 %>
+
+          <% @book_nodes.each do |node| %>
+            <% @node = Node.find(node[:id]) %>
+            <div class="story">
+              <h4><%= link_to @node.title, @node %></h4>
+              <% if @node.user %>
+                <p><i>Started by <%= @node.user.name %></i></p>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <h4>There are no stories to show.</h4>
+        <% end %>
+      </div>
+    </div>
+  </div> -->
+

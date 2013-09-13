@@ -1,8 +1,8 @@
-// $(document).ready(function() {
-//   if (document.getElementById("index-page")) {
-//     new forceGroup("#index-page");
-//   }
-// });
+$(document).ready(function() {
+  if (document.getElementById("index-page")) {
+    new forceGroup("#index-page");
+  }
+});
 
 function forceGroup(container) {
 

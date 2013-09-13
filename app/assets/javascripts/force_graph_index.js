@@ -1,8 +1,8 @@
-$(document).ready(function() {
-  if (document.getElementById("index-page")) {
-    new forceGroup2("#index-page");
-  }
-});
+// $(document).ready(function() {
+//   if (document.getElementById("index-page")) {
+//     new forceGroup2("#index-page");
+//   }
+// });
 
 function forceGroup2(container) {
   window.oncontextmenu = function () {
@@ -72,9 +72,9 @@ function forceGroup2(container) {
         var author = chain[0].author
         var content = chain[0].content
         
-        var story_preview = "<div id='story-preview' style='height: "+ window.innerHeight / 1.7 + "px'>";
+        var story_preview = "<div style='height: "+ window.innerHeight / 1.7 + "px; width:600px'>";
         chain.forEach(function(element, index, array) {
-         story_preview += ("<div class='node-preview'><h5>" + array[index].title.slice(0, 20) + "</h5><p class='preview small-preview' >" + array[index].content.slice(0, 15) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 400) + "...</p></div>");
+         story_preview += ("<div><h5>" + array[index].title.slice(0, 20) + "</h5><p>" + array[index].content.slice(0, 130) + "...</p><p class='full hide small-preview'>" + array[index].content.slice(0, 400) + "...</p></div>");
           vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == array[index].id})
             .style("fill", "silver")//these are the selected nodes 
             .style("stroke", "#fcb483")
@@ -91,7 +91,7 @@ function forceGroup2(container) {
         $('#preview-story').append(story_preview);
 
         if ($("#superNav").html() == "") {
-          $("#superNav").replaceWith("<div id='superNav' class='hide'>"+ story_preview + "</div>");
+          //$("#superNav").replaceWith("<div id='superNav' class='hide'>"+ story_preview + "</div>");
           $("#node-link").replaceWith("<a id='node-link' class='button success round right' href='/stories/"+data+"'>Check out this story!</a>");
           $("#chart-holder").css("width", "900px");
           $('#superNav').show("slow");
