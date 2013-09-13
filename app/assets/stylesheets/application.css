@@ -12,5 +12,6 @@
  *= require token-input-facebook
  *= require foundation_and_overrides
  *= require_tree .
- *= require jquery.ui.all
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
  */

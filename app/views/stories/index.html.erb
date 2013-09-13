@@ -1,23 +1,40 @@
 <div id="index-page" class="story-list small-8-columns">
-  <div id="group-chart" class="small-5-columns graph-container" data-nodes="<%= @nodes %>"></div>
+
+<div id="group-chart" class="small-5-columns graph-container" data-nodes="<%= @nodes %>"></div>
   <div id="superNavTwo" class="small-3-columns">All the content goes here</div>
   <div id="chart-holder"><div id="chart" class="hide" data-node="1"></div></div>
 
-  <div class="row">
-    <div class="small-12 columns">
-      <% if @book_nodes.length > 0 %>
-        <% @book_nodes.each do |node| %>
-          <% @node = Node.find(node[:id]) %>
-          <div class="story">
-            <h4><%= link_to @node.title, @node %></h4>
-            <% if @node.user %>
-              <p><i>Started by <%= @node.user.name %></i></p>
-            <% end %>
-          </div>
-        <% end %>
-      <% else %>
-        <h4>There are no stories to show.</h4>
+<div class="row">
+  <div class="story-show">
+    <% stories_count = @stories.length %>
+    <% stories_per_row = stories_count/3 %>
+
+    <% if @stories.length > 0 %>
+      <div class="small-4 columns">
+      <% @stories[0...stories_per_row].each do |story| %>
+          <h4><%= link_to story.node.title, node_path(story.node) %></h4>
+          <p><i>Started by <%= story.user.name %></i></p>
       <% end %>
-    </div>
+      </div>
+        
+      <div class="small-4 columns">
+      <% @stories[stories_per_row...stories_per_row*2].each do |story| %>
+          <h4><%= link_to story.node.title, node_path(story.node) %></h4>
+          <p><i>Started by <%= story.user.name %></i></p>
+      <% end %>
+      </div>
+
+      <div class="small-4 columns">
+      <% @stories[stories_per_row*2...stories_per_row*3].each do |story| %>
+          <h4><%= link_to story.node.title, node_path(story.node) %></h4>
+          <p><i>Started by <%= story.user.name %></i></p>
+      <% end %>
+      </div>
+
+    <% else %>
+      <h4>There are no stories to show.</h4>
+    <% end %>
   </div>
 </div>
+
+

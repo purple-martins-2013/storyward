@@ -16,8 +16,8 @@
     <% end %>
   <% end %>
   <%= f.file_field :upload %>
-  <p>Accepted formats: PDF and TXT</p>
-  <p>If a file is uploaded, the content field will be appended to the file.</p>
+  <span>Accepted formats: PDF and TXT</span>
+  <p><small>You can type in text above and upload from a file at the same time. Your file's text will be shown first, followed what you typed.</small></p>
   <% if tags_value %>
     <%= f.text_field :tag_list, value: tags_value %>
   <% else %>
