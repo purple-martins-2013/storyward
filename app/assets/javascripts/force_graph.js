@@ -133,12 +133,12 @@ function forceGraph(container) {
         
         if ($("#superNav").html() == "") {
           $("#superNav").replaceWith("<div id='superNav' class='hide'>"+ story_preview + "</div>");
-          $("#node-link").replaceWith("<a id='node-link' class='button success round right' href='/stories/"+data+"'>Check out this story!</a>");
+          $("#node-link").replaceWith("<a id='node-link' class='button right' href='/stories/"+data+"'>Check out this story!</a>");
           $("#chart-holder").css("width", "900px");
           $('#superNav').show("slow");
         } else {
           $("#superNav").replaceWith("<div id='superNav'>"+ story_preview + "</div>");
-          $("#node-link").replaceWith("<a id='node-link' class='button success round right' href='/stories/"+data+"'>Check out this story!</a>");
+          $("#node-link").replaceWith("<a id='node-link' class='button right' href='/stories/"+data+"'>Check out this story!</a>");
         }
         $("circle.node").css("opacity", "0.8");
         $(curElement).css("fill", "orange").css("opacity", "1.0").css("stroke", "red").css("stroke-width", "6px");

@@ -54,7 +54,7 @@ function forceGroup(container) {
         var div_short = document.createElement("div");
         div_short.innerHTML = response['content'].slice(0, 50);
         var short_content = div_short.textContent || div_short.innerText || "";
-        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3 columns'><h2><a href='nodes/" + book_id + "'>" + response['title'] + "</a></h2><p><i>Started by " + response['author'] + "</i></p><h4><i>" + short_content + "...</i></h4></div>");
+        $("#superNavTwo").replaceWith("<div id='superNavTwo' class='small-3 columns'><h2><a href='nodes/" + book_id + "'>" + response['title'].slice(0, 26) + "</a></h2><p><i>Started by " + response['author'] + "</i></p><h4><i>" + short_content + "...</i></h4></div>");
         $('#superNavTwo').slideDown();
       });
   }
