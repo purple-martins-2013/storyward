@@ -1,4 +1,4 @@
-<div class="show-user">
+<div id="show-user">
   <div class="row">
 
     <div class="small-4 columns">
@@ -8,6 +8,7 @@
         <%= gravatar_image_tag(@user.email) %>
       <% end %>
       <h3><%= @user.name %></h3>
+
       <div class="stories-contributed">
 
       <hr>
@@ -15,7 +16,7 @@
       <hr>
       <% if @parent_stories.length > 0 %>
         <% @parent_stories.last(5).each do |story| %>
-          <h6><%= link_to story.title, story, :data => { :node => node.id } %></h6>
+          <h6><%= link_to story.title, story, :data => { :node => story.id } %></h6>
         <% end %>
       <% else %>
         <h6>No stories created yet.</h6>
@@ -64,9 +65,10 @@
       </div>
       <div id='story-viewer' class="small-12 columns">
       	<h4>Story Viewer</h4>
-        <div id='chart' data-node=''></div><div><a id='node-link' class="hide"></a></div><div id='superNav'></div>
+        <div id='chart'></div><div><a id='node-link' class="hide"></a></div><div id='superNav'></div>
+      <div id='superNav'></div> 
       </div>
     </div>
-
+      
   </div>
 </div>

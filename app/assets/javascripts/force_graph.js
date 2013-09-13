@@ -3,9 +3,6 @@ $(document).ready(function() {
     new forceGraph("#node-page")
   }
 
-  if (document.getElementById("show-user")) {
-    new forceGraph("#show-user")
-  }
 
   if (document.getElementById("reading-background")) {
     $("#reading-background").on("click", "#story-map", function() {
@@ -18,6 +15,7 @@ $(document).ready(function() {
 
 
 function forceGraph(container) {
+  console.log("forceGraph")
   window.oncontextmenu = function () {
     if (clickedOnNode) {
       return false;
