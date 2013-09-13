@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20130911225057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "nodes", force: true do |t|
     t.integer  "user_id"

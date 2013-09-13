@@ -24,3 +24,4 @@ config/initializers/secret_token.rb   git config --global core.excludesfile '~/.
 .env
 .DS_Store
 coverage
+.DS_Store

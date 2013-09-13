@@ -1,0 +1,12 @@
+<div id='search-holder' class='small-9-columns container reveal-modal'>
+  <%= form_tag "/stories/search", :name => "searchForm" do %>
+    <%= label_tag :tag_tokens, "Search by Tag:" %>
+    <%= text_field_tag :tag_tokens %>
+    <p class="small-space"></p>
+    <%= label_tag :search_bar, "Search by title, keyword or author:" %>
+    <%= text_field_tag :search_bar %>
+    <hr>
+    <%= submit_tag "Search!", class: "button success round right" %>
+  <% end %> 
+  <a class='close-reveal-modal'>&#215;</a>
+</div>"

@@ -5,10 +5,11 @@ Storyward::Application.routes.draw do
   get 'visualizations' => 'users#index'
 
   get "stories/new/:id" => "stories#new"
+  post "stories/search" => "stories#search"
 
-  resources :profiles, :only => [:show]
-  resources :stories, :except => [:edit, :update]
-  resources :nodes, :except => [:new, :create, :index]
+  resources :profiles, :only => [:index, :show]
+  resources :stories
+  resources :nodes, :except => [:new, :create, :index, :edit]
   resources :stars, :only => [:create, :destroy]
 
   get "nodes/details/:id" => "nodes#details"

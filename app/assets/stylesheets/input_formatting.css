@@ -1,0 +1,32 @@
+label {
+  font-size: 20px !important;
+}
+
+input {
+  font-size: 17px;
+}
+
+.small-space {
+  margin-top: 40px;
+}
+
+.token-input-dropdown-facebook {
+  z-index: 9999 !important;
+  font-size: 17px;
+}
+
+.token-input-input-token-facebook, #token-input-tag_tokens {
+  width: 500px !important;
+  font-size: 17px;
+}
+
+#search_bar {
+  width: 500px;
+}
+
+#search-holder {
+  width: 600px;
+  font-size: 1.4375em;
+  height: 360px;
+  margin-left: -20%;
+}
