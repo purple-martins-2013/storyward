@@ -45,7 +45,7 @@ path {
 }
 
 #chart {
-  width: 50%;
+  width: 74%;
   float: left;
 }
 
@@ -56,7 +56,7 @@ path {
 
 #story-preview {
   overflow-y: scroll;
-  margin-right: 2em;
+  margin-right: 5px;
 }
 
 .node-preview {
@@ -99,6 +99,6 @@ path {
 }
 
 #node-link {
-  margin-right: 5em;
+  margin-right: 5px;
 }
 

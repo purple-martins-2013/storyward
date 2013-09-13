@@ -6,7 +6,7 @@ $(document).ready(function() {
 
   if (document.getElementById("reading-background")) {
     $("#reading-background").on("click", "#story-map", function() {
-      $("#chart-holder").replaceWith("<div id='chart-holder' class='small-6 columns reveal-modal' ><div id='chart' class='small-6 columns' data-node='"+$("#story-map").data("id")+"'></div><div><a id='node-link' style='display: none'></a></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
+      $("#chart-holder").replaceWith("<div id='chart-holder' class='small-9 columns reveal-modal' ><div id='chart' class='small-6 columns' data-node='"+$("#story-map").data("id")+"'></div><div><a id='node-link' style='display: none'></a></div><div id='superNav'></div><a class='close-reveal-modal'>&#215;</a></div>");
       $("#chart-holder").foundation('reveal', 'open');
       new forceGraph("#reading-background");
     });
@@ -131,7 +131,7 @@ function forceGraph(container) {
         if ($("#superNav").html() == "") {
           $("#superNav").replaceWith("<div id='superNav' class='hide'>"+ story_preview + "</div>");
           $("#node-link").replaceWith("<a id='node-link' class='button right' href='/stories/"+data+"'>Check out this story!</a>");
-          $("#chart-holder").css("width", "600px");
+          $("#chart-holder").css("width", "900px");
           $('#superNav').show("slow");
         } else {
           $("#superNav").replaceWith("<div id='superNav'>"+ story_preview + "</div>");
