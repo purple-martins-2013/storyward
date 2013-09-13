@@ -9,3 +9,7 @@ hr {
 .profile-list-headers {
 	font-style: italic;
 }
+
+.spacing {
+  margin-top: 23px;
+}

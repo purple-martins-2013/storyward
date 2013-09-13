@@ -80,7 +80,7 @@ class StoriesController < ApplicationController
       else
         story.node.destroy
         story.destroy
-        redirect_to stories_path, :notice => "Story removed successfully."
+        redirect_to root_path, :notice => "Story removed successfully."
       end
     else
       redirect_to :back, :notice => "You don't own this story!"
