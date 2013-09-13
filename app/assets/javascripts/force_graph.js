@@ -64,7 +64,7 @@ function forceGraph(container) {
     }
   });
 
-  var w = window.innerWidth/ 2.5,
+  var w = window.innerWidth / 2.5,
       h = window.innerHeight / 1.5,
       r = 15,
       node,
@@ -98,20 +98,23 @@ function forceGraph(container) {
   function takeJson() {
     root = json;
     
-    if (container == "#reading-background") {
+    if (container == "#reading-background" || container == "#show-user") {
       update();
     } else {
       initialize();
     }
+
     if ($("#story-map").data("id")) {
       populateNode(vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == $("#story-map").data("me")})[0][0] );
+    } else if ($("#story-viewer").data("id")) {
+      populateNode(vis.selectAll("circle.node").filter(function(d, i) {return d["id"] == $("#story-viewer").data("id")})[0][0] );
     }
   }
 
   function populateNode(curElement) {
     var data = curElement.__data__["id"];
     
-    $.get("/nodes/chain/"+data,//getting ancestory chain for curElement
+    $.get("/nodes/chain/"+data,//getting ancestry chain for curElement
       function(chain) {
         var story_preview = "<div id='story-preview' style='height: "+ window.innerHeight / 1.7 + "px'>";
         chain.forEach(function(element, index, array) {
