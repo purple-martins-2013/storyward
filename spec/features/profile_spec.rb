@@ -43,7 +43,6 @@ describe "profile page" do
       expect(page.has_content? "Stories Created").to be_true
       expect(page.has_content? "Nodes Contributed").to be_true
       expect(page.has_content? "Favorite Authors").to be_true
-      expect(page.has_content? "Story Viewer").to be_true
       expect(page.has_content? "Favorite Stories").to be_true
     end
 
