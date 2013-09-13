@@ -14,4 +14,15 @@ class ApplicationController < ActionController::Base
 	  devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:name, :email, :password, :password_confirmation)}
 	end
 
+  layout :layout_by_resource
+
+  protected
+
+  def layout_by_resource
+    if devise_controller?
+      false
+    else
+      "application"
+    end
+  end
 end
