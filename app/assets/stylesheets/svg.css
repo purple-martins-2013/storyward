@@ -1,18 +1,18 @@
 circle.node {
   cursor: pointer;
-  stroke: #3182bd;
+  stroke: #fa7429;
   stroke-width: 1.5px;
 }
 
 line.link {
   fill: none;
-  stroke: #9ecae1;
+  stroke: #fcb483;
   stroke-width: 1.5px;
 }
 
 circle {
   fill: #fff;
-  stroke: steelblue;
+  stroke: #fa7429;
 }
 
 text, .node {
@@ -101,3 +101,4 @@ path {
 #node-link {
   margin-right: 5em;
 }
+
