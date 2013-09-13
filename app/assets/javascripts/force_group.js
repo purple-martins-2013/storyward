@@ -1,8 +1,8 @@
-$(document).ready(function() {
-  if (document.getElementById("index-page")) {
-    new forceGroup("#index-page");
-  }
-});
+// $(document).ready(function() {
+//   if (document.getElementById("index-page")) {
+//     new forceGroup("#index-page");
+//   }
+// });
 
 function forceGroup(container) {
 
@@ -36,14 +36,14 @@ function forceGroup(container) {
 
   var fill = d3.scale.category10();
 
-  var json = $("#group-chart").data("nodes");
+  var initialNodeIds = $("#group-chart").data("nodes");
+  console.log($("#group-chart").data("nodes"));
+  getInitialNodes();
 
-  takeJson();
-
-  function takeJson() {
-    console.log('takeJson')
-    console.log(json)
-    root = json;
+  function getInitialNodes() {
+    console.log('takeJson');
+    console.log(initialNodeIds);
+    root = initialNodeIds;
     update();
   }
 
@@ -58,6 +58,7 @@ function forceGroup(container) {
         $('#superNavTwo').slideDown();
       });
   }
+
 
   function update() {
 
