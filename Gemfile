@@ -32,6 +32,7 @@ group :test do
   gem 'capybara'
   gem 'shoulda'
   gem 'simplecov', :require => false
+  gem 'launchy'
 end
 
 #Assets
@@ -43,6 +44,7 @@ gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'zurb-foundation'
 gem 'foundation_rails_helper'
+gem 'foundation-icons-sass-rails'
 
 group :doc do
   gem 'sdoc', require: false
@@ -57,3 +59,4 @@ gem 'tinymce-rails'
 gem 'sanitize'
 gem 'pdf-reader'
 gem 'acts-as-taggable-on'
+gem 'gravatar_image_tag'

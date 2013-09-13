@@ -1,0 +1,11 @@
+#story-viewer {
+	text-align: center;
+}
+
+hr {
+	border-color: rgba(205,170,125,0.5);
+}
+
+.profile-list-headers {
+	font-style: italic;
+}
