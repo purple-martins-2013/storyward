@@ -12,3 +12,8 @@
   max-width: 80%;
   min-width: 80%;
 }
+
+.graph-container {
+  background: none repeat scroll 0 0 #C9C8B5;
+  border-radius: 0.625em 0.625em 0.625em 0.625em;
+}

@@ -8,6 +8,8 @@ describe "profile page" do
     page.fill_in "Email", :with => @user.email
     page.fill_in "Password", :with => @user.password
     page.find('.button').click
+
+    @story = FactoryGirl.create(:story)
   end
     
   context "see the empty profile page" do
@@ -17,22 +19,22 @@ describe "profile page" do
     end
 
     it "contains the user's name" do
-      assert page.has_content? @user.name
+      expect(page.has_content? @user.name).to be_true
     end
 
     it "has headings for all relevant profile categories" do
-      assert page.has_content? "Stories Created"
-      assert page.has_content? "Nodes Contributed"
-      assert page.has_content? "Favorite Authors"
-      assert page.has_content? "Story Viewer"
-      assert page.has_content? "Favorite Stories"
+      expect(page.has_content? "Stories Created").to be_true
+      expect(page.has_content? "Nodes Contributed").to be_true
+      expect(page.has_content? "Favorite Authors").to be_true
+      expect(page.has_content? "Story Viewer").to be_true
+      expect(page.has_content? "Favorite Stories").to be_true
     end
 
     it "provides empty disclaimers when profile is empty" do
-      assert page.has_content? "No stories created yet."
-      assert page.has_content? "No nodes created yet."
-      assert page.has_content? "No authors favorited yet."
-      assert page.has_content? "No stories favorited yet."
+      expect(page.has_content? "No stories created yet.").to be_true
+      expect(page.has_content? "No nodes created yet.").to be_true
+      expect(page.has_content? "No authors favorited yet.").to be_true
+      expect(page.has_content? "No stories favorited yet.").to be_true
     end
 
   end
@@ -49,25 +51,24 @@ describe "profile page" do
     end
 
     it "shows the recently created story" do
-      assert page.has_content? @node.title
+      expect(page.has_content? @node.title).to be_true
       page.should have_no_content "No stories created yet."
     end
 
     it "shows a node created by the user" do
-      @node = Node.where(title: @node.title).first
-      visit story_path(@node)
+      @node = @story.node
+      visit story_path(@story)
       click_link "Create a New Branch!"
       page.fill_in "Title", :with => "tribbles"
       fill_in "Content", :with => @node.content
       click_button "Create Story"
       click_link "My Profile"
 
-      assert page.has_content? "tribbles"
+      expect(page.has_content? "tribbles").to be_true
       page.should have_no_content "No stories created yet."
       page.should have_no_content "No nodes created yet."
     end
 
   end
-
 end
 

@@ -19,7 +19,7 @@
       <%= render "/layouts/nav" %>
       <%= render '/layouts/search' %>
     <% end %>
-    <div id="<%= content_for?(:page_id) ? yield(:page_id) : '' %>">
+    <div <%= content_for :container_modifier %> class="container small-9 small-centered columns">
       <%= display_flash_messages %>
       <%= yield %>
       <div class="reveal-modal" id="modalContainer" style="display:hidden;"></div>

@@ -22,4 +22,8 @@ class Story < ActiveRecord::Base
     return recurse_parent(Node.find(node.parent_node))
   end
 
+	def bookmarked?(user)
+  	Star.where(user_id: user.id, story_id: self.id).any?
+	end
+
 end

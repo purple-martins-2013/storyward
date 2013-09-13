@@ -7,9 +7,10 @@ Storyward::Application.routes.draw do
   get "stories/new/:id" => "stories#new"
   post "stories/search" => "stories#search"
 
-  resources :profiles, :only => [:index, :show]
-  resources :stories
+  resources :profiles, :only => [:show]
+  resources :stories, :except => [:edit, :update]
   resources :nodes, :except => [:new, :create, :index]
+  resources :stars, :only => [:create, :destroy]
 
   get "nodes/details/:id" => "nodes#details"
   get "nodes/query/:id" => "nodes#query"

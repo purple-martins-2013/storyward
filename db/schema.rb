@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130911011128) do
+ActiveRecord::Schema.define(version: 20130911225057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20130911011128) do
     t.boolean  "terminal"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_path",    default: [], array: true
   end
 
   create_table "nodes_stories", force: true do |t|

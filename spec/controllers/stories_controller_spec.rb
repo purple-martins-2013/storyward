@@ -47,6 +47,37 @@ describe StoriesController do
         Node.first.children_nodes.length.should eq 1
         Node.first.children_nodes.first.should eq Node.last.id
       end
+
+      it 'with invalid params' do
+        post :create, story: FactoryGirl.attributes_for(:story), node: FactoryGirl.attributes_for(:node, title: '')
+        response.should render_template('new')
+      end
+
+    end
+
+    context "with a file upload" do
+      
+      it "accepts and parses a TXT file" do
+        @file = fixture_file_upload('files/test.txt', 'text/txt')
+        @node = FactoryGirl.attributes_for(:node, content: 'TEST')
+        post :create, node: @node, :story => { title: 'test', :upload => @file, node: @node, user: FactoryGirl.attributes_for(:user) }
+        expect(Story.last.node.content).to eq 'TEST TXT' + "\n" + 'TEST'
+      end
+
+      it "accepts and parses a PDF file" do
+        @file = fixture_file_upload('files/test.pdf', 'application/pdf')
+        @node = FactoryGirl.attributes_for(:node, content: 'TEST')
+        post :create, node: @node, :story => { title: 'test', :upload => @file, node: @node, user: FactoryGirl.attributes_for(:user) }
+        expect(Story.last.node.content).to eq ' TEST PDF' + ' TEST'
+      end
+
+    end
+  end
+
+  describe '#show' do
+    it 'finds the right story' do
+      get :show, id: story
+      assigns(:story).should eq(story)
     end
   end
 

@@ -22,5 +22,12 @@ describe Node do
       node.save
       expect(node.content).to eq('alert("foo!");A Message')
     end
+
+    it "builds parent node path" do
+      node1 = FactoryGirl.create(:node)
+      expect(node1.parent_path).to eq []
+      node2 = FactoryGirl.create(:node, parent_node: node1.id)
+      expect(node2.parent_path).to eq [node1.id]
+    end
   end
 end
