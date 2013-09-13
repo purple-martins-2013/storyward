@@ -3,31 +3,28 @@
 
 <div class="row">
   <div class="story-show">
-    <% book_count = @book_nodes.length %>
-    <% book_per_row = book_count/3 %>
+    <% stories_count = @stories.length %>
+    <% stories_per_row = stories_count/3 %>
 
-    <% if @book_nodes.length > 0 %>
+    <% if @stories.length > 0 %>
       <div class="small-4 columns">
-      <% @book_nodes[0...book_per_row].each do |node| %>
-          <% @node = Node.find(node[:id]) %>
-          <h4><%= link_to @node.title, @node %></h4>
-          <p><i>Started by <%= @node.user.name if @node.user%></i></p>
+      <% @stories[0...stories_per_row].each do |story| %>
+          <h4><%= link_to story.node.title, node_path(story.node) %></h4>
+          <p><i>Started by <%= story.user.name %></i></p>
       <% end %>
       </div>
         
       <div class="small-4 columns">
-      <% @book_nodes[book_per_row...book_per_row*2].each do |node| %>
-          <% @node = Node.find(node[:id]) %>
-          <h4><%= link_to @node.title, @node %></h4>
-          <p><i>Started by <%= @node.user.name if @node.user%></i></p>
+      <% @stories[stories_per_row...stories_per_row*2].each do |story| %>
+          <h4><%= link_to story.node.title, node_path(story.node) %></h4>
+          <p><i>Started by <%= story.user.name %></i></p>
       <% end %>
       </div>
 
       <div class="small-4 columns">
-      <% @book_nodes[book_per_row*2...book_per_row*3].each do |node| %>
-          <% @node = Node.find(node[:id]) %>
-          <h4><%= link_to @node.title, @node %></h4>
-          <p><i>Started by <%= @node.user.name if @node.user%></i></p>
+      <% @stories[stories_per_row*2...stories_per_row*3].each do |story| %>
+          <h4><%= link_to story.node.title, node_path(story.node) %></h4>
+          <p><i>Started by <%= story.user.name %></i></p>
       <% end %>
       </div>
 
