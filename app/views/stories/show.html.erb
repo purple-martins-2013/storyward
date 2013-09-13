@@ -3,7 +3,7 @@
     <div id="show-story" class="show-story small-12-columns">
       <div id="chart-holder"></div>
         <% if @story.node.parent_chain.any? %>
-          <h4><i id="story-map" class="fi-map" data-id="<%= @story.node.parent_chain.first.id %>" data-endnode="<%= @story.node.parent_chain.last.id %>"></i></h4>
+          <h4><i id="story-map" class="fi-map" data-me="<%= @story.node.id %>" data-id="<%= @story.node.parent_chain.first.id %>" data-endnode="<%= @story.node.parent_chain.last.id %>"></i></h4>
         <% end %>
         <%= render partial: 'bookmark' %>
 

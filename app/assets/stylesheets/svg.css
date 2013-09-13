@@ -56,7 +56,7 @@ path {
 
 #story-preview {
   overflow-y: scroll;
-  margin-right: 2em;
+  margin-right: 5px;
 }
 
 .node-preview {
