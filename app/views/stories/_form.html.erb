@@ -1,11 +1,16 @@
-<%= form_for @story do |f| %>
-  <%= fields_for @story.node do |n| %>
-    <%= n.text_field :title %>
-    <%= n.text_area :content, class: "tinymce" %>
+<%= form_for story do |f| %>
+  <%= fields_for story.node do |n| %>
+    <% if title_value %>
+      <%= n.text_field :title, value: title_value %>
+      <%= n.text_area :content, class: "tinymce", value: content_value %>
+    <% else %>
+      <%= n.text_field :title %>
+      <%= n.text_area :content, class: "tinymce" %>
+    <% end %>
     <%= tinymce %>
     <p></p>
-    <% if @parent_node %>
-      <%= n.hidden_field :parent_node, value: @parent_node %>
+    <% if parent_node %>
+      <%= n.hidden_field :parent_node, value: parent_node %>
     <% else %>
       <%= n.hidden_field :parent_node, value: "0" %>
     <% end %>
@@ -13,6 +18,10 @@
   <%= f.file_field :upload %>
   <span>Accepted formats: PDF and TXT</span>
   <p><small>You can type in text above and upload from a file at the same time. Your file's text will be shown first, followed what you typed.</small></p>
-  <%= f.text_field :tag_list %>
+  <% if tags_value %>
+    <%= f.text_field :tag_list, value: tags_value %>
+  <% else %>
+    <%= f.text_field :tag_list %>
+  <% end %>
   <%= f.submit %>
 <% end %>

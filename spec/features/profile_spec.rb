@@ -1,7 +1,24 @@
 require "spec_helper"
 
+describe "profile index page" do
+
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+    visit new_user_session_path
+    page.fill_in "Email", :with => @user.email
+    page.fill_in "Password", :with => @user.password
+    page.find('.button').click
+    click_link "Browse Authors"
+  end
+
+  it "contains an entry for our default user" do
+    assert page.has_content? @user.name
+  end
+
+end
+
 describe "profile page" do
-  
+
   before(:each) do
     @user = FactoryGirl.create(:user)
     visit new_user_session_path

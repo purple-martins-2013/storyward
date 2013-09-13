@@ -10,11 +10,13 @@
   <section class="top-bar-section">
     <ul class="left">
       <li><%= link_to "Browse Stories", stories_path %></li>
+      <li><%= link_to "Search Stories", "#", id: "search" %></li>
     </ul>
 
     <ul class="right">
-      <li><%= link_to "Create a Story", new_story_path %></li>
+      <li><%= link_to "Create a Story", new_story_path %></li>        
       <li><%= link_to "My Profile", profile_path(current_user) %></li>
+      <li><%= link_to "Browse Authors", profiles_path %></li>
       <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
     </ul>
   </section>

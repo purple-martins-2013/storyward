@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="small-12 columns">
+    <% if @parent_node %>
+      <h2><%= Node.find(@parent_node).title %></h3>
+      <h3>Revise your node!</h4>
+    <% else %>
+      <h2>Revise your story!</h2>
+    <% end %>
+    <div class="new-form">
+      <%= render partial: 'form', :locals => {story: @story, parent_node: @parent_node, title_value: @existing_title, content_value: @existing_content, tags_value: @existing_tags} %>
+    </div>
+  </div>
+</div>
