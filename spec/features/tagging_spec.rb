@@ -21,10 +21,11 @@ describe "story creation page" do
 
 	  context "when the tags are different" do
 		  it "should downcase the tags" do
-		  	page.fill_in "Tag list (separated by commas)", :with => 'gOoD, BaD'
+		  	tags = 'gOoD, BaD'
+		  	page.fill_in "Tag list (separated by commas)", :with => tags
 		  	click_button 'Create Story'
 		  	@story = Story.last
-		  	expect(@story.tag_list).to eq ['bad', 'good']
+		  	expect(@story.tag_list).to eq tags.downcase.gsub(/\s+/, "").split(',').sort
 		  end
 
 		  it "should assign the tags to the story" do

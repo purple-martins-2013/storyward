@@ -1,21 +1,56 @@
-function LightDimmer(buttons, readingPage, story) {
+function LightDimmer(buttons, readingPage) {
   this.readingPage = readingPage;
-  var self = this;
-  buttons.on('click', '.dimlights', function() {
-    readingPage.dim();
-    self.toggleButton($(this));
-  });
-
-  buttons.on('click', '.brighten', function() {
-    readingPage.brighten();
-    self.toggleButton($(this));
-  });
+  this.buttons = buttons;
+  this.bindButton();
 }
 
+LightDimmer.prototype.bindButton = function() {
+   var lightDimmer = this;
+
+   this.buttons.on('click', '.dimlights', function(){
+    lightDimmer.dimPage($(this));
+    lightDimmer.fullscreenify();
+  });
+
+  this.buttons.on('click', '.brighten', function(){
+    lightDimmer.brightenPage($(this));
+    lightDimmer.unfullscreenify();
+  });
+};
+
+LightDimmer.prototype.fullscreenify = function() {
+  $('#reading-background').fullScreen();
+};
+
+LightDimmer.prototype.unfullscreenify = function() {
+  $('#reading-background').fullScreen(); 
+};
+
+LightDimmer.prototype.dimPage = function(button) {
+    this.buttons.unbind('click');
+    this.updateColor(this.readingPage.dimColor());
+    this.toggleButton(button);
+};
+
+LightDimmer.prototype.brightenPage = function(button) {
+    this.buttons.unbind('click');
+    this.updateColor(this.readingPage.brightColor());
+    this.toggleButton(button);
+};
 
 LightDimmer.prototype.toggleButton = function(button) {
   button.toggle();
   button.siblings('button').toggle();
+};
+
+LightDimmer.prototype.updateColor = function(color) {
+  var lightDimmer = this;
+
+  this.readingPage.page.animate({
+    backgroundColor: color
+  }, 500, function(){
+    lightDimmer.bindButton();
+  });
 };
 
 function ReadingPage(page, story) {
@@ -23,27 +58,20 @@ function ReadingPage(page, story) {
   this.story = story;
 }
 
-ReadingPage.prototype.dim = function() {
+ReadingPage.prototype.dimColor = function() {
   this.story.addClass('box-shadowify');
-  this.__updateColor(this.__color().saturate(1/2));
+  return this.__color().saturate(1/2).toRGB();
 };
 
-ReadingPage.prototype.brighten = function(color) {
+ReadingPage.prototype.brightColor = function() {
   this.story.removeClass('box-shadowify');
-  this.__updateColor(this.__color().saturate(2));
-};
-
-ReadingPage.prototype.__updateColor = function(color) {
-  this.page.animate({
-    backgroundColor: color.toRGB()
-  }, 500);
+  return this.__color().saturate(2).toRGB();
 };
 
 ReadingPage.prototype.__color = function() {
   var cssColor = this.page.css("background-color").match(/\d{1,3}/g);
   return new Color(cssColor);
 };
-
 
 function Color(rgbArray) {
   this.rgbArray = rgbArray;
@@ -59,3 +87,8 @@ Color.prototype.saturate = function(ratio) {
 Color.prototype.toRGB = function() {
   return "rgb("+this.rgbArray[0]+","+this.rgbArray[1]+","+this.rgbArray[2]+")";
 };
+
+$(document).ready(function(){
+  readingPage = new ReadingPage($('#reading-background'), $('#show-story'));
+  new LightDimmer($('.buttons'), readingPage);
+});
