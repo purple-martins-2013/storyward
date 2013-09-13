@@ -14,6 +14,6 @@
 //= require jquery_ujs
 //= require foundation
 //= require tinymce-jquery
-//= require_tree ../../../vendor/assets/javascripts/.
-//= require jquery.ui.all
+//= require d3.v3
+//= require jquery.ui.effect.all
 //= require_tree .

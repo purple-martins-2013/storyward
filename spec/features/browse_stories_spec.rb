@@ -18,30 +18,6 @@ describe "browsing and reading stories" do
     @story = FactoryGirl.create(:story)
   end
     
-  context "browse all stories page" do
-  
-    before(:each) do
-      visit stories_path
-    end
-
-    it "contains the created story/node" do
-      expect(page.has_content? @node.title).to be_true
-      expect(page.has_content? "Started by #{@user.name}").to be_true
-    end
-
-    it "has a title link to the correct story/path" do
-      @node = Node.where(title: @node.title).first
-      expect(page.has_link? @node.title, node_path(@node)).to be_true
-    end
-
-    it "has story content on the story parent node view page" do
-      @node = Node.where(title: @node.title).first
-      click_link @node.title
-      current_path.should eq "/nodes/#{@node.id}"
-      expect(page.has_content? @node.content).to be_true
-    end
-
-  end
 
   context "when viewing a story's main page" do
 
