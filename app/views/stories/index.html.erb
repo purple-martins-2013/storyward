@@ -1,15 +1,23 @@
 <div id="index-page" class="story-list small-8-columns">
+  <%= form_tag "/stories/search" do %>
+    <%= label_tag :search_bar, "Search by tag, title, or author" %>
+    <%= text_field_tag :search_bar %>
+    <hr>
+    <%= submit_tag "Search!", class: "button success round right" %>
+  <% end %>
 
+  <div class="row">
+    <div class="story-show">
+      <% if @stories.any? %>
+        <% @stories.each do |story| %>
+          <div class="small-4 columns">
+              <h4><%= link_to story.node.title, node_path(story.node) %></h4>
+              <p><i>Started by <%= story.user.name %></i></p>
+          </div>
+        <% end %>
 
-<div class="row">
-  <div class="story-show">
-
-    <% if @stories.any? %>
-      <% @stories.each do |story| %>
-        <div class="small-4 columns">
-            <h4><%= link_to story.node.title, node_path(story.node) %></h4>
-            <p><i>Started by <%= story.user.name %></i></p>
-        </div>
+      <% else %>
+        <h4>There are no stories to show.</h4>
       <% end %>
 
     <% else %>
