@@ -41,6 +41,7 @@ class StoriesController < ApplicationController
     stories_by_author = Story.includes(:user).where(:'users.name' => params[:search_bar])
     stories_by_title = Story.where(title: params[:search_bar])
     @stories = stories_tagged + stories_by_author + stories_by_title
+    @stories.uniq!
   end
 
   private
