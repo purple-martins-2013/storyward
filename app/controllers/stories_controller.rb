@@ -36,6 +36,13 @@ class StoriesController < ApplicationController
     redirect_to stories_path, :notice => "Story removed successfully."
   end
 
+  def search
+    stories_tagged = Story.tagged_with(params[:search_bar].downcase)
+    stories_by_author = Story.includes(:user).where(:'users.name' => params[:search_bar])
+    stories_by_title = Story.where(title: params[:search_bar])
+    @stories = stories_tagged + stories_by_author + stories_by_title
+  end
+
   private
 
   def node_params
