@@ -3,7 +3,6 @@ class StoriesController < ApplicationController
 
   def index
     @stories = Story.includes(:node).where(:'nodes.parent_node' => 0)
-    p @stories
   end
 
   def new
