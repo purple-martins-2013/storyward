@@ -15,6 +15,8 @@ Storyward::Application.routes.draw do
   get "nodes/query/:id" => "nodes#query"
   get "nodes/chain/:id" => "nodes#chain"
 
+  post "stories/search" => "stories#search"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
