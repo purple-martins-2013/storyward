@@ -36,7 +36,7 @@ var prepWalkthrough = function() {
           },
           {
             element: '#story-viewer',
-            intro: "Here is the story viewer. When you click on a created story or node, a little ball will pop up in the center of the screen. Double click the ball to expand the tree. Hover over any node to see a preview of that particular branch's story. Click 'Check out this story!' to view the story in the cozy reading page.<br><br>There is even more the tree can do, explore!",
+            intro: "This is the super fancy story viewer. When you click on a created story or node, a little ball will pop up in the center of the screen. Double click the ball to expand the tree. Hover over any node to see a preview of that particular branch's story. Click 'Check out this story!' to view the story in the cozy reading page.<br><br>There is even more the tree can do, explore!",
             position: 'top'
           }
       ]
