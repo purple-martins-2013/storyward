@@ -1,0 +1,21 @@
+div.introjs-tooltip {
+	background-color: rgba(205,170,125,1);
+	border-radius: 0.5em;
+	color: #3c2f1c;
+}
+
+div.introjs-arrow.top {
+	border-bottom-color: rgba(205,170,125,1);
+}
+
+div.introjs-arrow.left {
+	border-right-color: rgba(205,170,125,1);
+}
+
+div.introjs-arrow.right {
+	border-left-color: rgba(205,170,125,1);
+}
+
+div.introjs-arrow.bottom {
+	border-top-color: rgba(205,170,125,1);
+}
