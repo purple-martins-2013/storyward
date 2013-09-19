@@ -15,22 +15,22 @@ $(document).ready(function() {
           },
           {
             element: '.top-bar',
-            intro:  'Here\'s a fancy navigation bar! Click \'Browse Stories\' to explore user created stories. Click \'Create Story\' to write your own!',
+            intro:  "Here's a fancy navigation bar! Click 'Browse Stories' to explore user created stories. Click 'Create Story' to write your own!",
             position: 'bottom'
           },
           {
             element: '#created-stories',
-            intro: 'Here are all the stories you\'ve created. Click the story to view it\'s tree in the \'Story Viewer\'',
+            intro: "Here are all the stories you've created. Click the story to view it's tree in the 'Story Viewer'",
             position: 'right'
           },
           {
             element: '.nodes-contributed',
-            intro: 'Here are nodes you\'ve added to stories. Click the title to view their tree in the \'Story Viewer\'',
+            intro: "Here are nodes you've added to stories. Click the title to view their tree in the 'Story Viewer'",
             position: 'right'
           },
           {
             element: '#favorite-authors',
-            intro: 'Favorite authors are added when you bookmark a story. Click to view the author\'s profile.',
+            intro: "Favorite authors are added when you bookmark a story. Click to view the author's profile.",
             position: 'right'
           },
           {
