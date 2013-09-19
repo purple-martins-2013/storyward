@@ -16,4 +16,5 @@
 //= require tinymce-jquery
 //= require d3.v3
 //= require jquery.ui.effect.all
+//= require introjs
 //= require_tree .

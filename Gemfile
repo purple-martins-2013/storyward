@@ -60,3 +60,5 @@ gem 'sanitize'
 gem 'pdf-reader'
 gem 'acts-as-taggable-on'
 gem 'gravatar_image_tag'
+
+gem 'introjs-rails'
