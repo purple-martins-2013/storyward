@@ -14,14 +14,19 @@ $(document).ready(function() {
             position: 'bottom'
           },
           {
+            element: '.top-bar',
+            intro:  'Here\'s a fancy navigation bar! Click \'Browse Stories\' to explore user created stories. Click \'Create Story\' to write your own!',
+            position: 'bottom'
+          },
+          {
             element: '#created-stories',
             intro: 'Here are all the stories you\'ve created. Click the story to view it\'s tree in the \'Story Viewer\'',
-            position: 'bottom'
+            position: 'right'
           },
           {
             element: '.nodes-contributed',
             intro: 'Here are nodes you\'ve added to stories. Click the title to view their tree in the \'Story Viewer\'',
-            position: 'bottom'
+            position: 'right'
           },
           {
             element: '#favorite-authors',
@@ -31,7 +36,7 @@ $(document).ready(function() {
           {
             element: '#favorite-stories',
             intro: "Favorite stories are added when you bookmark a story. Click the title to read the story.",
-            position: 'bottom'
+            position: 'left'
           }
       ]
   });
