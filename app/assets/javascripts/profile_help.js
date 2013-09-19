@@ -1,12 +1,8 @@
-$(document).ready(function() {
+var prepWalkthrough = function() {
   var introguide = introJs();
   var startButton = $('#profile-help');
 
-  startButton.on('click', function(){
-    introguide.start();
-  });
-
-  introguide.setOptions({
+    introguide.setOptions({
       steps: [
           {
             element: '#profile-picture',
@@ -45,4 +41,24 @@ $(document).ready(function() {
           }
       ]
   });
+  introguide.oncomplete(function(){
+    prepWalkthrough();
+  });
+
+  introguide.onexit(function(){
+    prepWalkthrough();
+  });
+
+  listenForHelp(introguide);
+};
+
+var listenForHelp = function(intro) {
+  $('#profile-help').on('click', function(){
+    intro.start();
+    $(this).hide();
+  });
+};
+
+$(document).ready(function() {
+  prepWalkthrough();
 });
