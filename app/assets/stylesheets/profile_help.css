@@ -19,3 +19,7 @@ div.introjs-arrow.right {
 div.introjs-arrow.bottom {
 	border-top-color: rgba(205,170,125,1);
 }
+
+span.introjs-helperNumberLayer {
+	display: none;
+}
