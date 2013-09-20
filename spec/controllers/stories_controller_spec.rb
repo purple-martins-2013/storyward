@@ -51,4 +51,27 @@ describe StoriesController do
       expect{ delete :destroy, id: story }.to change(Story,:count).by(-1)
     end
   end
+
+  describe '#search' do
+    before do
+      story.tag_list = 'test'
+      story.save
+    end
+
+    it 'should return the story with the tag searched' do
+      post :search, :search_bar => story.tag_list.first
+      assigns(:stories).should include(story)
+    end
+
+    it 'should return the stories written by the author searched' do
+      post :search, :search_bar => story.user.name
+      assigns(:stories).should include(story)
+    end
+
+    it 'should return the stories of the title searched' do
+      post :search, :search_bar => story.title
+      assigns(:stories).should include(story)
+    end
+
+  end
 end
