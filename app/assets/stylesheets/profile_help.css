@@ -1,0 +1,50 @@
+div.introjs-tooltip {
+	background-color: #e7e6d9;
+	border-radius: 0.5em;
+	color: #3c2f1c;
+}
+
+div.introjs-arrow.top {
+	border-bottom-color: #e7e6d9;
+}
+
+div.introjs-arrow.left {
+	border-right-color: #e7e6d9;
+}
+
+div.introjs-arrow.right {
+	border-left-color: #e7e6d9;
+}
+
+div.introjs-arrow.bottom {
+	border-top-color: #e7e6d9;
+}
+
+span.introjs-helperNumberLayer {
+	display: none;
+}
+
+a.introjs-button.introjs-skipbutton {
+	display: none;
+}
+
+a.introjs-button.introjs-nextbutton {
+	border: none;
+	background-color: #e7e6d9;
+	background-image: none;
+	color: #3c2f1c;
+	font-size: 15px;
+	margin-top: 0;
+	text-shadow: none;
+}
+
+a.introjs-button.introjs-prevbutton {
+	border: none;
+	background-color: #e7e6d9;
+	margin-right: 2px;
+	background-image: none;
+	color: #3c2f1c;
+	font-size: 15px;
+	margin-top: 0;
+	text-shadow: none;
+}
